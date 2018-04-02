@@ -108,3 +108,69 @@ Passphrase:
 Repeat passphrase: 
 Address: {7600d939dd892d4b3d2acb85a316c4f0e5721bd8}
 nathan@nathan-VirtualBox:~$ 
+
+
+===========================
+nathan@nathan-VirtualBox:~$ git clone https://github.com/bitcoin/bitcoin.git
+The program 'git' is currently not installed. You can install it by typing:
+sudo apt install git
+nathan@nathan-VirtualBox:~$ sudo apt install git
+[sudo] password for nathan: 
+E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)
+E: Unable to lock the administration directory (/var/lib/dpkg/), is another process using it?
+nathan@nathan-VirtualBox:~$ sudo apt install git
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  git-man liberror-perl
+Suggested packages:
+  git-daemon-run | git-daemon-sysvinit git-doc git-el git-email git-gui gitk
+  gitweb git-arch git-cvs git-mediawiki git-svn
+The following NEW packages will be installed:
+  git git-man liberror-perl
+0 upgraded, 3 newly installed, 0 to remove and 63 not upgraded.
+Need to get 3,857 kB of archives.
+After this operation, 25.6 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://sg.archive.ubuntu.com/ubuntu xenial/main amd64 liberror-perl all 0.17-1.2 [19.6 kB]
+Get:2 http://sg.archive.ubuntu.com/ubuntu xenial-updates/main amd64 git-man all 1:2.7.4-0ubuntu1.3 [736 kB]
+Get:3 http://sg.archive.ubuntu.com/ubuntu xenial-updates/main amd64 git amd64 1:2.7.4-0ubuntu1.3 [3,102 kB]
+Fetched 3,857 kB in 17s (226 kB/s)                                             
+Selecting previously unselected package liberror-perl.
+(Reading database ... 176361 files and directories currently installed.)
+Preparing to unpack .../liberror-perl_0.17-1.2_all.deb ...
+Unpacking liberror-perl (0.17-1.2) ...
+Selecting previously unselected package git-man.
+Preparing to unpack .../git-man_1%3a2.7.4-0ubuntu1.3_all.deb ...
+Unpacking git-man (1:2.7.4-0ubuntu1.3) ...
+Selecting previously unselected package git.
+Preparing to unpack .../git_1%3a2.7.4-0ubuntu1.3_amd64.deb ...
+Unpacking git (1:2.7.4-0ubuntu1.3) ...
+Processing triggers for man-db (2.7.5-1) ...
+Setting up liberror-perl (0.17-1.2) ...
+Setting up git-man (1:2.7.4-0ubuntu1.3) ...
+Setting up git (1:2.7.4-0ubuntu1.3) ...
+nathan@nathan-VirtualBox:~$ git clone https://github.com/bitcoin/bitcoin.git
+Cloning into 'bitcoin'...
+remote: Counting objects: 111684, done.
+remote: Compressing objects: 100% (16/16), done.
+remote: Total 111684 (delta 5), reused 4 (delta 2), pack-reused 111666
+Receiving objects: 100% (111684/111684), 101.33 MiB | 8.11 MiB/s, done.
+Resolving deltas: 100% (77560/77560), done.
+Checking connectivity... done.
+nathan@nathan-VirtualBox:~$ git clone https://github.com/ethereum/go-ethereum.git
+Cloning into 'go-ethereum'...
+remote: Counting objects: 69307, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 69307 (delta 0), reused 0 (delta 0), pack-reused 69305
+Receiving objects: 100% (69307/69307), 95.02 MiB | 8.11 MiB/s, done.
+Resolving deltas: 100% (46153/46153), done.
+Checking connectivity... done.
+nathan@nathan-VirtualBox:~$ git clone https://github.com/jpmorganchase/quorum.git
+Cloning into 'quorum'...
+remote: Counting objects: 64994, done.
+remote: Total 64994 (delta 0), reused 0 (delta 0), pack-reused 64994
+Receiving objects: 100% (64994/64994), 73.46 MiB | 7.99 MiB/s, done.
+Resolving deltas: 100% (44393/44393), done.
+Checking connectivity... done.
