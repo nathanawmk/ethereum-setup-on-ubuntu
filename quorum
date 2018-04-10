@@ -912,3 +912,178 @@ at block: 0 (Thu, 01 Jan 1970 00:00:00 UTC)
  modules: admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 raft:1.0 rpc:1.0 txpool:1.0 web3:1.0
 
 >
+> dir
+ReferenceError: 'dir' is not defined
+    at <anonymous>:1:1
+
+> private.get()
+ReferenceError: 'private' is not defined
+    at <anonymous>:1:1
+
+> geth attach ipc:qdata/dd2/geth.ipc
+(anonymous): Line 1:6 Unexpected identifier
+> ^C
+> ^C
+> ^C
+> ^C
+> exit
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ geth attach ipc:qdata/dd2/geth.ipc
+Welcome to the Geth JavaScript console!
+
+instance: Geth/v1.7.2-stable-ee498061/linux-amd64/go1.9.3
+coinbase: 0xca843569e3427144cead5e4d5999a3d0ccf92b8e
+at block: 0 (Thu, 01 Jan 1970 00:00:00 UTC)
+ datadir: /home/vagrant/quorum-examples/7nodes/qdata/dd2
+ modules: admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 raft:1.0 rpc:1.0 txpool:1.0 web3:1.0
+
+> exit
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ geth attach ipc:qdata/dd3/geth.ipc
+Welcome to the Geth JavaScript console!
+
+instance: Geth/v1.7.2-stable-ee498061/linux-amd64/go1.9.3
+ modules: admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 raft:1.0 rpc:1.0 txpool:1.0 web3:1.0
+
+> exit
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ geth attach ipc:qdata/dd4/geth.ipc
+Welcome to the Geth JavaScript console!
+
+instance: Geth/v1.7.2-stable-ee498061/linux-amd64/go1.9.3
+coinbase: 0x9186eb3d20cbd1f5f992a950d808c4495153abd5
+at block: 0 (Thu, 01 Jan 1970 00:00:00 UTC)
+ datadir: /home/vagrant/quorum-examples/7nodes/qdata/dd4
+ modules: admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 raft:1.0 rpc:1.0 txpool:1.0 web3:1.0
+
+> ^C
+> ^C
+> exit
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ geth attach ipc:qdata/dd5/geth.ipc
+Welcome to the Geth JavaScript console!
+
+instance: Geth/v1.7.2-stable-ee498061/linux-amd64/go1.9.3
+coinbase: 0x0638e1574728b6d862dd5d3a3e0942c3be47d996
+at block: 0 (Thu, 01 Jan 1970 00:00:00 UTC)
+ datadir: /home/vagrant/quorum-examples/7nodes/qdata/dd5
+ modules: admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 raft:1.0 rpc:1.0 txpool:1.0 web3:1.0
+
+> ^C
+> ^C
+> exit
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ geth attach ipc:qdata/dd6/geth.ipc
+Welcome to the Geth JavaScript console!
+
+instance: Geth/v1.7.2-stable-ee498061/linux-amd64/go1.9.3
+ modules: admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 raft:1.0 rpc:1.0 txpool:1.0 web3:1.0
+
+> ^C
+> ^C
+> exit
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ geth attach ipc:qdata/dd7/geth.ipc
+Welcome to the Geth JavaScript console!
+
+instance: Geth/v1.7.2-stable-ee498061/linux-amd64/go1.9.3
+ modules: admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 raft:1.0 rpc:1.0 txpool:1.0 web3:1.0
+
+> ^C
+> ^C
+> ^C
+> exit
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ geth attach ipc:qdata/dd8/geth.ipc
+Fatal: Unable to attach to remote geth: dial unix qdata/dd8/geth.ipc: connect: no such file or directory
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ geth attach ipc:qdata/dd1/geth.ipc
+Welcome to the Geth JavaScript console!
+
+instance: Geth/v1.7.2-stable-ee498061/linux-amd64/go1.9.3
+coinbase: 0xed9d02e382b34818e88b88a309c7fe71e65f419d
+at block: 0 (Thu, 01 Jan 1970 00:00:00 UTC)
+ datadir: /home/vagrant/quorum-examples/7nodes/qdata/dd1
+ modules: admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 raft:1.0 rpc:1.0 txpool:1.0 web3:1.0
+
+> exit
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ vagrant suspend
+The program 'vagrant' is currently not installed. To run 'vagrant' please ask your administrator to install the package 'vagrant'
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ dir
+bench                   istanbul-init.sh   passwords.txt            raft           runscript.sh
+constellation-start.sh  istanbul-start.sh  permissioned-nodes.json  raft-init.sh   script1.js
+genesis.json            keys               porosity                 raft-start.sh  simplestorage.sol
+istanbul-genesis.json   nohup.out          qdata                    README.md      stop.sh
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ exit
+logout
+Connection to 127.0.0.1 closed.
+
+C:\Users\USER\Desktop\Quorum\quorum-examples>vagrant suspend
+==> default: Saving VM state and suspending execution...
+
+C:\Users\USER\Desktop\Quorum\quorum-examples>vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Checking if box 'ubuntu/xenial64' is up to date...
+==> default: Resuming suspended VM...
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+==> default: Machine booted and ready!
+==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> default: flag to force provisioning. Provisioners marked to run always will still run.
+
+C:\Users\USER\Desktop\Quorum\quorum-examples>vagrant ssh
+Welcome to Ubuntu 16.04.4 LTS (GNU/Linux 4.4.0-119-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  Get cloud support with Ubuntu Advantage Cloud Guest:
+    http://www.ubuntu.com/business/services/cloud
+
+2 packages can be updated.
+2 updates are security updates.
+
+
+Last login: Tue Apr 10 14:21:54 2018 from 10.0.2.2
+vagrant@ubuntu-xenial:~$ cd quorum-examples/
+vagrant@ubuntu-xenial:~/quorum-examples$ geth attach ipc:qdata/dd1/geth.ipc
+Fatal: Unable to attach to remote geth: dial unix qdata/dd1/geth.ipc: connect: no such file or directory
+vagrant@ubuntu-xenial:~/quorum-examples$ geth attach ipc:qdata/dd1/geth.ipc
+Fatal: Unable to attach to remote geth: dial unix qdata/dd1/geth.ipc: connect: no such file or directory
+vagrant@ubuntu-xenial:~/quorum-examples$ dir
+7nodes
+vagrant@ubuntu-xenial:~/quorum-examples$ cd 7nodes/
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ dir
+bench                   istanbul-init.sh   passwords.txt            raft           runscript.sh
+constellation-start.sh  istanbul-start.sh  permissioned-nodes.json  raft-init.sh   script1.js
+genesis.json            keys               porosity                 raft-start.sh  simplestorage.sol
+istanbul-genesis.json   nohup.out          qdata                    README.md      stop.sh
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ ./raft-start.sh
+[*] Starting Constellation nodes
+constellation-node --url=https://127.0.0.1:9001/ --port=9001 --workdir=qdata/c1 --socket=tm.ipc --publickeys=tm.pub --privatekeys=tm.key --othernodes=https://127.0.0.1:9001/ >> qdata/logs/constellation1.log 2>&1 &
+constellation-node --url=https://127.0.0.2:9002/ --port=9002 --workdir=qdata/c2 --socket=tm.ipc --publickeys=tm.pub --privatekeys=tm.key --othernodes=https://127.0.0.1:9001/ >> qdata/logs/constellation2.log 2>&1 &
+constellation-node --url=https://127.0.0.3:9003/ --port=9003 --workdir=qdata/c3 --socket=tm.ipc --publickeys=tm.pub --privatekeys=tm.key --othernodes=https://127.0.0.1:9001/ >> qdata/logs/constellation3.log 2>&1 &
+constellation-node --url=https://127.0.0.4:9004/ --port=9004 --workdir=qdata/c4 --socket=tm.ipc --publickeys=tm.pub --privatekeys=tm.key --othernodes=https://127.0.0.1:9001/ >> qdata/logs/constellation4.log 2>&1 &
+constellation-node --url=https://127.0.0.5:9005/ --port=9005 --workdir=qdata/c5 --socket=tm.ipc --publickeys=tm.pub --privatekeys=tm.key --othernodes=https://127.0.0.1:9001/ >> qdata/logs/constellation5.log 2>&1 &
+constellation-node --url=https://127.0.0.6:9006/ --port=9006 --workdir=qdata/c6 --socket=tm.ipc --publickeys=tm.pub --privatekeys=tm.key --othernodes=https://127.0.0.1:9001/ >> qdata/logs/constellation6.log 2>&1 &
+constellation-node --url=https://127.0.0.7:9007/ --port=9007 --workdir=qdata/c7 --socket=tm.ipc --publickeys=tm.pub --privatekeys=tm.key --othernodes=https://127.0.0.1:9001/ >> qdata/logs/constellation7.log 2>&1 &
+[*] Starting Ethereum nodes
+ARGS="--raft --rpc --rpcaddr 0.0.0.0 --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum --emitcheckpoints"
+PRIVATE_CONFIG=qdata/c1/tm.ipc nohup geth --datadir qdata/dd1 $ARGS --permissioned --raftport 50401 --rpcport 22000 --port 21000 --unlock 0 --password passwords.txt 2>>qdata/logs/1.log &
+PRIVATE_CONFIG=qdata/c2/tm.ipc nohup geth --datadir qdata/dd2 $ARGS --permissioned --raftport 50402 --rpcport 22001 --port 21001 2>>qdata/logs/2.log &
+PRIVATE_CONFIG=qdata/c3/tm.ipc nohup geth --datadir qdata/dd3 $ARGS --permissioned --raftport 50403 --rpcport 22002 --port 21002 2>>qdata/logs/3.log &
+PRIVATE_CONFIG=qdata/c4/tm.ipc nohup geth --datadir qdata/dd4 $ARGS --permissioned --raftport 50404 --rpcport 22003 --port 21003 2>>qdata/logs/4.log &
+PRIVATE_CONFIG=qdata/c5/tm.ipc nohup geth --datadir qdata/dd5 $ARGS --raftport 50405 --rpcport 22004 --port 21004 2>>qdata/logs/5.log &
+PRIVATE_CONFIG=qdata/c6/tm.ipc nohup geth --datadir qdata/dd6 $ARGS --raftport 50406 --rpcport 22005 --port 21005 2>>qdata/logs/6.log &
+PRIVATE_CONFIG=qdata/c7/tm.ipc nohup geth --datadir qdata/dd7 $ARGS --raftport 50407 --rpcport 22006 --port 21006 2>>qdata/logs/7.log &
+set +v
+
+All nodes configured. See 'qdata/logs' for logs, and run e.g. 'geth attach qdata/dd1/geth.ipc' to attach to the first Geth node.
+To test sending a private transaction from Node 1 to Node 7, run './runscript script1.js'
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ geth attach ipc:qdata/dd1/geth.ipc
+Welcome to the Geth JavaScript console!
+
+instance: Geth/v1.7.2-stable-ee498061/linux-amd64/go1.9.3
+coinbase: 0xed9d02e382b34818e88b88a309c7fe71e65f419d
+at block: 0 (Thu, 01 Jan 1970 00:00:00 UTC)
+ datadir: /home/vagrant/quorum-examples/7nodes/qdata/dd1
+ modules: admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 raft:1.0 rpc:1.0 txpool:1.0 web3:1.0
+
+>
