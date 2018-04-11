@@ -1,0 +1,2268 @@
+var SimpleStorage = artifacts.require("SimpleStorage");
+
+module.exports = function(deployer) {
+  // Pass 42 to the contract as the first constructor parameter
+  deployer.deploy(SimpleStorage, 42, {privateFor: ["ROAZBWtSacxXQrOe3FGAqJDyJjFePR5ce4TSIzmJ0Bc="]}
+~
+                                                ~
+                                                                                                ~
+
+                        ~
+                                                                        ~
+
+~
+                                                ~
+                                                                                                ~
+
+                        ~
+                                                                        ~                                   Connection to 127.0.0.1 closed.
+
+C:\Users\USER\Desktop\Quorum\quorum-examples>vagrant suspend
+==> default: Saving VM state and suspending execution...
+
+C:\Users\USER\Desktop\Quorum\quorum-examples>vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Checking if box 'ubuntu/xenial64' is up to date...
+==> default: There was a problem while downloading the metadata for your box
+==> default: to check for updates. This is not an error, since it is usually due
+==> default: to temporary network problems. This is just a warning. The problem
+==> default: encountered was:
+==> default:
+==> default: Could not resolve host: vagrantcloud.com
+==> default:
+==> default: If you want to check for box updates, verify your network connection
+==> default: is valid and try again.
+==> default: Resuming suspended VM...
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+==> default: Machine booted and ready!
+==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> default: flag to force provisioning. Provisioners marked to run always will still run.
+
+C:\Users\USER\Desktop\Quorum\quorum-examples>vagrant ssh
+Welcome to Ubuntu 16.04.4 LTS (GNU/Linux 4.4.0-119-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  Get cloud support with Ubuntu Advantage Cloud Guest:
+    http://www.ubuntu.com/business/services/cloud
+
+3 packages can be updated.
+3 updates are security updates.
+
+
+Last login: Wed Apr 11 08:32:47 2018 from 10.0.2.2
+vagrant@ubuntu-xenial:~$ truffle migrate --reset
+Could not find suitable configuration file.
+vagrant@ubuntu-xenial:~$ pwd
+/home/vagrant
+vagrant@ubuntu-xenial:~$ ls -l
+total 4584
+-rw-r--r--  1 root    root    4682556 Feb 21 21:16 constellation-0.3.2-ubuntu1604.tar.xz
+drwxr-xr-x 41 vagrant vagrant    4096 Apr 10 14:14 quorum
+drwxr-xr-x  3 vagrant vagrant    4096 Apr 10 14:16 quorum-examples
+vagrant@ubuntu-xenial:~$ cd quorum-examples/
+vagrant@ubuntu-xenial:~/quorum-examples$ dir
+7nodes
+vagrant@ubuntu-xenial:~/quorum-examples$ cd 7nodes
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ dir
+bench                   istanbul-init.sh   nohup.out                qdata          README.md          stop.sh
+constellation-start.sh  istanbul-start.sh  passwords.txt            raft           runscript.sh
+genesis.json            keys               permissioned-nodes.json  raft-init.sh   script1.js
+istanbul-genesis.json   myproject          porosity                 raft-start.sh  simplestorage.sol
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ cd myproject/
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject$ dir
+build  contracts  migrations  test  truffle-config.js  truffle.js
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject$ ls -l
+total 24
+drwxrwxr-x 3 vagrant vagrant 4096 Apr 11 06:56 build
+drwxrwxr-x 2 vagrant vagrant 4096 Apr 11 09:03 contracts
+drwxrwxr-x 2 vagrant vagrant 4096 Apr 11 09:28 migrations
+drwxrwxr-x 2 vagrant vagrant 4096 Apr 11 06:41 test
+-rw-rw-r-- 1 vagrant vagrant  135 Apr 11 06:41 truffle-config.js
+-rw-rw-r-- 1 vagrant vagrant  183 Apr 11 09:18 truffle.js
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject$ truffle migrate --reset
+Using network 'development'.
+
+Running migration: 2_deploy_simplestorage.js
+  Replacing SimpleStorage...
+  ... 0xdf495b80059dc2e26a0e5ffd58693f82ceb69bd22a0d3d4b3eb49239427edf49
+  SimpleStorage: 0x131f110145a704e028bca7b85eae33e32f94097c
+Saving artifacts...
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject$ ls -l
+total 24
+drwxrwxr-x 3 vagrant vagrant 4096 Apr 11 06:56 build
+drwxrwxr-x 2 vagrant vagrant 4096 Apr 11 09:03 contracts
+drwxrwxr-x 2 vagrant vagrant 4096 Apr 11 09:28 migrations
+drwxrwxr-x 2 vagrant vagrant 4096 Apr 11 06:41 test
+-rw-rw-r-- 1 vagrant vagrant  135 Apr 11 06:41 truffle-config.js
+-rw-rw-r-- 1 vagrant vagrant  183 Apr 11 09:18 truffle.js
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject$ cd contracts/
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ dir
+Migrations.sol.bak  Mortal.sol.bak  SimpleStorage.sol.bak
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ dir
+Migrations.sol.bak  Mortal.sol.bak  SimpleStorage.sol.bak
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ touch HelloWorld.sol
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ dir
+HelloWorld.sol  Migrations.sol.bak  Mortal.sol.bak  SimpleStorage.sol.bak
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ vi HelloWorld.sol
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ cat SimpleStorage.sol.bak
+pragma solidity ^0.4.17;
+
+contract SimpleStorage {
+  uint public storedData;
+
+  function SimpleStorage(uint initVal) public {
+    storedData = initVal;
+  }
+
+  function set(uint x) public {
+    storedData = x;
+  }
+
+  function get() constant public returns (uint retVal) {
+    return storedData;
+  }
+}
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ pwd
+/home/vagrant/quorum-examples/7nodes/myproject/contracts
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ ls -l
+total 16
+-rw-rw-r-- 1 vagrant vagrant 721 Apr 11 10:11 HelloWorld.sol
+-rw-rw-r-- 1 vagrant vagrant 515 Apr 11 06:41 Migrations.sol.bak
+-rw-rw-r-- 1 vagrant vagrant 727 Apr 11 08:03 Mortal.sol.bak
+-rw-rw-r-- 1 vagrant vagrant 300 Apr 11 06:55 SimpleStorage.sol.bak
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ vi HelloWorld.sol
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ vi HelloWorld.sol
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ ls -l
+total 16
+-rw-rw-r-- 1 vagrant vagrant 728 Apr 11 10:12 HelloWorld.sol
+-rw-rw-r-- 1 vagrant vagrant 515 Apr 11 06:41 Migrations.sol.bak
+-rw-rw-r-- 1 vagrant vagrant 727 Apr 11 08:03 Mortal.sol.bak
+-rw-rw-r-- 1 vagrant vagrant 300 Apr 11 06:55 SimpleStorage.sol.bak
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ pwd
+/home/vagrant/quorum-examples/7nodes/myproject/contracts
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ pwd
+/home/vagrant/quorum-examples/7nodes/myproject/contracts
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ dir
+HelloWorld.sol  Migrations.sol.bak  Mortal.sol.bak  SimpleStorage.sol.bak
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ cd ..
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject$ truffle compile
+Compiling ./contracts/HelloWorld.sol...
+
+Compilation warnings encountered:
+
+/home/vagrant/quorum-examples/7nodes/myproject/contracts/HelloWorld.sol:7:5: Warning: No visibility specified. Defaulting to "public".
+    function mortal() { owner = msg.sender; }
+    ^---------------------------------------^
+,/home/vagrant/quorum-examples/7nodes/myproject/contracts/HelloWorld.sol:10:5: Warning: No visibility specified. Defaulting to "public".
+    function kill() { if (msg.sender == owner) suicide(owner); }
+    ^----------------------------------------------------------^
+,/home/vagrant/quorum-examples/7nodes/myproject/contracts/HelloWorld.sol:23:5: Warning: No visibility specified. Defaulting to "public".
+    function greet() constant returns (string) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+,/home/vagrant/quorum-examples/7nodes/myproject/contracts/HelloWorld.sol:10:48: Warning: "suicide" has been deprecated in favour of "selfdestruct"
+    function kill() { if (msg.sender == owner) suicide(owner); }
+                                               ^------------^
+
+Writing artifacts to ./build/contracts
+
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject$ cd migrations/
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/migrations$ dir
+1_initial_migration.js.bak  2_deploy_simplestorage.js  3_deploy_mortal.js.bak
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/migrations$ touch 4_deploy_helloworld.js
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/migrations$ cat 2_deploy_simplestorage.js
+var SimpleStorage = artifacts.require("SimpleStorage");
+
+module.exports = function(deployer) {
+  // Pass 42 to the contract as the first constructor parameter
+  deployer.deploy(SimpleStorage,1);
+};
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/migrations$ vi 4_deploy_helloworld.js
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/migrations$ vi 4_deploy_helloworld.js
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/migrations$ ls -l
+total 16
+-rw-rw-r-- 1 vagrant vagrant 129 Apr 11 06:41 1_initial_migration.js.bak
+-rw-rw-r-- 1 vagrant vagrant 198 Apr 11 09:28 2_deploy_simplestorage.js
+-rw-rw-r-- 1 vagrant vagrant 175 Apr 11 08:41 3_deploy_mortal.js.bak
+-rw-rw-r-- 1 vagrant vagrant 183 Apr 11 10:16 4_deploy_helloworld.js
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/migrations$ mv 2_deploy_simplestorage.js 2_deploy_simplestorag
+e.js.bak
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/migrations$ ls -l
+total 16
+-rw-rw-r-- 1 vagrant vagrant 129 Apr 11 06:41 1_initial_migration.js.bak
+-rw-rw-r-- 1 vagrant vagrant 198 Apr 11 09:28 2_deploy_simplestorage.js.bak
+-rw-rw-r-- 1 vagrant vagrant 175 Apr 11 08:41 3_deploy_mortal.js.bak
+-rw-rw-r-- 1 vagrant vagrant 183 Apr 11 10:16 4_deploy_helloworld.js
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/migrations$ cd ..
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject$ dir
+build  contracts  migrations  test  truffle-config.js  truffle.js
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject$ cd contracts
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ dor
+No command 'dor' found, did you mean:
+ Command 'dir' from package 'coreutils' (main)
+ Command 'dog' from package 'sheepdog' (universe)
+ Command 'sor' from package 'pccts' (universe)
+ Command 'dot' from package 'graphviz' (main)
+ Command 'drr' from package 'plastimatch' (universe)
+ Command 'dar' from package 'dar' (universe)
+ Command 'tor' from package 'tor' (universe)
+dor: command not found
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ dir
+HelloWorld.sol  Migrations.sol.bak  Mortal.sol.bak  SimpleStorage.sol.bak
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ ls -l
+total 16
+-rw-rw-r-- 1 vagrant vagrant 728 Apr 11 10:12 HelloWorld.sol
+-rw-rw-r-- 1 vagrant vagrant 515 Apr 11 06:41 Migrations.sol.bak
+-rw-rw-r-- 1 vagrant vagrant 727 Apr 11 08:03 Mortal.sol.bak
+-rw-rw-r-- 1 vagrant vagrant 300 Apr 11 06:55 SimpleStorage.sol.bak
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ ls -l
+total 16
+-rw-rw-r-- 1 vagrant vagrant 728 Apr 11 10:12 HelloWorld.sol
+-rw-rw-r-- 1 vagrant vagrant 515 Apr 11 06:41 Migrations.sol.bak
+-rw-rw-r-- 1 vagrant vagrant 727 Apr 11 08:03 Mortal.sol.bak
+-rw-rw-r-- 1 vagrant vagrant 300 Apr 11 06:55 SimpleStorage.sol.bak
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ ls -l
+total 16
+-rw-rw-r-- 1 vagrant vagrant 728 Apr 11 10:12 HelloWorld.sol
+-rw-rw-r-- 1 vagrant vagrant 515 Apr 11 06:41 Migrations.sol.bak
+-rw-rw-r-- 1 vagrant vagrant 727 Apr 11 08:03 Mortal.sol.bak
+-rw-rw-r-- 1 vagrant vagrant 300 Apr 11 06:55 SimpleStorage.sol.bak
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ cd ..
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject$ dir
+build  contracts  migrations  test  truffle-config.js  truffle.js
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject$ cd migrations/
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/migrations$ dir
+1_initial_migration.js.bak  2_deploy_simplestorage.js.bak  3_deploy_mortal.js.bak  4_deploy_helloworld.js
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/migrations$ cd ..
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject$ truffle migrate
+Using network 'development'.
+
+Network up to date.
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject$ truffle migrate -reset
+Using network 'development'.
+
+Network up to date.
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject$ truffle migrate --reset
+Using network 'development'.
+
+Running migration: 4_deploy_helloworld.js
+
+/usr/lib/node_modules/truffle/build/webpack:/~/truffle-resolver/index.js:37
+  throw new Error("Could not find artifacts for " + import_path + " from any sources");
+^
+Error: Could not find artifacts for HelloWorld from any sources
+    at Resolver.require (/usr/lib/node_modules/truffle/build/webpack:/~/truffle-resolver/index.js:37:1)
+    at Object.require (/usr/lib/node_modules/truffle/build/webpack:/~/truffle-migrate/index.js:234:1)
+    at ResolverIntercept.require (/usr/lib/node_modules/truffle/build/webpack:/~/truffle-migrate/resolverintercept.js:20:1)
+    at /home/vagrant/quorum-examples/7nodes/myproject/migrations/4_deploy_helloworld.js:1:24
+    at ContextifyScript.Script.runInContext (vm.js:32:29)
+    at ContextifyScript.Script.runInNewContext (vm.js:38:15)
+    at /usr/lib/node_modules/truffle/build/webpack:/~/truffle-require/require.js:97:1
+    at tryToString (fs.js:449:3)
+    at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:436:12)
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject$ cd ..
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ ls -l
+total 92
+drwxr-xr-x  2 vagrant vagrant 4096 Apr 10 14:16 bench
+-rwxr-xr-x  1 vagrant vagrant  670 Apr 10 14:16 constellation-start.sh
+-rwxr-xr-x  1 vagrant vagrant  575 Apr 10 14:16 genesis.json
+-rwxr-xr-x  1 vagrant vagrant 6513 Apr 10 14:16 istanbul-genesis.json
+-rwxr-xr-x  1 vagrant vagrant 2045 Apr 10 14:16 istanbul-init.sh
+-rwxr-xr-x  1 vagrant vagrant 1403 Apr 10 14:16 istanbul-start.sh
+drwxr-xr-x  2 vagrant vagrant 4096 Apr 10 14:16 keys
+drwxrwxr-x  6 vagrant vagrant 4096 Apr 11 09:18 myproject
+-rw-------  1 vagrant vagrant 4480 Apr 11 07:08 nohup.out
+-rwxr-xr-x  1 vagrant vagrant    0 Apr 10 14:16 passwords.txt
+-rwxr-xr-x  1 vagrant vagrant 1300 Apr 10 14:16 permissioned-nodes.json
+drwxr-xr-x  2 vagrant vagrant 4096 Apr 10 14:16 porosity
+drwxrwxr-x 17 vagrant vagrant 4096 Apr 11 06:16 qdata
+drwxr-xr-x  2 vagrant vagrant 4096 Apr 10 14:16 raft
+-rwxr-xr-x  1 vagrant vagrant 1910 Apr 10 14:16 raft-init.sh
+-rwxr-xr-x  1 vagrant vagrant 1575 Apr 10 14:16 raft-start.sh
+-rwxr-xr-x  1 vagrant vagrant 7757 Apr 10 14:16 README.md
+-rwxr-xr-x  1 vagrant vagrant  106 Apr 10 14:16 runscript.sh
+-rwxr-xr-x  1 vagrant vagrant 1865 Apr 10 14:16 script1.js
+-rwxr-xr-x  1 vagrant vagrant  296 Apr 10 14:16 simplestorage.sol
+-rwxr-xr-x  1 vagrant vagrant   53 Apr 10 14:16 stop.sh
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ truffle migrate --reset
+Could not find suitable configuration file.
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ pwd
+/home/vagrant/quorum-examples/7nodes
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ ls -l
+total 92
+drwxr-xr-x  2 vagrant vagrant 4096 Apr 10 14:16 bench
+-rwxr-xr-x  1 vagrant vagrant  670 Apr 10 14:16 constellation-start.sh
+-rwxr-xr-x  1 vagrant vagrant  575 Apr 10 14:16 genesis.json
+-rwxr-xr-x  1 vagrant vagrant 6513 Apr 10 14:16 istanbul-genesis.json
+-rwxr-xr-x  1 vagrant vagrant 2045 Apr 10 14:16 istanbul-init.sh
+-rwxr-xr-x  1 vagrant vagrant 1403 Apr 10 14:16 istanbul-start.sh
+drwxr-xr-x  2 vagrant vagrant 4096 Apr 10 14:16 keys
+drwxrwxr-x  6 vagrant vagrant 4096 Apr 11 09:18 myproject
+-rw-------  1 vagrant vagrant 4480 Apr 11 07:08 nohup.out
+-rwxr-xr-x  1 vagrant vagrant    0 Apr 10 14:16 passwords.txt
+-rwxr-xr-x  1 vagrant vagrant 1300 Apr 10 14:16 permissioned-nodes.json
+drwxr-xr-x  2 vagrant vagrant 4096 Apr 10 14:16 porosity
+drwxrwxr-x 17 vagrant vagrant 4096 Apr 11 06:16 qdata
+drwxr-xr-x  2 vagrant vagrant 4096 Apr 10 14:16 raft
+-rwxr-xr-x  1 vagrant vagrant 1910 Apr 10 14:16 raft-init.sh
+-rwxr-xr-x  1 vagrant vagrant 1575 Apr 10 14:16 raft-start.sh
+-rwxr-xr-x  1 vagrant vagrant 7757 Apr 10 14:16 README.md
+-rwxr-xr-x  1 vagrant vagrant  106 Apr 10 14:16 runscript.sh
+-rwxr-xr-x  1 vagrant vagrant 1865 Apr 10 14:16 script1.js
+-rwxr-xr-x  1 vagrant vagrant  296 Apr 10 14:16 simplestorage.sol
+-rwxr-xr-x  1 vagrant vagrant   53 Apr 10 14:16 stop.sh
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ cd myproject/
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject$ dir
+build  contracts  migrations  test  truffle-config.js  truffle.js
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject$ truffle migrate --reset
+Using network 'development'.
+
+Running migration: 4_deploy_helloworld.js
+
+/usr/lib/node_modules/truffle/build/webpack:/~/truffle-resolver/index.js:37
+  throw new Error("Could not find artifacts for " + import_path + " from any sources");
+^
+Error: Could not find artifacts for HelloWorld from any sources
+    at Resolver.require (/usr/lib/node_modules/truffle/build/webpack:/~/truffle-resolver/index.js:37:1)
+    at Object.require (/usr/lib/node_modules/truffle/build/webpack:/~/truffle-migrate/index.js:234:1)
+    at ResolverIntercept.require (/usr/lib/node_modules/truffle/build/webpack:/~/truffle-migrate/resolverintercept.js:20:1)
+    at /home/vagrant/quorum-examples/7nodes/myproject/migrations/4_deploy_helloworld.js:1:24
+    at ContextifyScript.Script.runInContext (vm.js:32:29)
+    at ContextifyScript.Script.runInNewContext (vm.js:38:15)
+    at /usr/lib/node_modules/truffle/build/webpack:/~/truffle-require/require.js:97:1
+    at tryToString (fs.js:449:3)
+    at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:436:12)
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject$ cd migrations/
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/migrations$ dir
+1_initial_migration.js.bak  2_deploy_simplestorage.js.bak  3_deploy_mortal.js.bak  4_deploy_helloworld.js
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/migrations$ cat 4_deploy_helloworld.js
+HelloWorld = artifacts.require("HelloWorld");
+
+module.exports = function(deployer) {
+  // Pass 42 to the contract as the first constructor parameter
+  deployer.deploy(HelloWorld);
+};
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/migrations$ cd ..
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject$ dir
+build  contracts  migrations  test  truffle-config.js  truffle.js
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject$ cd contracts/
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ dir
+HelloWorld.sol  Migrations.sol.bak  Mortal.sol.bak  SimpleStorage.sol.bak
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ ls -l
+total 16
+-rw-rw-r-- 1 vagrant vagrant 728 Apr 11 10:12 HelloWorld.sol
+-rw-rw-r-- 1 vagrant vagrant 515 Apr 11 06:41 Migrations.sol.bak
+-rw-rw-r-- 1 vagrant vagrant 727 Apr 11 08:03 Mortal.sol.bak
+-rw-rw-r-- 1 vagrant vagrant 300 Apr 11 06:55 SimpleStorage.sol.bak
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ cat HelloWorld.sol
+pragma solidity ^0.4.17;
+contract mortal {
+    /* Define variable owner of the type address*/
+    address owner;
+
+    /* this function is executed at initialization and sets the owner of the contract */
+    function mortal() { owner = msg.sender; }
+
+    /* Function to recover the funds on the contract */
+    function kill() { if (msg.sender == owner) suicide(owner); }
+}
+
+contract greeter is mortal {
+    /* define variable greeting of the type string */
+    string public greeting;
+
+    /* this runs when the contract is executed */
+    function greeter(string _greeting) public {
+        greeting = _greeting;
+    }
+
+    /* main function */
+    function greet() constant returns (string) {
+        return greeting;
+    }
+}
+
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ git
+usage: git [--version] [--help] [-C <path>] [-c name=value]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | --no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+           <command> [<args>]
+
+These are common Git commands used in various situations:
+
+start a working area (see also: git help tutorial)
+   clone      Clone a repository into a new directory
+   init       Create an empty Git repository or reinitialize an existing one
+
+work on the current change (see also: git help everyday)
+   add        Add file contents to the index
+   mv         Move or rename a file, a directory, or a symlink
+   reset      Reset current HEAD to the specified state
+   rm         Remove files from the working tree and from the index
+
+examine the history and state (see also: git help revisions)
+   bisect     Use binary search to find the commit that introduced a bug
+   grep       Print lines matching a pattern
+   log        Show commit logs
+   show       Show various types of objects
+   status     Show the working tree status
+
+grow, mark and tweak your common history
+   branch     List, create, or delete branches
+   checkout   Switch branches or restore working tree files
+   commit     Record changes to the repository
+   diff       Show changes between commits, commit and working tree, etc
+   merge      Join two or more development histories together
+   rebase     Forward-port local commits to the updated upstream head
+   tag        Create, list, delete or verify a tag object signed with GPG
+
+collaborate (see also: git help workflows)
+   fetch      Download objects and refs from another repository
+   pull       Fetch from and integrate with another repository or a local branch
+   push       Update remote refs along with associated objects
+
+'git help -a' and 'git help -g' list available subcommands and some
+concept guides. See 'git help <command>' or 'git help <concept>'
+to read about a specific subcommand or concept.
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ git clone https://github.com/blk-io/blk-explorer-fr
+ee.git
+Cloning into 'blk-explorer-free'...
+fatal: unable to access 'https://github.com/blk-io/blk-explorer-free.git/': Could not resolve host: github.com
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ dir
+HelloWorld.sol  Migrations.sol.bak  Mortal.sol.bak  SimpleStorage.sol.bak
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/contracts$ cd ..
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject$ cd ..
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ exot
+No command 'exot' found, did you mean:
+ Command 'emot' from package 'ruby-emot' (universe)
+exot: command not found
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ exit
+logout
+Connection to 127.0.0.1 closed.
+
+C:\Users\USER\Desktop\Quorum\quorum-examples>vagrant suspend
+==> default: Saving VM state and suspending execution...
+
+C:\Users\USER\Desktop\Quorum\quorum-examples>vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Checking if box 'ubuntu/xenial64' is up to date...
+==> default: A newer version of the box 'ubuntu/xenial64' for provider 'virtualbox' is
+==> default: available! You currently have version '20180406.0.0'. The latest is version
+==> default: '20180410.0.0'. Run `vagrant box update` to update.
+==> default: Resuming suspended VM...
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+==> default: Machine booted and ready!
+==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> default: flag to force provisioning. Provisioners marked to run always will still run.
+
+C:\Users\USER\Desktop\Quorum\quorum-examples>pwd
+'pwd' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\USER\Desktop\Quorum\quorum-examples>vagrant ssh
+Welcome to Ubuntu 16.04.4 LTS (GNU/Linux 4.4.0-119-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  Get cloud support with Ubuntu Advantage Cloud Guest:
+    http://www.ubuntu.com/business/services/cloud
+
+3 packages can be updated.
+3 updates are security updates.
+
+
+Last login: Wed Apr 11 10:06:56 2018 from 10.0.2.2
+vagrant@ubuntu-xenial:~$ pwd
+/home/vagrant
+vagrant@ubuntu-xenial:~$ ls -l
+total 4584
+-rw-r--r--  1 root    root    4682556 Feb 21 21:16 constellation-0.3.2-ubuntu1604.tar.xz
+drwxr-xr-x 41 vagrant vagrant    4096 Apr 10 14:14 quorum
+drwxr-xr-x  3 vagrant vagrant    4096 Apr 10 14:16 quorum-examples
+vagrant@ubuntu-xenial:~$ cd quorum
+vagrant@ubuntu-xenial:~/quorum$ dir
+accounts      BUILDING.md  consensus   COPYING.LESSER  eth        HACKING.md     log       node     README.md  trie
+appveyor.yml  circle.yml   console     core            ethclient  interfaces.go  Makefile  p2p      rlp        vendor
+AUTHORS       cmd          containers  crypto          ethdb      internal       metrics   params   rpc        VERSION
+bmt           common       contracts   Dockerfile      ethstats   les            miner     private  swarm      whisper
+build         compression  COPYING     docs            event      light          mobile    raft     tests
+vagrant@ubuntu-xenial:~/quorum$ ls -l
+total 248
+drwxr-xr-x  5 vagrant vagrant  4096 Apr 10 14:14 accounts
+-rw-r--r--  1 vagrant vagrant  1104 Apr 10 14:14 appveyor.yml
+-rw-r--r--  1 vagrant vagrant  3289 Apr 10 14:14 AUTHORS
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 bmt
+drwxr-xr-x  4 vagrant vagrant  4096 Apr 10 14:15 build
+-rw-r--r--  1 vagrant vagrant   429 Apr 10 14:14 BUILDING.md
+-rw-r--r--  1 vagrant vagrant  1544 Apr 10 14:14 circle.yml
+drwxr-xr-x 14 vagrant vagrant  4096 Apr 10 14:14 cmd
+drwxr-xr-x  8 vagrant vagrant  4096 Apr 10 14:14 common
+drwxr-xr-x  3 vagrant vagrant  4096 Apr 10 14:14 compression
+drwxr-xr-x  6 vagrant vagrant  4096 Apr 10 14:14 consensus
+drwxr-xr-x  3 vagrant vagrant  4096 Apr 10 14:14 console
+drwxr-xr-x  4 vagrant vagrant  4096 Apr 10 14:14 containers
+drwxr-xr-x  5 vagrant vagrant  4096 Apr 10 14:14 contracts
+-rw-r--r--  1 vagrant vagrant 32397 Apr 10 14:14 COPYING
+-rw-r--r--  1 vagrant vagrant  7651 Apr 10 14:14 COPYING.LESSER
+drwxr-xr-x  8 vagrant vagrant  4096 Apr 10 14:14 core
+drwxr-xr-x  7 vagrant vagrant  4096 Apr 10 14:14 crypto
+-rw-r--r--  1 vagrant vagrant   422 Apr 10 14:14 Dockerfile
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 docs
+drwxr-xr-x  6 vagrant vagrant  4096 Apr 10 14:14 eth
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 ethclient
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 ethdb
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 ethstats
+drwxr-xr-x  3 vagrant vagrant  4096 Apr 10 14:14 event
+-rw-r--r--  1 vagrant vagrant  2064 Apr 10 14:14 HACKING.md
+-rw-r--r--  1 vagrant vagrant 10555 Apr 10 14:14 interfaces.go
+drwxr-xr-x  9 vagrant vagrant  4096 Apr 10 14:14 internal
+drwxr-xr-x  3 vagrant vagrant  4096 Apr 10 14:14 les
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 light
+drwxr-xr-x  3 vagrant vagrant  4096 Apr 10 14:14 log
+-rw-r--r--  1 vagrant vagrant  5246 Apr 10 14:14 Makefile
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 metrics
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 miner
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 mobile
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 node
+drwxr-xr-x  7 vagrant vagrant  4096 Apr 10 14:14 p2p
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 params
+drwxr-xr-x  3 vagrant vagrant  4096 Apr 10 14:14 private
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 raft
+-rw-r--r--  1 vagrant vagrant  8416 Apr 10 14:14 README.md
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 rlp
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 rpc
+drwxr-xr-x  9 vagrant vagrant  4096 Apr 10 14:14 swarm
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 tests
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 trie
+drwxr-xr-x  6 vagrant vagrant  4096 Apr 10 14:14 vendor
+-rw-r--r--  1 vagrant vagrant     6 Apr 10 14:14 VERSION
+drwxr-xr-x  6 vagrant vagrant  4096 Apr 10 14:14 whisper
+vagrant@ubuntu-xenial:~/quorum$ pwd
+/home/vagrant/quorum
+vagrant@ubuntu-xenial:~/quorum$ ls -l
+total 248
+drwxr-xr-x  5 vagrant vagrant  4096 Apr 10 14:14 accounts
+-rw-r--r--  1 vagrant vagrant  1104 Apr 10 14:14 appveyor.yml
+-rw-r--r--  1 vagrant vagrant  3289 Apr 10 14:14 AUTHORS
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 bmt
+drwxr-xr-x  4 vagrant vagrant  4096 Apr 10 14:15 build
+-rw-r--r--  1 vagrant vagrant   429 Apr 10 14:14 BUILDING.md
+-rw-r--r--  1 vagrant vagrant  1544 Apr 10 14:14 circle.yml
+drwxr-xr-x 14 vagrant vagrant  4096 Apr 10 14:14 cmd
+drwxr-xr-x  8 vagrant vagrant  4096 Apr 10 14:14 common
+drwxr-xr-x  3 vagrant vagrant  4096 Apr 10 14:14 compression
+drwxr-xr-x  6 vagrant vagrant  4096 Apr 10 14:14 consensus
+drwxr-xr-x  3 vagrant vagrant  4096 Apr 10 14:14 console
+drwxr-xr-x  4 vagrant vagrant  4096 Apr 10 14:14 containers
+drwxr-xr-x  5 vagrant vagrant  4096 Apr 10 14:14 contracts
+-rw-r--r--  1 vagrant vagrant 32397 Apr 10 14:14 COPYING
+-rw-r--r--  1 vagrant vagrant  7651 Apr 10 14:14 COPYING.LESSER
+drwxr-xr-x  8 vagrant vagrant  4096 Apr 10 14:14 core
+drwxr-xr-x  7 vagrant vagrant  4096 Apr 10 14:14 crypto
+-rw-r--r--  1 vagrant vagrant   422 Apr 10 14:14 Dockerfile
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 docs
+drwxr-xr-x  6 vagrant vagrant  4096 Apr 10 14:14 eth
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 ethclient
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 ethdb
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 ethstats
+drwxr-xr-x  3 vagrant vagrant  4096 Apr 10 14:14 event
+-rw-r--r--  1 vagrant vagrant  2064 Apr 10 14:14 HACKING.md
+-rw-r--r--  1 vagrant vagrant 10555 Apr 10 14:14 interfaces.go
+drwxr-xr-x  9 vagrant vagrant  4096 Apr 10 14:14 internal
+drwxr-xr-x  3 vagrant vagrant  4096 Apr 10 14:14 les
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 light
+drwxr-xr-x  3 vagrant vagrant  4096 Apr 10 14:14 log
+-rw-r--r--  1 vagrant vagrant  5246 Apr 10 14:14 Makefile
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 metrics
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 miner
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 mobile
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 node
+drwxr-xr-x  7 vagrant vagrant  4096 Apr 10 14:14 p2p
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 params
+drwxr-xr-x  3 vagrant vagrant  4096 Apr 10 14:14 private
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 raft
+-rw-r--r--  1 vagrant vagrant  8416 Apr 10 14:14 README.md
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 rlp
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 rpc
+drwxr-xr-x  9 vagrant vagrant  4096 Apr 10 14:14 swarm
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 tests
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 trie
+drwxr-xr-x  6 vagrant vagrant  4096 Apr 10 14:14 vendor
+-rw-r--r--  1 vagrant vagrant     6 Apr 10 14:14 VERSION
+drwxr-xr-x  6 vagrant vagrant  4096 Apr 10 14:14 whisper
+vagrant@ubuntu-xenial:~/quorum$ ls -l
+total 248
+drwxr-xr-x  5 vagrant vagrant  4096 Apr 10 14:14 accounts
+-rw-r--r--  1 vagrant vagrant  1104 Apr 10 14:14 appveyor.yml
+-rw-r--r--  1 vagrant vagrant  3289 Apr 10 14:14 AUTHORS
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 bmt
+drwxr-xr-x  4 vagrant vagrant  4096 Apr 10 14:15 build
+-rw-r--r--  1 vagrant vagrant   429 Apr 10 14:14 BUILDING.md
+-rw-r--r--  1 vagrant vagrant  1544 Apr 10 14:14 circle.yml
+drwxr-xr-x 14 vagrant vagrant  4096 Apr 10 14:14 cmd
+drwxr-xr-x  8 vagrant vagrant  4096 Apr 10 14:14 common
+drwxr-xr-x  3 vagrant vagrant  4096 Apr 10 14:14 compression
+drwxr-xr-x  6 vagrant vagrant  4096 Apr 10 14:14 consensus
+drwxr-xr-x  3 vagrant vagrant  4096 Apr 10 14:14 console
+drwxr-xr-x  4 vagrant vagrant  4096 Apr 10 14:14 containers
+drwxr-xr-x  5 vagrant vagrant  4096 Apr 10 14:14 contracts
+-rw-r--r--  1 vagrant vagrant 32397 Apr 10 14:14 COPYING
+-rw-r--r--  1 vagrant vagrant  7651 Apr 10 14:14 COPYING.LESSER
+drwxr-xr-x  8 vagrant vagrant  4096 Apr 10 14:14 core
+drwxr-xr-x  7 vagrant vagrant  4096 Apr 10 14:14 crypto
+-rw-r--r--  1 vagrant vagrant   422 Apr 10 14:14 Dockerfile
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 docs
+drwxr-xr-x  6 vagrant vagrant  4096 Apr 10 14:14 eth
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 ethclient
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 ethdb
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 ethstats
+drwxr-xr-x  3 vagrant vagrant  4096 Apr 10 14:14 event
+-rw-r--r--  1 vagrant vagrant  2064 Apr 10 14:14 HACKING.md
+-rw-r--r--  1 vagrant vagrant 10555 Apr 10 14:14 interfaces.go
+drwxr-xr-x  9 vagrant vagrant  4096 Apr 10 14:14 internal
+drwxr-xr-x  3 vagrant vagrant  4096 Apr 10 14:14 les
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 light
+drwxr-xr-x  3 vagrant vagrant  4096 Apr 10 14:14 log
+-rw-r--r--  1 vagrant vagrant  5246 Apr 10 14:14 Makefile
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 metrics
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 miner
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 mobile
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 node
+drwxr-xr-x  7 vagrant vagrant  4096 Apr 10 14:14 p2p
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 params
+drwxr-xr-x  3 vagrant vagrant  4096 Apr 10 14:14 private
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 raft
+-rw-r--r--  1 vagrant vagrant  8416 Apr 10 14:14 README.md
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 rlp
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 rpc
+drwxr-xr-x  9 vagrant vagrant  4096 Apr 10 14:14 swarm
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 tests
+drwxr-xr-x  2 vagrant vagrant  4096 Apr 10 14:14 trie
+drwxr-xr-x  6 vagrant vagrant  4096 Apr 10 14:14 vendor
+-rw-r--r--  1 vagrant vagrant     6 Apr 10 14:14 VERSION
+drwxr-xr-x  6 vagrant vagrant  4096 Apr 10 14:14 whisper
+vagrant@ubuntu-xenial:~/quorum$ dir
+accounts      BUILDING.md  consensus   COPYING.LESSER  eth        HACKING.md     log       node     README.md  trie
+appveyor.yml  circle.yml   console     core            ethclient  interfaces.go  Makefile  p2p      rlp        vendor
+AUTHORS       cmd          containers  crypto          ethdb      internal       metrics   params   rpc        VERSION
+bmt           common       contracts   Dockerfile      ethstats   les            miner     private  swarm      whisper
+build         compression  COPYING     docs            event      light          mobile    raft     tests
+vagrant@ubuntu-xenial:~/quorum$ cd ..
+vagrant@ubuntu-xenial:~$ dir
+constellation-0.3.2-ubuntu1604.tar.xz  quorum  quorum-examples
+vagrant@ubuntu-xenial:~$ pwd
+/home/vagrant
+vagrant@ubuntu-xenial:~$ cd quorum-examples/
+vagrant@ubuntu-xenial:~/quorum-examples$ dir
+7nodes
+vagrant@ubuntu-xenial:~/quorum-examples$ cd 7nodes/
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ dir
+bench                   istanbul-init.sh   nohup.out                qdata          README.md          stop.sh
+constellation-start.sh  istanbul-start.sh  passwords.txt            raft           runscript.sh
+genesis.json            keys               permissioned-nodes.json  raft-init.sh   script1.js
+istanbul-genesis.json   myproject          porosity                 raft-start.sh  simplestorage.sol
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ cd ..
+vagrant@ubuntu-xenial:~/quorum-examples$ git clone https://github.com/blk-io/blk-explorer-free.git
+Cloning into 'blk-explorer-free'...
+remote: Counting objects: 125, done.
+remote: Compressing objects: 100% (87/87), done.
+remote: Total 125 (delta 49), reused 93 (delta 35), pack-reused 0
+Receiving objects: 100% (125/125), 107.74 KiB | 0 bytes/s, done.
+Resolving deltas: 100% (49/49), done.
+Checking connectivity... done.
+vagrant@ubuntu-xenial:~/quorum-examples$ cd blk-explorer-free
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f <os>-
+docker-compose.yaml up
+-bash: os: No such file or directory
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ dir
+docs  linux-docker-compose.yaml  mac-docker-compose.yaml  README.md  win-docker-compose.yaml
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ pwd
+/home/vagrant/quorum-examples/blk-explorer-free
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ ls -l
+total 20
+drwxrwxr-x 3 vagrant vagrant 4096 Apr 11 11:04 docs
+-rw-rw-r-- 1 vagrant vagrant  808 Apr 11 11:04 linux-docker-compose.yaml
+-rw-rw-r-- 1 vagrant vagrant  801 Apr 11 11:04 mac-docker-compose.yaml
+-rw-rw-r-- 1 vagrant vagrant 2038 Apr 11 11:04 README.md
+-rw-rw-r-- 1 vagrant vagrant  801 Apr 11 11:04 win-docker-compose.yaml
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f <os>-
+docker-compose.yaml up
+-bash: os: No such file or directory
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f <os>-
+docker-compose.yaml up
+-bash: os: No such file or directory
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f linux
+-docker-compose.yaml up -d
+The program 'docker-compose' is currently not installed. To run 'docker-compose' please ask your administrator to install the package 'docker-compose'
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo curl -L https://github.com/docker/compose/releases/down
+load/1.20.1/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   617    0   617    0     0   1016      0 --:--:-- --:--:-- --:--:--  1016
+100 10.3M  100 10.3M    0     0   718k      0  0:00:14  0:00:14 --:--:-- 1806k
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo chmod +x /usr/local/bin/docker-compose
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ docker-compose --version
+docker-compose version 1.20.1, build 5d8c71b
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f linux
+-docker-compose.yaml up -d
+ERROR: Couldn't connect to Docker daemon. You might need to install Docker:
+
+https://docs.docker.com/engine/installation/
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | su
+do apt-key add -
+OK
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo add-apt-repository "deb [arch=amd64] https://download.d
+ocker.com/linux/ubuntu $(lsb_release -cs) stable"
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo apt-get update
+Hit:1 https://deb.nodesource.com/node_7.x xenial InRelease
+Get:2 https://download.docker.com/linux/ubuntu xenial InRelease [65.8 kB]
+Get:3 http://security.ubuntu.com/ubuntu xenial-security InRelease [102 kB]
+Hit:4 http://archive.ubuntu.com/ubuntu xenial InRelease
+Get:5 https://download.docker.com/linux/ubuntu xenial/stable amd64 Packages [3,539 B]
+Get:6 http://archive.ubuntu.com/ubuntu xenial-updates InRelease [102 kB]
+Get:7 http://ppa.launchpad.net/ethereum/ethereum/ubuntu xenial InRelease [17.5 kB]
+Get:8 http://ppa.launchpad.net/ethereum/ethereum/ubuntu xenial/main amd64 Packages [6,672 B]
+Get:9 http://archive.ubuntu.com/ubuntu xenial-backports InRelease [102 kB]
+Fetched 400 kB in 3s (121 kB/s)
+Reading package lists... Done
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ apt-cache policy docker-ce
+docker-ce:
+  Installed: (none)
+  Candidate: 18.03.0~ce-0~ubuntu
+  Version table:
+     18.03.0~ce-0~ubuntu 500
+        500 https://download.docker.com/linux/ubuntu xenial/stable amd64 Packages
+     17.12.1~ce-0~ubuntu 500
+        500 https://download.docker.com/linux/ubuntu xenial/stable amd64 Packages
+     17.12.0~ce-0~ubuntu 500
+        500 https://download.docker.com/linux/ubuntu xenial/stable amd64 Packages
+     17.09.1~ce-0~ubuntu 500
+        500 https://download.docker.com/linux/ubuntu xenial/stable amd64 Packages
+     17.09.0~ce-0~ubuntu 500
+        500 https://download.docker.com/linux/ubuntu xenial/stable amd64 Packages
+     17.06.2~ce-0~ubuntu 500
+        500 https://download.docker.com/linux/ubuntu xenial/stable amd64 Packages
+     17.06.1~ce-0~ubuntu 500
+        500 https://download.docker.com/linux/ubuntu xenial/stable amd64 Packages
+     17.06.0~ce-0~ubuntu 500
+        500 https://download.docker.com/linux/ubuntu xenial/stable amd64 Packages
+     17.03.2~ce-0~ubuntu-xenial 500
+        500 https://download.docker.com/linux/ubuntu xenial/stable amd64 Packages
+     17.03.1~ce-0~ubuntu-xenial 500
+        500 https://download.docker.com/linux/ubuntu xenial/stable amd64 Packages
+     17.03.0~ce-0~ubuntu-xenial 500
+        500 https://download.docker.com/linux/ubuntu xenial/stable amd64 Packages
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo apt-get install -y docker-ce
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following additional packages will be installed:
+  aufs-tools cgroupfs-mount libltdl7 pigz
+Suggested packages:
+  mountall
+The following NEW packages will be installed:
+  aufs-tools cgroupfs-mount docker-ce libltdl7 pigz
+0 upgraded, 5 newly installed, 0 to remove and 3 not upgraded.
+Need to get 34.1 MB of archives.
+After this operation, 182 MB of additional disk space will be used.
+Get:1 https://download.docker.com/linux/ubuntu xenial/stable amd64 docker-ce amd64 18.03.0~ce-0~ubuntu [33.9 MB]
+Get:2 http://archive.ubuntu.com/ubuntu xenial/universe amd64 pigz amd64 2.3.1-2 [61.1 kB]
+Get:3 http://archive.ubuntu.com/ubuntu xenial/universe amd64 aufs-tools amd64 1:3.2+20130722-1.1ubuntu1 [92.9 kB]
+Get:4 http://archive.ubuntu.com/ubuntu xenial/universe amd64 cgroupfs-mount all 1.2 [4,970 B]
+Get:5 http://archive.ubuntu.com/ubuntu xenial/main amd64 libltdl7 amd64 2.4.6-0.1 [38.3 kB]
+Fetched 34.1 MB in 14s (2,282 kB/s)
+Selecting previously unselected package pigz.
+(Reading database ... 62512 files and directories currently installed.)
+Preparing to unpack .../pigz_2.3.1-2_amd64.deb ...
+Unpacking pigz (2.3.1-2) ...
+Selecting previously unselected package aufs-tools.
+Preparing to unpack .../aufs-tools_1%3a3.2+20130722-1.1ubuntu1_amd64.deb ...
+Unpacking aufs-tools (1:3.2+20130722-1.1ubuntu1) ...
+Selecting previously unselected package cgroupfs-mount.
+Preparing to unpack .../cgroupfs-mount_1.2_all.deb ...
+Unpacking cgroupfs-mount (1.2) ...
+Selecting previously unselected package libltdl7:amd64.
+Preparing to unpack .../libltdl7_2.4.6-0.1_amd64.deb ...
+Unpacking libltdl7:amd64 (2.4.6-0.1) ...
+Selecting previously unselected package docker-ce.
+Preparing to unpack .../docker-ce_18.03.0~ce-0~ubuntu_amd64.deb ...
+Unpacking docker-ce (18.03.0~ce-0~ubuntu) ...
+Processing triggers for man-db (2.7.5-1) ...
+Processing triggers for libc-bin (2.23-0ubuntu10) ...
+Processing triggers for ureadahead (0.100.0-19) ...
+Processing triggers for systemd (229-4ubuntu21.2) ...
+Setting up pigz (2.3.1-2) ...
+Setting up aufs-tools (1:3.2+20130722-1.1ubuntu1) ...
+Setting up cgroupfs-mount (1.2) ...
+Setting up libltdl7:amd64 (2.4.6-0.1) ...
+Setting up docker-ce (18.03.0~ce-0~ubuntu) ...
+Processing triggers for libc-bin (2.23-0ubuntu10) ...
+Processing triggers for systemd (229-4ubuntu21.2) ...
+Processing triggers for ureadahead (0.100.0-19) ...
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f linux
+-docker-compose.yaml up -d
+ERROR: Couldn't connect to Docker daemon at http+docker://localhost - is it running?
+
+If it's at a non-standard location, specify the URL with the DOCKER_HOST environment variable.
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo systemctl status docker
+● docker.service - Docker Application Container Engine
+   Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2018-04-11 11:12:31 UTC; 22s ago
+     Docs: https://docs.docker.com
+ Main PID: 17237 (dockerd)
+   CGroup: /system.slice/docker.service
+           ├─17237 /usr/bin/dockerd -H fd://
+           └─17243 docker-containerd --config /var/run/docker/containerd/containerd.toml
+
+Apr 11 11:12:30 ubuntu-xenial dockerd[17237]: time="2018-04-11T11:12:30.560315478Z" level=warning msg="Your kernel does Apr 11 11:12:30 ubuntu-xenial dockerd[17237]: time="2018-04-11T11:12:30.560559055Z" level=warning msg="Your kernel does Apr 11 11:12:30 ubuntu-xenial dockerd[17237]: time="2018-04-11T11:12:30.560734928Z" level=warning msg="Your kernel does Apr 11 11:12:30 ubuntu-xenial dockerd[17237]: time="2018-04-11T11:12:30.561539789Z" level=info msg="Loading containers: Apr 11 11:12:31 ubuntu-xenial dockerd[17237]: time="2018-04-11T11:12:31.019580274Z" level=info msg="Default bridge (dockApr 11 11:12:31 ubuntu-xenial dockerd[17237]: time="2018-04-11T11:12:31.100437794Z" level=info msg="Loading containers: Apr 11 11:12:31 ubuntu-xenial dockerd[17237]: time="2018-04-11T11:12:31.152742621Z" level=info msg="Docker daemon" commiApr 11 11:12:31 ubuntu-xenial dockerd[17237]: time="2018-04-11T11:12:31.153344604Z" level=info msg="Daemon has completedApr 11 11:12:31 ubuntu-xenial systemd[1]: Started Docker Application Container Engine.
+Apr 11 11:12:31 ubuntu-xenial dockerd[17237]: time="2018-04-11T11:12:31.172868173Z" level=info msg="API listen on /var/r
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f linux
+-docker-compose.yaml up -d
+ERROR: Couldn't connect to Docker daemon at http+docker://localhost - is it running?
+
+If it's at a non-standard location, specify the URL with the DOCKER_HOST environment variable.
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f linux
+-docker-compose.yaml up -d
+ERROR: Couldn't connect to Docker daemon at http+docker://localhost - is it running?
+
+If it's at a non-standard location, specify the URL with the DOCKER_HOST environment variable.
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$  sudo service docker start
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f linux
+-docker-compose.yaml up -d
+ERROR: Couldn't connect to Docker daemon at http+docker://localhost - is it running?
+
+If it's at a non-standard location, specify the URL with the DOCKER_HOST environment variable.
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$  export DOCKER_HOST=127.0.0.1
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f linux
+-docker-compose.yaml up -d
+Traceback (most recent call last):
+  File "bin/docker-compose", line 6, in <module>
+  File "compose/cli/main.py", line 71, in main
+  File "compose/cli/main.py", line 124, in perform_command
+  File "compose/cli/command.py", line 41, in project_from_options
+  File "compose/cli/command.py", line 121, in get_project
+  File "compose/cli/command.py", line 92, in get_client
+  File "compose/cli/docker_client.py", line 120, in docker_client
+  File "site-packages/docker/api/client.py", line 114, in __init__
+  File "site-packages/docker/utils/utils.py", line 358, in parse_host
+docker.errors.DockerException: Bind address needs a port: 127.0.0.1
+[17489] Failed to execute script docker-compose
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$  service docker restart
+==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ===
+Authentication is required to restart 'docker.service'.
+Authenticating as: Ubuntu (ubuntu)
+Password:
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo systemctl status docker\t:2
+>
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo  service docker restart
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f linux
+-docker-compose.yaml up -d
+Traceback (most recent call last):
+  File "bin/docker-compose", line 6, in <module>
+  File "compose/cli/main.py", line 71, in main
+  File "compose/cli/main.py", line 124, in perform_command
+  File "compose/cli/command.py", line 41, in project_from_options
+  File "compose/cli/command.py", line 121, in get_project
+  File "compose/cli/command.py", line 92, in get_client
+  File "compose/cli/docker_client.py", line 120, in docker_client
+  File "site-packages/docker/api/client.py", line 114, in __init__
+  File "site-packages/docker/utils/utils.py", line 358, in parse_host
+docker.errors.DockerException: Bind address needs a port: 127.0.0.1
+[17620] Failed to execute script docker-compose
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo systemctl status docker\t:2
+>
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ export DOCKER_HOST=127.0.0.1:2375
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f linux
+-docker-compose.yaml up -d
+ERROR: Couldn't connect to Docker daemon at http://127.0.0.1:2375 - is it running?
+
+If it's at a non-standard location, specify the URL with the DOCKER_HOST environment variable.
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo service docker restart
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f linux
+-docker-compose.yaml up -d
+ERROR: Couldn't connect to Docker daemon at http://127.0.0.1:2375 - is it running?
+
+If it's at a non-standard location, specify the URL with the DOCKER_HOST environment variable.
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo apt-get remove docker docker-engine
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+Package 'docker-engine' is not installed, so not removed
+Package 'docker' is not installed, so not removed
+0 upgraded, 0 newly installed, 0 to remove and 3 not upgraded.
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo service docker start && docker-compose up -d
+ERROR:
+        Can't find a suitable configuration file in this directory or any
+        parent. Are you in the right directory?
+
+        Supported filenames: docker-compose.yml, docker-compose.yaml
+
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo service docker start && docker-compose up -d
+ERROR:
+        Can't find a suitable configuration file in this directory or any
+        parent. Are you in the right directory?
+
+        Supported filenames: docker-compose.yml, docker-compose.yaml
+
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo usermod -aG docker ${USER}
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo su - ${USER}
+vagrant@ubuntu-xenial:~$ ls -l
+total 4584
+-rw-r--r--  1 root    root    4682556 Feb 21 21:16 constellation-0.3.2-ubuntu1604.tar.xz
+drwxr-xr-x 41 vagrant vagrant    4096 Apr 10 14:14 quorum
+drwxr-xr-x  4 vagrant vagrant    4096 Apr 11 11:04 quorum-examples
+vagrant@ubuntu-xenial:~$ cd quorum
+vagrant@ubuntu-xenial:~/quorum$ cd ..
+vagrant@ubuntu-xenial:~$ cd quorum-examples/
+vagrant@ubuntu-xenial:~/quorum-examples$ dir
+7nodes  blk-explorer-free
+vagrant@ubuntu-xenial:~/quorum-examples$ cd blk-explorer-free/
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ dir
+docs  linux-docker-compose.yaml  mac-docker-compose.yaml  README.md  win-docker-compose.yaml
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f linux
+-docker-compose.yaml up -d
+Creating network "blkexplorerfree_default" with the default driver
+Pulling web (blkio10/explorer-ui-free:1.0.0)...
+1.0.0: Pulling from blkio10/explorer-ui-free
+b56ae66c2937: Pull complete
+e5cc5d928577: Pull complete
+df3c404a4598: Pull complete
+e8415a40f74e: Pull complete
+71b161421503: Pull complete
+6fa9bd7cbb2c: Pull complete
+309b7094e8b9: Pull complete
+91faff8cfd7e: Pull complete
+6cb469ed6d5e: Pull complete
+Digest: sha256:94614529d7d8ced1d2fed661d8df47020f2b6abf0704c17fc56e6fde6b4ef222
+Status: Downloaded newer image for blkio10/explorer-ui-free:1.0.0
+Pulling mongodb (mongo:3.4.10)...
+3.4.10: Pulling from library/mongo
+c4bb02b17bb4: Pull complete
+3f58e3bb3be4: Pull complete
+a229fb575a6e: Pull complete
+8f5ddc533743: Pull complete
+5e9d2af6e206: Pull complete
+8b17a0553222: Pull complete
+1723351cb8b4: Pull complete
+78dd8437755a: Pull complete
+61012c043572: Pull complete
+76aeb242d479: Pull complete
+bdc8171e92f4: Pull complete
+Digest: sha256:b84baeffd0f14bebaf057b36de9414ee41584a897351795f4a3889257cf19b6d
+Status: Downloaded newer image for mongo:3.4.10
+Pulling REST (blkio10/explorer-free:1.0.0)...
+1.0.0: Pulling from blkio10/explorer-free
+b56ae66c2937: Already exists
+2296e775ba08: Pull complete
+6e753bb2ec67: Pull complete
+1759033506d8: Pull complete
+55bcea0a0321: Pull complete
+Digest: sha256:a8374dcdc17e2304f98282c9a738bc8a3f0c2a10ed0a47ceeac8064f7d74d651
+Status: Downloaded newer image for blkio10/explorer-free:1.0.0
+Creating blk-mongodb-free     ... done
+Creating blk-explorer-ui-free ... done
+Creating blk-explorer-free    ... done
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f linux-docker-compose.yaml up -d
+blk-mongodb-free is up-to-date
+blk-explorer-ui-free is up-to-date
+blk-explorer-free is up-to-date
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f linux-docker-compose.yaml up -d
+grant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ cd blk-explorer-free/
+
+
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ exit
+logout
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ exit
+logout
+Connection to 127.0.0.1 closed.
+
+C:\Users\USER\Desktop\Quorum\quorum-examples>vagrant suspend
+==> default: Saving VM state and suspending execution...
+
+C:\Users\USER\Desktop\Quorum\quorum-examples>vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Checking if box 'ubuntu/xenial64' is up to date...
+==> default: There was a problem while downloading the metadata for your box
+==> default: to check for updates. This is not an error, since it is usually due
+==> default: to temporary network problems. This is just a warning. The problem
+==> default: encountered was:
+==> default:
+==> default: Could not resolve host: vagrantcloud.com
+==> default:
+==> default: If you want to check for box updates, verify your network connection
+==> default: is valid and try again.
+==> default: Resuming suspended VM...
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+==> default: Machine booted and ready!
+==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> default: flag to force provisioning. Provisioners marked to run always will still run.
+
+C:\Users\USER\Desktop\Quorum\quorum-examples>vagrant ssh
+Welcome to Ubuntu 16.04.4 LTS (GNU/Linux 4.4.0-119-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  Get cloud support with Ubuntu Advantage Cloud Guest:
+    http://www.ubuntu.com/business/services/cloud
+
+3 packages can be updated.
+3 updates are security updates.
+
+
+Last login: Wed Apr 11 11:03:13 2018 from 10.0.2.2
+vagrant@ubuntu-xenial:~$ dir
+constellation-0.3.2-ubuntu1604.tar.xz  quorum  quorum-examples
+vagrant@ubuntu-xenial:~$ cd quorum-examples/
+vagrant@ubuntu-xenial:~/quorum-examples$ dir
+7nodes  blk-explorer-free
+vagrant@ubuntu-xenial:~/quorum-examples$ cd 7nodes/
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ dor
+No command 'dor' found, did you mean:
+ Command 'dog' from package 'sheepdog' (universe)
+ Command 'drr' from package 'plastimatch' (universe)
+ Command 'dot' from package 'graphviz' (main)
+ Command 'dar' from package 'dar' (universe)
+ Command 'tor' from package 'tor' (universe)
+ Command 'dir' from package 'coreutils' (main)
+ Command 'sor' from package 'pccts' (universe)
+dor: command not found
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ dir
+bench                   istanbul-init.sh   nohup.out                qdata          README.md          stop.sh
+constellation-start.sh  istanbul-start.sh  passwords.txt            raft           runscript.sh
+genesis.json            keys               permissioned-nodes.json  raft-init.sh   script1.js
+istanbul-genesis.json   myproject          porosity                 raft-start.sh  simplestorage.sol
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ ./raft-start.sh
+[*] Starting Constellation nodes
+constellation-node --url=https://127.0.0.1:9001/ --port=9001 --workdir=qdata/c1 --socket=tm.ipc --publickeys=tm.pub --privatekeys=tm.key --othernodes=https://127.0.0.1:9001/ >> qdata/logs/constellation1.log 2>&1 &
+constellation-node --url=https://127.0.0.2:9002/ --port=9002 --workdir=qdata/c2 --socket=tm.ipc --publickeys=tm.pub --privatekeys=tm.key --othernodes=https://127.0.0.1:9001/ >> qdata/logs/constellation2.log 2>&1 &
+constellation-node --url=https://127.0.0.3:9003/ --port=9003 --workdir=qdata/c3 --socket=tm.ipc --publickeys=tm.pub --privatekeys=tm.key --othernodes=https://127.0.0.1:9001/ >> qdata/logs/constellation3.log 2>&1 &
+constellation-node --url=https://127.0.0.4:9004/ --port=9004 --workdir=qdata/c4 --socket=tm.ipc --publickeys=tm.pub --privatekeys=tm.key --othernodes=https://127.0.0.1:9001/ >> qdata/logs/constellation4.log 2>&1 &
+constellation-node --url=https://127.0.0.5:9005/ --port=9005 --workdir=qdata/c5 --socket=tm.ipc --publickeys=tm.pub --privatekeys=tm.key --othernodes=https://127.0.0.1:9001/ >> qdata/logs/constellation5.log 2>&1 &
+constellation-node --url=https://127.0.0.6:9006/ --port=9006 --workdir=qdata/c6 --socket=tm.ipc --publickeys=tm.pub --privatekeys=tm.key --othernodes=https://127.0.0.1:9001/ >> qdata/logs/constellation6.log 2>&1 &
+constellation-node --url=https://127.0.0.7:9007/ --port=9007 --workdir=qdata/c7 --socket=tm.ipc --publickeys=tm.pub --privatekeys=tm.key --othernodes=https://127.0.0.1:9001/ >> qdata/logs/constellation7.log 2>&1 &
+[*] Starting Ethereum nodes
+ARGS="--raft --rpc --rpcaddr 0.0.0.0 --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum --emitcheckpoints"
+PRIVATE_CONFIG=qdata/c1/tm.ipc nohup geth --datadir qdata/dd1 $ARGS --permissioned --raftport 50401 --rpcport 22000 --port 21000 --unlock 0 --password passwords.txt 2>>qdata/logs/1.log &
+PRIVATE_CONFIG=qdata/c2/tm.ipc nohup geth --datadir qdata/dd2 $ARGS --permissioned --raftport 50402 --rpcport 22001 --port 21001 2>>qdata/logs/2.log &
+PRIVATE_CONFIG=qdata/c3/tm.ipc nohup geth --datadir qdata/dd3 $ARGS --permissioned --raftport 50403 --rpcport 22002 --port 21002 2>>qdata/logs/3.log &
+PRIVATE_CONFIG=qdata/c4/tm.ipc nohup geth --datadir qdata/dd4 $ARGS --permissioned --raftport 50404 --rpcport 22003 --port 21003 2>>qdata/logs/4.log &
+PRIVATE_CONFIG=qdata/c5/tm.ipc nohup geth --datadir qdata/dd5 $ARGS --raftport 50405 --rpcport 22004 --port 21004 2>>qdata/logs/5.log &
+PRIVATE_CONFIG=qdata/c6/tm.ipc nohup geth --datadir qdata/dd6 $ARGS --raftport 50406 --rpcport 22005 --port 21005 2>>qdata/logs/6.log &
+PRIVATE_CONFIG=qdata/c7/tm.ipc nohup geth --datadir qdata/dd7 $ARGS --raftport 50407 --rpcport 22006 --port 21006 2>>qdata/logs/7.log &
+set +v
+
+All nodes configured. See 'qdata/logs' for logs, and run e.g. 'geth attach qdata/dd1/geth.ipc' to attach to the first Geth node.
+To test sending a private transaction from Node 1 to Node 7, run './runscript script1.js'
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ ls -l
+total 92
+drwxr-xr-x  2 vagrant vagrant 4096 Apr 10 14:16 bench
+-rwxr-xr-x  1 vagrant vagrant  670 Apr 10 14:16 constellation-start.sh
+-rwxr-xr-x  1 vagrant vagrant  575 Apr 10 14:16 genesis.json
+-rwxr-xr-x  1 vagrant vagrant 6513 Apr 10 14:16 istanbul-genesis.json
+-rwxr-xr-x  1 vagrant vagrant 2045 Apr 10 14:16 istanbul-init.sh
+-rwxr-xr-x  1 vagrant vagrant 1403 Apr 10 14:16 istanbul-start.sh
+drwxr-xr-x  2 vagrant vagrant 4096 Apr 10 14:16 keys
+drwxrwxr-x  6 vagrant vagrant 4096 Apr 11 09:18 myproject
+-rw-------  1 vagrant vagrant 4948 Apr 11 11:32 nohup.out
+-rwxr-xr-x  1 vagrant vagrant    0 Apr 10 14:16 passwords.txt
+-rwxr-xr-x  1 vagrant vagrant 1300 Apr 10 14:16 permissioned-nodes.json
+drwxr-xr-x  2 vagrant vagrant 4096 Apr 10 14:16 porosity
+drwxrwxr-x 17 vagrant vagrant 4096 Apr 11 06:16 qdata
+drwxr-xr-x  2 vagrant vagrant 4096 Apr 10 14:16 raft
+-rwxr-xr-x  1 vagrant vagrant 1910 Apr 10 14:16 raft-init.sh
+-rwxr-xr-x  1 vagrant vagrant 1575 Apr 10 14:16 raft-start.sh
+-rwxr-xr-x  1 vagrant vagrant 7757 Apr 10 14:16 README.md
+-rwxr-xr-x  1 vagrant vagrant  106 Apr 10 14:16 runscript.sh
+-rwxr-xr-x  1 vagrant vagrant 1865 Apr 10 14:16 script1.js
+-rwxr-xr-x  1 vagrant vagrant  296 Apr 10 14:16 simplestorage.sol
+-rwxr-xr-x  1 vagrant vagrant   53 Apr 10 14:16 stop.sh
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f linux-docker-com
+pose.yaml up -d
+ERROR: .FileNotFoundError: [Errno 2] No such file or directory: './linux-docker-compose.yaml'
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ ls -l
+total 92
+drwxr-xr-x  2 vagrant vagrant 4096 Apr 10 14:16 bench
+-rwxr-xr-x  1 vagrant vagrant  670 Apr 10 14:16 constellation-start.sh
+-rwxr-xr-x  1 vagrant vagrant  575 Apr 10 14:16 genesis.json
+-rwxr-xr-x  1 vagrant vagrant 6513 Apr 10 14:16 istanbul-genesis.json
+-rwxr-xr-x  1 vagrant vagrant 2045 Apr 10 14:16 istanbul-init.sh
+-rwxr-xr-x  1 vagrant vagrant 1403 Apr 10 14:16 istanbul-start.sh
+drwxr-xr-x  2 vagrant vagrant 4096 Apr 10 14:16 keys
+drwxrwxr-x  6 vagrant vagrant 4096 Apr 11 09:18 myproject
+-rw-------  1 vagrant vagrant 4948 Apr 11 11:32 nohup.out
+-rwxr-xr-x  1 vagrant vagrant    0 Apr 10 14:16 passwords.txt
+-rwxr-xr-x  1 vagrant vagrant 1300 Apr 10 14:16 permissioned-nodes.json
+drwxr-xr-x  2 vagrant vagrant 4096 Apr 10 14:16 porosity
+drwxrwxr-x 17 vagrant vagrant 4096 Apr 11 06:16 qdata
+drwxr-xr-x  2 vagrant vagrant 4096 Apr 10 14:16 raft
+-rwxr-xr-x  1 vagrant vagrant 1910 Apr 10 14:16 raft-init.sh
+-rwxr-xr-x  1 vagrant vagrant 1575 Apr 10 14:16 raft-start.sh
+-rwxr-xr-x  1 vagrant vagrant 7757 Apr 10 14:16 README.md
+-rwxr-xr-x  1 vagrant vagrant  106 Apr 10 14:16 runscript.sh
+-rwxr-xr-x  1 vagrant vagrant 1865 Apr 10 14:16 script1.js
+-rwxr-xr-x  1 vagrant vagrant  296 Apr 10 14:16 simplestorage.sol
+-rwxr-xr-x  1 vagrant vagrant   53 Apr 10 14:16 stop.sh
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ cd ..
+vagrant@ubuntu-xenial:~/quorum-examples$ dir
+7nodes  blk-explorer-free
+vagrant@ubuntu-xenial:~/quorum-examples$ cd blk-explorer-free/
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ dir
+docs  linux-docker-compose.yaml  mac-docker-compose.yaml  README.md  win-docker-compose.yaml
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f linux
+-docker-compose.yaml up -d
+blk-explorer-ui-free is up-to-date
+blk-mongodb-free is up-to-date
+blk-explorer-free is up-to-date
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f linux
+-docker-compose.yaml down -d
+Stops containers and removes containers, networks, volumes, and images
+created by `up`.
+
+By default, the only things removed are:
+
+- Containers for services defined in the Compose file
+- Networks defined in the `networks` section of the Compose file
+- The default network, if one is used
+
+Networks and volumes defined as `external` are never removed.
+
+Usage: down [options]
+
+Options:
+    --rmi type              Remove images. Type must be one of:
+                              'all': Remove all images used by any service.
+                              'local': Remove only images that don't have a
+                              custom tag set by the `image` field.
+    -v, --volumes           Remove named volumes declared in the `volumes`
+                            section of the Compose file and anonymous volumes
+                            attached to containers.
+    --remove-orphans        Remove containers for services not defined in the
+                            Compose file
+    -t, --timeout TIMEOUT   Specify a shutdown timeout in seconds.
+                            (default: 10)
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f linux
+-docker-compose.yaml up -d
+blk-explorer-ui-free is up-to-date
+blk-mongodb-free is up-to-date
+blk-explorer-free is up-to-date
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f linux
+-docker-compose.yaml up -d
+blk-explorer-ui-free is up-to-date
+blk-mongodb-free is up-to-date
+blk-explorer-free is up-to-date
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ telnet
+telnet> 
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ telnet localhost 22000
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+^C^C^C^C^C
+Connection closed by foreign host.
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ telnet localhost 22009
+Trying 127.0.0.1...
+telnet: Unable to connect to remote host: Connection refused
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ telnet localhost 22006
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+^C^C^C^C^C
+Connection closed by foreign host.
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ telnet localhost 5000
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+^CConnection closed by foreign host.
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ netstat -ano
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       Timer
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      off (0.00/0/0)
+tcp        0      0 0.0.0.0:9001            0.0.0.0:*               LISTEN      off (0.00/0/0)
+tcp        0      0 0.0.0.0:9002            0.0.0.0:*               LISTEN      off (0.00/0/0)
+tcp        0      0 0.0.0.0:9003            0.0.0.0:*               LISTEN      off (0.00/0/0)
+tcp        0      0 0.0.0.0:9004            0.0.0.0:*               LISTEN      off (0.00/0/0)
+tcp        0      0 0.0.0.0:9005            0.0.0.0:*               LISTEN      off (0.00/0/0)
+tcp        0      0 0.0.0.0:9006            0.0.0.0:*               LISTEN      off (0.00/0/0)
+tcp        0      0 0.0.0.0:9007            0.0.0.0:*               LISTEN      off (0.00/0/0)
+tcp        0      0 127.0.0.1:53720         127.0.0.1:50405         ESTABLISHED keepalive (10.49/0/0)
+tcp        0      0 10.0.2.15:22            10.0.2.2:54425          ESTABLISHED keepalive (6612.09/0/0)
+tcp        0      0 127.0.0.1:42710         127.0.0.1:50404         ESTABLISHED keepalive (5.50/0/0)
+tcp        0      0 127.0.0.1:45084         127.0.0.1:21004         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:53046         127.0.0.1:50401         ESTABLISHED keepalive (7.04/0/0)
+tcp        0      0 127.0.0.1:50082         127.0.0.1:50407         ESTABLISHED keepalive (8.19/0/0)
+tcp        0      0 127.0.0.1:42834         127.0.0.1:50403         ESTABLISHED keepalive (7.16/0/0)
+tcp        0      0 127.0.0.1:53286         127.0.0.1:50401         ESTABLISHED keepalive (7.04/0/0)
+tcp        0      0 127.0.0.1:40080         127.0.0.1:21000         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:50076         127.0.0.1:50407         ESTABLISHED keepalive (7.16/0/0)
+tcp        0      0 127.0.0.1:41688         127.0.0.1:50406         ESTABLISHED keepalive (25.53/0/0)
+tcp        0      0 127.0.0.1:37314         127.0.0.1:50403         ESTABLISHED keepalive (6.91/0/0)
+tcp        0      0 127.0.0.1:36338         127.0.0.1:50404         ESTABLISHED keepalive (10.62/0/0)
+tcp        0      0 127.0.0.1:46858         127.0.0.1:50401         ESTABLISHED keepalive (10.62/0/0)
+tcp        0      0 127.0.0.1:41980         127.0.0.1:50406         ESTABLISHED keepalive (7.16/0/0)
+tcp        0      0 127.0.0.1:60030         127.0.0.1:50405         ESTABLISHED keepalive (7.29/0/0)
+tcp        0      0 172.18.0.1:37804        172.18.0.3:27017        ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:54636         127.0.0.1:50405         ESTABLISHED keepalive (10.75/0/0)
+tcp        0      0 127.0.0.1:36210         127.0.0.1:50404         ESTABLISHED keepalive (10.49/0/0)
+tcp        0      0 127.0.0.1:36614         127.0.0.1:50406         ESTABLISHED keepalive (10.49/0/0)
+tcp        0      0 127.0.0.1:33846         127.0.0.1:50402         ESTABLISHED keepalive (6.90/0/0)
+tcp        0      0 127.0.0.1:42790         127.0.0.1:50404         ESTABLISHED keepalive (8.18/0/0)
+tcp        0      0 127.0.0.1:48768         127.0.0.1:21005         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:42810         127.0.0.1:50404         ESTABLISHED keepalive (7.16/0/0)
+tcp        0      0 127.0.0.1:42088         127.0.0.1:50406         ESTABLISHED keepalive (10.49/0/0)
+tcp        0      0 127.0.0.1:33858         127.0.0.1:50402         ESTABLISHED keepalive (10.62/0/0)
+tcp        0      0 127.0.0.1:41888         127.0.0.1:50406         ESTABLISHED keepalive (7.16/0/0)
+tcp        0      0 127.0.0.1:42084         127.0.0.1:50406         ESTABLISHED keepalive (10.49/0/0)
+tcp        0      0 127.0.0.1:53228         127.0.0.1:50401         ESTABLISHED keepalive (7.03/0/0)
+tcp        0      0 127.0.0.1:46742         127.0.0.1:50401         ESTABLISHED keepalive (8.70/0/0)
+tcp        0      0 127.0.0.1:42770         127.0.0.1:50403         ESTABLISHED keepalive (8.06/0/0)
+tcp        0      0 127.0.0.1:54698         127.0.0.1:50405         ESTABLISHED keepalive (22.90/0/0)
+tcp        0      0 127.0.0.1:37294         127.0.0.1:50403         ESTABLISHED keepalive (10.87/0/0)
+tcp        0      0 127.0.0.1:37140         127.0.0.1:50404         ESTABLISHED keepalive (10.74/0/0)
+tcp        0      0 127.0.0.1:47678         127.0.0.1:50401         ESTABLISHED keepalive (10.87/0/0)
+tcp        0      0 127.0.0.1:53284         127.0.0.1:50401         ESTABLISHED keepalive (7.03/0/0)
+tcp        0      0 127.0.0.1:60022         127.0.0.1:50405         ESTABLISHED keepalive (7.29/0/0)
+tcp        0      0 127.0.0.1:35648         127.0.0.1:50406         ESTABLISHED keepalive (10.49/0/0)
+tcp        0      0 127.0.0.1:42794         127.0.0.1:50404         ESTABLISHED keepalive (5.50/0/0)
+tcp        0      0 127.0.0.1:37166         127.0.0.1:50404         ESTABLISHED keepalive (10.87/0/0)
+tcp        0      0 127.0.0.1:42942         127.0.0.1:50403         ESTABLISHED keepalive (8.18/0/0)
+tcp        0      0 127.0.0.1:33836         127.0.0.1:50402         ESTABLISHED keepalive (10.62/0/0)
+tcp        0      0 127.0.0.1:42076         127.0.0.1:50406         ESTABLISHED keepalive (18.87/0/0)
+tcp        0      0 127.0.0.1:53198         127.0.0.1:50401         ESTABLISHED keepalive (7.03/0/0)
+tcp        0      0 127.0.0.1:39932         127.0.0.1:21000         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:54566         127.0.0.1:50405         ESTABLISHED keepalive (10.87/0/0)
+tcp        0      0 127.0.0.1:37190         127.0.0.1:50404         ESTABLISHED keepalive (10.87/0/0)
+tcp        0      0 127.0.0.1:33828         127.0.0.1:50402         ESTABLISHED keepalive (6.84/0/0)
+tcp        0      0 127.0.0.1:47674         127.0.0.1:50401         ESTABLISHED keepalive (10.81/0/0)
+tcp        0      0 127.0.0.1:36342         127.0.0.1:50403         ESTABLISHED keepalive (10.49/0/0)
+tcp        0      0 127.0.0.1:44320         127.0.0.1:50407         ESTABLISHED keepalive (8.82/0/0)
+tcp        0      0 127.0.0.1:42772         127.0.0.1:50404         ESTABLISHED keepalive (5.50/0/0)
+tcp        0      0 127.0.0.1:60350         127.0.0.1:50405         ESTABLISHED keepalive (7.16/0/0)
+tcp        0      0 127.0.0.1:40172         127.0.0.1:21002         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:37306         127.0.0.1:50403         ESTABLISHED keepalive (10.87/0/0)
+tcp        0      0 127.0.0.1:58690         127.0.0.1:21003         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:33834         127.0.0.1:50402         ESTABLISHED keepalive (10.62/0/0)
+tcp        0      0 127.0.0.1:36626         127.0.0.1:50406         ESTABLISHED keepalive (10.87/0/0)
+tcp        0      0 127.0.0.1:41900         127.0.0.1:50406         ESTABLISHED keepalive (7.16/0/0)
+tcp        0      0 127.0.0.1:33902         127.0.0.1:50402         ESTABLISHED keepalive (10.68/0/0)
+tcp        0      0 127.0.0.1:42078         127.0.0.1:50406         ESTABLISHED keepalive (9.46/0/0)
+tcp        0      0 127.0.0.1:36606         127.0.0.1:50406         ESTABLISHED keepalive (10.87/0/0)
+tcp        0      0 127.0.0.1:44490         127.0.0.1:50407         ESTABLISHED keepalive (10.87/0/0)
+tcp        0      0 127.0.0.1:59966         127.0.0.1:50405         ESTABLISHED keepalive (27.26/0/0)
+tcp        0      0 127.0.0.1:60644         127.0.0.1:21000         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:33864         127.0.0.1:50402         ESTABLISHED keepalive (10.62/0/0)
+tcp        0      0 127.0.0.1:42656         127.0.0.1:50403         ESTABLISHED keepalive (8.06/0/0)
+tcp        0      0 127.0.0.1:40170         127.0.0.1:21000         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:36400         127.0.0.1:50403         ESTABLISHED keepalive (12.02/0/0)
+tcp        0      0 127.0.0.1:41984         127.0.0.1:50406         ESTABLISHED keepalive (7.16/0/0)
+tcp        0      0 127.0.0.1:39050         127.0.0.1:21004         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:47690         127.0.0.1:50401         ESTABLISHED keepalive (18.81/0/0)
+tcp        0      0 127.0.0.1:37196         127.0.0.1:50404         ESTABLISHED keepalive (10.87/0/0)
+tcp        0      0 127.0.0.1:33830         127.0.0.1:50402         ESTABLISHED keepalive (6.84/0/0)
+tcp        0      0 127.0.0.1:42408         127.0.0.1:21005         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:40004         127.0.0.1:21000         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:53328         127.0.0.1:50401         ESTABLISHED keepalive (8.18/0/0)
+tcp        0      0 127.0.0.1:33840         127.0.0.1:50402         ESTABLISHED keepalive (10.61/0/0)
+tcp        0      0 127.0.0.1:36398         127.0.0.1:50403         ESTABLISHED keepalive (12.02/0/0)
+tcp        0      0 127.0.0.1:57866         127.0.0.1:21006         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:53330         127.0.0.1:50401         ESTABLISHED keepalive (7.03/0/0)
+tcp        0      0 127.0.0.1:46740         127.0.0.1:50401         ESTABLISHED keepalive (8.69/0/0)
+tcp        0      0 127.0.0.1:49846         127.0.0.1:50407         ESTABLISHED keepalive (7.16/0/0)
+tcp        0      0 127.0.0.1:47482         127.0.0.1:50401         ESTABLISHED keepalive (28.66/0/0)
+tcp        0      0 127.0.0.1:37878         127.0.0.1:21003         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:58458         127.0.0.1:21003         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:42668         127.0.0.1:50403         ESTABLISHED keepalive (7.28/0/0)
+tcp        0      0 127.0.0.1:33850         127.0.0.1:50402         ESTABLISHED keepalive (6.90/0/0)
+tcp        0      0 127.0.0.1:33852         127.0.0.1:50402         ESTABLISHED keepalive (10.61/0/0)
+tcp        0      0 127.0.0.1:35650         127.0.0.1:50406         ESTABLISHED keepalive (10.48/0/0)
+tcp        0      0 127.0.0.1:33856         127.0.0.1:50402         ESTABLISHED keepalive (10.61/0/0)
+tcp        0      0 127.0.0.1:36344         127.0.0.1:50403         ESTABLISHED keepalive (10.87/0/0)
+tcp        0      0 127.0.0.1:54664         127.0.0.1:50405         ESTABLISHED keepalive (10.87/0/0)
+tcp        0      0 127.0.0.1:36628         127.0.0.1:50406         ESTABLISHED keepalive (10.87/0/0)
+tcp        0      0 172.18.0.1:34090        172.18.0.3:27017        ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:33866         127.0.0.1:50402         ESTABLISHED keepalive (11.12/0/0)
+tcp        0      0 127.0.0.1:54540         127.0.0.1:50405         ESTABLISHED keepalive (27.25/0/0)
+tcp        0      0 127.0.0.1:35762         127.0.0.1:50406         ESTABLISHED keepalive (10.61/0/0)
+tcp        0      0 127.0.0.1:49996         127.0.0.1:50407         ESTABLISHED keepalive (7.22/0/0)
+tcp        0      0 127.0.0.1:44286         127.0.0.1:50407         ESTABLISHED keepalive (10.54/0/0)
+tcp        0      0 127.0.0.1:44478         127.0.0.1:50407         ESTABLISHED keepalive (18.86/0/0)
+tcp        0      0 127.0.0.1:33860         127.0.0.1:50402         ESTABLISHED keepalive (10.61/0/0)
+tcp        0      0 127.0.0.1:42712         127.0.0.1:50404         ESTABLISHED keepalive (5.49/0/0)
+tcp        0      0 127.0.0.1:49988         127.0.0.1:50407         ESTABLISHED keepalive (7.22/0/0)
+tcp        0      0 127.0.0.1:53834         127.0.0.1:50405         ESTABLISHED keepalive (10.61/0/0)
+tcp        0      0 127.0.0.1:52120         127.0.0.1:21003         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:37202         127.0.0.1:50404         ESTABLISHED keepalive (18.86/0/0)
+tcp        0      0 127.0.0.1:50274         127.0.0.1:21006         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:37842         127.0.0.1:21003         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:42160         127.0.0.1:50406         ESTABLISHED keepalive (7.15/0/0)
+tcp        0      0 127.0.0.1:36396         127.0.0.1:50403         ESTABLISHED keepalive (6.64/0/0)
+tcp        0      0 127.0.0.1:59764         127.0.0.1:50405         ESTABLISHED keepalive (18.93/0/0)
+tcp        0      0 127.0.0.1:44322         127.0.0.1:50407         ESTABLISHED keepalive (7.15/0/0)
+tcp        0      0 127.0.0.1:33853         127.0.0.1:50402         ESTABLISHED keepalive (10.61/0/0)
+tcp        0      0 127.0.0.1:42692         127.0.0.1:50403         ESTABLISHED keepalive (7.15/0/0)
+tcp        0      0 127.0.0.1:42532         127.0.0.1:50404         ESTABLISHED keepalive (7.15/0/0)
+tcp        0      0 127.0.0.1:42070         127.0.0.1:50406         ESTABLISHED keepalive (7.15/0/0)
+tcp        0      0 127.0.0.1:50084         127.0.0.1:50407         ESTABLISHED keepalive (7.15/0/0)
+tcp        0      0 127.0.0.1:54686         127.0.0.1:50405         ESTABLISHED keepalive (10.86/0/0)
+tcp        0      0 127.0.0.1:60208         127.0.0.1:50405         ESTABLISHED keepalive (7.22/0/0)
+tcp        0      0 127.0.0.1:33842         127.0.0.1:50402         ESTABLISHED keepalive (6.83/0/0)
+tcp        0      0 127.0.0.1:42220         127.0.0.1:50406         ESTABLISHED keepalive (8.18/0/0)
+tcp        0      0 127.0.0.1:41924         127.0.0.1:50406         ESTABLISHED keepalive (7.15/0/0)
+tcp        0      0 127.0.0.1:43624         127.0.0.1:50407         ESTABLISHED keepalive (10.61/0/0)
+tcp        0      0 127.0.0.1:44452         127.0.0.1:50407         ESTABLISHED keepalive (22.90/0/0)
+tcp        0      0 127.0.0.1:43910         127.0.0.1:21006         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:47676         127.0.0.1:50401         ESTABLISHED keepalive (10.86/0/0)
+tcp        0      0 172.18.0.1:33466        172.18.0.3:27017        ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:37268         127.0.0.1:50403         ESTABLISHED keepalive (10.74/0/0)
+tcp        0      0 127.0.0.1:41960         127.0.0.1:50406         ESTABLISHED keepalive (7.15/0/0)
+tcp        0      0 127.0.0.1:54452         127.0.0.1:21002         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:33838         127.0.0.1:50402         ESTABLISHED keepalive (10.61/0/0)
+tcp        0      0 127.0.0.1:42760         127.0.0.1:50404         ESTABLISHED keepalive (5.49/0/0)
+tcp        0      0 127.0.0.1:43514         127.0.0.1:50407         ESTABLISHED keepalive (10.48/0/0)
+tcp        0      0 127.0.0.1:47680         127.0.0.1:50401         ESTABLISHED keepalive (10.86/0/0)
+tcp        0      0 127.0.0.1:36216         127.0.0.1:50404         ESTABLISHED keepalive (10.48/0/0)
+tcp        0      0 127.0.0.1:42722         127.0.0.1:50403         ESTABLISHED keepalive (8.05/0/0)
+tcp        0      0 127.0.0.1:42898         127.0.0.1:50403         ESTABLISHED keepalive (8.18/0/0)
+tcp        0      0 127.0.0.1:54248         127.0.0.1:21000         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:54672         127.0.0.1:50405         ESTABLISHED keepalive (10.86/0/0)
+tcp        0      0 127.0.0.1:44288         127.0.0.1:50407         ESTABLISHED keepalive (17.26/0/0)
+tcp        0      0 127.0.0.1:42534         127.0.0.1:50404         ESTABLISHED keepalive (7.15/0/0)
+tcp        0      0 127.0.0.1:42422         127.0.0.1:50403         ESTABLISHED keepalive (25.58/0/0)
+tcp        0      0 127.0.0.1:44468         127.0.0.1:50407         ESTABLISHED keepalive (10.86/0/0)
+tcp        0      0 127.0.0.1:57818         127.0.0.1:21006         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:53160         127.0.0.1:50401         ESTABLISHED keepalive (7.02/0/0)
+tcp        0      0 127.0.0.1:42474         127.0.0.1:50404         ESTABLISHED keepalive (7.15/0/0)
+tcp        0      0 127.0.0.1:59970         127.0.0.1:50405         ESTABLISHED keepalive (5.49/0/0)
+tcp        0      0 127.0.0.1:59964         127.0.0.1:50405         ESTABLISHED keepalive (7.15/0/0)
+tcp        0      0 127.0.0.1:44424         127.0.0.1:50407         ESTABLISHED keepalive (10.74/0/0)
+tcp        0      0 127.0.0.1:53726         127.0.0.1:50405         ESTABLISHED keepalive (10.48/0/0)
+tcp        0      0 127.0.0.1:43516         127.0.0.1:50407         ESTABLISHED keepalive (10.48/0/0)
+tcp        0      0 127.0.0.1:42776         127.0.0.1:50403         ESTABLISHED keepalive (7.15/0/0)
+tcp        0      0 127.0.0.1:53134         127.0.0.1:50401         ESTABLISHED keepalive (7.02/0/0)
+tcp        0      0 127.0.0.1:33862         127.0.0.1:50402         ESTABLISHED keepalive (10.61/0/0)
+tcp        0      0 127.0.0.1:37330         127.0.0.1:50403         ESTABLISHED keepalive (10.86/0/0)
+tcp        0      0 127.0.0.1:36566         127.0.0.1:50406         ESTABLISHED keepalive (10.74/0/0)
+tcp6       0      0 :::22006                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::22                   :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::50401                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::50402                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::50403                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::50404                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::50405                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::50406                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::50407                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::5000                 :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::21000                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::21001                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::21002                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::21003                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::21004                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::21005                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::21006                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::22000                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::22001                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::8081                 :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::28017                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::22002                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::22003                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::22004                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::22005                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:41980         ESTABLISHED keepalive (37.49/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:42722         ESTABLISHED keepalive (38.51/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:36216         ESTABLISHED keepalive (41.07/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:36210         ESTABLISHED keepalive (41.07/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:60208         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33866         ESTABLISHED keepalive (41.58/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:42942         ESTABLISHED keepalive (39.02/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:36606         ESTABLISHED keepalive (57.45/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:59970         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:41688         ESTABLISHED keepalive (55.92/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33852         ESTABLISHED keepalive (41.07/0/0)
+tcp6       0      0 127.0.0.1:21003         127.0.0.1:52120         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:36400         ESTABLISHED keepalive (41.58/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:42712         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:21003         127.0.0.1:37878         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:50082         ESTABLISHED keepalive (39.02/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:50084         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:36396         ESTABLISHED keepalive (41.07/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:60022         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:44468         ESTABLISHED keepalive (57.45/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33902         ESTABLISHED keepalive (45.16/0/0)
+tcp6       0      0 127.0.0.1:21000         127.0.0.1:60644         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:42422         ESTABLISHED keepalive (55.92/0/0)
+tcp6       0      0 127.0.0.1:50180         127.0.0.1:28017         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:53720         ESTABLISHED keepalive (41.07/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33842         ESTABLISHED keepalive (41.07/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:37306         ESTABLISHED keepalive (53.36/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:47678         ESTABLISHED keepalive (57.45/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:37330         ESTABLISHED keepalive (57.45/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:36344         ESTABLISHED keepalive (41.07/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:47690         ESTABLISHED keepalive (9.32/0/0)
+tcp6       0      0 127.0.0.1:22000         127.0.0.1:45442         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:44322         ESTABLISHED keepalive (97.39/0/0)
+tcp6       0      0 127.0.0.1:21003         127.0.0.1:58690         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:36566         ESTABLISHED keepalive (56.94/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:42070         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:37268         ESTABLISHED keepalive (56.94/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:59764         ESTABLISHED keepalive (55.92/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:37140         ESTABLISHED keepalive (56.94/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:42770         ESTABLISHED keepalive (38.51/0/0)
+tcp6       0      0 127.0.0.1:28017         127.0.0.1:50180         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:21005         127.0.0.1:42408         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:46858         ESTABLISHED keepalive (45.16/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:59964         ESTABLISHED keepalive (167.53/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:49996         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:42220         ESTABLISHED keepalive (39.02/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:44478         ESTABLISHED keepalive (9.32/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:36338         ESTABLISHED keepalive (45.16/0/0)
+tcp6       0      0 127.0.0.1:21006         127.0.0.1:43910         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:42084         ESTABLISHED keepalive (39.53/0/0)
+tcp6       0      0 127.0.0.1:21002         127.0.0.1:40172         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:54672         ESTABLISHED keepalive (57.45/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:37294         ESTABLISHED keepalive (53.36/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:44320         ESTABLISHED keepalive (129.13/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:53834         ESTABLISHED keepalive (45.16/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:43516         ESTABLISHED keepalive (41.07/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33830         ESTABLISHED keepalive (41.07/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33838         ESTABLISHED keepalive (41.07/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:53330         ESTABLISHED keepalive (36.97/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33856         ESTABLISHED keepalive (41.07/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:36628         ESTABLISHED keepalive (53.36/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:44490         ESTABLISHED keepalive (53.36/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:43624         ESTABLISHED keepalive (45.16/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:54566         ESTABLISHED keepalive (13.93/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:42760         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:21006         127.0.0.1:50274         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:42656         ESTABLISHED keepalive (38.51/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:37314         ESTABLISHED keepalive (85.10/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:47674         ESTABLISHED keepalive (53.36/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33834         ESTABLISHED keepalive (41.07/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:53328         ESTABLISHED keepalive (39.02/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:54636         ESTABLISHED keepalive (56.94/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:53134         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33860         ESTABLISHED keepalive (41.07/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:50076         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:21004         127.0.0.1:39050         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33864         ESTABLISHED keepalive (41.07/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33840         ESTABLISHED keepalive (41.07/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:42810         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:42160         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:53228         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:43514         ESTABLISHED keepalive (41.07/0/0)
+tcp6       0      0 127.0.0.1:21006         127.0.0.1:57866         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:21000         127.0.0.1:40004         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:44452         ESTABLISHED keepalive (9.32/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:41924         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:49988         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:53046         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:44288         ESTABLISHED keepalive (107.63/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:60030         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:54698         ESTABLISHED keepalive (69.23/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:42692         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:35762         ESTABLISHED keepalive (45.16/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:53726         ESTABLISHED keepalive (41.07/0/0)
+tcp6       0      0 127.0.0.1:21003         127.0.0.1:37842         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:36626         ESTABLISHED keepalive (53.36/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:47676         ESTABLISHED keepalive (57.45/0/0)
+tcp6       0      0 10.0.2.15:22000         10.0.2.2:53901          ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:37190         ESTABLISHED keepalive (53.36/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:42474         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33858         ESTABLISHED keepalive (41.07/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:42776         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:53160         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:36614         ESTABLISHED keepalive (40.04/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:60350         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:28017         127.0.0.1:53804         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:41888         ESTABLISHED keepalive (149.10/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:54540         ESTABLISHED keepalive (147.56/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:42834         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:41900         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:42088         ESTABLISHED keepalive (39.53/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:44286         ESTABLISHED keepalive (140.90/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:36342         ESTABLISHED keepalive (41.06/0/0)
+tcp6       0      0 127.0.0.1:21000         127.0.0.1:54248         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:46740         ESTABLISHED keepalive (40.55/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:42790         ESTABLISHED keepalive (39.02/0/0)
+tcp6       0      0 127.0.0.1:49556         127.0.0.1:28017         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:49846         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:59966         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 10.0.2.15:22000         10.0.2.2:53216          ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:42772         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:42794         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33862         ESTABLISHED keepalive (41.06/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33853         ESTABLISHED keepalive (41.06/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33836         ESTABLISHED keepalive (41.06/0/0)
+tcp6       0      0 127.0.0.1:21002         127.0.0.1:54452         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:47680         ESTABLISHED keepalive (57.45/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:37196         ESTABLISHED keepalive (57.45/0/0)
+tcp6       0      0 127.0.0.1:45442         127.0.0.1:22000         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33850         ESTABLISHED keepalive (41.06/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:42710         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:42898         ESTABLISHED keepalive (39.02/0/0)
+tcp6       0      0 127.0.0.1:21004         127.0.0.1:45084         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:53286         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:42076         ESTABLISHED keepalive (36.97/0/0)
+tcp6       0      0 127.0.0.1:21000         127.0.0.1:40170         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:42078         ESTABLISHED keepalive (38.50/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:35648         ESTABLISHED keepalive (41.06/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:36398         ESTABLISHED keepalive (41.58/0/0)
+tcp6       0      0 127.0.0.1:21000         127.0.0.1:40080         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:21003         127.0.0.1:58458         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:42534         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:41984         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:54686         ESTABLISHED keepalive (57.45/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:54664         ESTABLISHED keepalive (53.35/0/0)
+tcp6       0      0 127.0.0.1:53804         127.0.0.1:28017         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:46742         ESTABLISHED keepalive (40.55/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:37166         ESTABLISHED keepalive (53.35/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33846         ESTABLISHED keepalive (41.06/0/0)
+tcp6       0      0 127.0.0.1:21005         127.0.0.1:48768         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33828         ESTABLISHED keepalive (41.06/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:37202         ESTABLISHED keepalive (93.29/0/0)
+tcp6       0      0 10.0.2.15:22000         10.0.2.2:53208          ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:53198         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:42668         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:47482         ESTABLISHED keepalive (92.26/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:44424         ESTABLISHED keepalive (56.94/0/0)
+tcp6       0      0 127.0.0.1:21006         127.0.0.1:57818         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:41960         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 127.0.0.1:28017         127.0.0.1:49556         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:21000         127.0.0.1:39932         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:35650         ESTABLISHED keepalive (41.06/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:53284         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 10.0.2.15:22000         10.0.2.2:57959          ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:42532         ESTABLISHED keepalive (37.48/0/0)
+tcp6       0      0 10.0.2.15:22000         10.0.2.2:57958          ESTABLISHED off (0.00/0/0)
+udp        0      0 0.0.0.0:68              0.0.0.0:*                           off (0.00/0/0)
+udp6       0      0 :::21000                :::*                                off (0.00/0/0)
+udp6       0      0 :::21001                :::*                                off (0.00/0/0)
+udp6       0      0 :::21002                :::*                                off (0.00/0/0)
+udp6       0      0 :::21003                :::*                                off (0.00/0/0)
+udp6       0      0 :::21004                :::*                                off (0.00/0/0)
+udp6       0      0 :::21005                :::*                                off (0.00/0/0)
+udp6       0      0 :::21006                :::*                                off (0.00/0/0)
+Active UNIX domain sockets (servers and established)
+Proto RefCnt Flags       Type       State         I-Node   Path
+unix  3      [ ]         DGRAM                    8664     /run/systemd/notify
+unix  2      [ ACC ]     STREAM     LISTENING     8665     /run/systemd/private
+unix  2      [ ]         DGRAM                    26730    /run/user/1000/systemd/notify
+unix  2      [ ACC ]     STREAM     LISTENING     8671     /run/systemd/journal/stdout
+unix  2      [ ACC ]     STREAM     LISTENING     26731    /run/user/1000/systemd/private
+unix  2      [ ACC ]     SEQPACKET  LISTENING     8720     /run/udev/control
+unix  14     [ ]         DGRAM                    8672     /run/systemd/journal/socket
+unix  2      [ ACC ]     STREAM     LISTENING     8716     /run/lvm/lvmetad.socket
+unix  10     [ ]         DGRAM                    8717     /run/systemd/journal/dev-log
+unix  2      [ ACC ]     STREAM     LISTENING     8721     /run/lvm/lvmpolld.socket
+unix  2      [ ]         DGRAM                    8722     /run/systemd/journal/syslog
+unix  2      [ ACC ]     STREAM     LISTENING     204876   /home/vagrant/quorum-examples/7nodes/qdata/dd5/geth.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     12007    /run/acpid.socket
+unix  2      [ ACC ]     STREAM     LISTENING     203966   /home/vagrant/quorum-examples/7nodes/qdata/dd7/geth.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     265805   @/containerd-shim/moby/fe4cba3dbbc7ac76b223925d948326b03ea304c858037c7f084dba2da65b4afb/shim.sock
+unix  2      [ ACC ]     STREAM     LISTENING     301603   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     301617   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     302615   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     301643   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     302622   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     301655   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     12008    /var/lib/lxd/unix.socket
+unix  2      [ ACC ]     STREAM     LISTENING     301661   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     203559   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     202593   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     203582   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     203730   /home/vagrant/quorum-examples/7nodes/qdata/dd1/geth.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     202641   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     203609   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     203613   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     202663   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     301893   /home/vagrant/quorum-examples/7nodes/qdata/dd2/geth.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     12010    /run/snapd-snap.socket
+unix  2      [ ACC ]     STREAM     LISTENING     12011    /var/run/dbus/system_bus_socket
+unix  2      [ ACC ]     STREAM     LISTENING     12012    /run/uuidd/request
+unix  2      [ ACC ]     STREAM     LISTENING     12009    /run/snapd.socket
+unix  2      [ ACC ]     STREAM     LISTENING     265538   @/containerd-shim/moby/64776ffee372ca12cc9a665dfc75c2d31375b23112084351533b590254b31201/shim.sock
+unix  2      [ ACC ]     STREAM     LISTENING     12082    @ISCSIADM_ABSTRACT_NAMESPACE
+unix  2      [ ACC ]     STREAM     LISTENING     265536   @/containerd-shim/moby/d8df12a01f0a26ede7727f3447911f075c1918f9828c8495a6523e0b8d5aba50/shim.sock
+unix  2      [ ACC ]     STREAM     LISTENING     255615   /var/run/docker.sock
+unix  2      [ ACC ]     STREAM     LISTENING     204819   /home/vagrant/quorum-examples/7nodes/qdata/dd6/geth.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     204831   /home/vagrant/quorum-examples/7nodes/qdata/dd4/geth.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     254655   /var/run/docker/containerd/docker-containerd-debug.sock
+unix  2      [ ACC ]     STREAM     LISTENING     254656   /var/run/docker/containerd/docker-containerd.sock
+unix  2      [ ACC ]     STREAM     LISTENING     255644   /var/run/docker/metrics.sock
+unix  2      [ ACC ]     STREAM     LISTENING     254815   /run/docker/libnetwork/b8b409d3f090e20b9b6f4cde9920f049bc106b9e51560bf6914c26b3f64a5d84.sock
+unix  2      [ ACC ]     STREAM     LISTENING     204852   /home/vagrant/quorum-examples/7nodes/qdata/dd3/geth.ipc
+unix  2      [ ]         DGRAM                    289864
+unix  3      [ ]         STREAM     CONNECTED     265541
+unix  3      [ ]         STREAM     CONNECTED     254633
+unix  3      [ ]         STREAM     CONNECTED     255647
+unix  2      [ ]         DGRAM                    255628
+unix  3      [ ]         STREAM     CONNECTED     255645
+unix  3      [ ]         STREAM     CONNECTED     254634   /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     266618   @/containerd-shim/moby/fe4cba3dbbc7ac76b223925d948326b03ea304c858037c7f084dba2da65b4afb/shim.sock
+unix  3      [ ]         STREAM     CONNECTED     255642
+unix  2      [ ]         STREAM     CONNECTED     266917
+unix  3      [ ]         STREAM     CONNECTED     13384    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     254659   /var/run/docker/containerd/docker-containerd.sock
+unix  3      [ ]         STREAM     CONNECTED     14352
+unix  2      [ ]         DGRAM                    12111
+unix  3      [ ]         STREAM     CONNECTED     255649   /var/run/docker/containerd/docker-containerd.sock
+unix  2      [ ]         DGRAM                    252473
+unix  3      [ ]         STREAM     CONNECTED     254662   /var/run/docker/containerd/docker-containerd.sock
+unix  2      [ ]         DGRAM                    203639
+unix  3      [ ]         STREAM     CONNECTED     265809
+unix  2      [ ]         DGRAM                    203643
+unix  3      [ ]         STREAM     CONNECTED     25816
+unix  3      [ ]         STREAM     CONNECTED     265545
+unix  3      [ ]         STREAM     CONNECTED     13186    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     265549   @/containerd-shim/moby/d8df12a01f0a26ede7727f3447911f075c1918f9828c8495a6523e0b8d5aba50/shim.sock
+unix  3      [ ]         STREAM     CONNECTED     26708    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     12843
+unix  3      [ ]         STREAM     CONNECTED     12102
+unix  2      [ ]         DGRAM                    11102
+unix  3      [ ]         STREAM     CONNECTED     12976
+unix  3      [ ]         STREAM     CONNECTED     13176    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     12581
+unix  2      [ ]         DGRAM                    12081
+unix  3      [ ]         STREAM     CONNECTED     12224    /var/run/dbus/system_bus_socket
+unix  3      [ ]         STREAM     CONNECTED     265550   @/containerd-shim/moby/64776ffee372ca12cc9a665dfc75c2d31375b23112084351533b590254b31201/shim.sock
+unix  2      [ ]         DGRAM                    249545
+unix  3      [ ]         STREAM     CONNECTED     12965
+unix  2      [ ]         DGRAM                    301705
+unix  3      [ ]         STREAM     CONNECTED     12223    /var/run/dbus/system_bus_socket
+unix  3      [ ]         STREAM     CONNECTED     13194    /run/systemd/journal/stdout
+unix  2      [ ]         DGRAM                    25823
+unix  2      [ ]         DGRAM                    12966
+unix  3      [ ]         STREAM     CONNECTED     13593
+unix  3      [ ]         STREAM     CONNECTED     289888
+unix  2      [ ]         DGRAM                    9490
+unix  3      [ ]         STREAM     CONNECTED     12225    /var/run/dbus/system_bus_socket
+unix  3      [ ]         STREAM     CONNECTED     13936    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     289889
+unix  3      [ ]         STREAM     CONNECTED     13092
+unix  2      [ ]         DGRAM                    12218
+unix  3      [ ]         STREAM     CONNECTED     13196    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     9587
+unix  3      [ ]         STREAM     CONNECTED     12221
+unix  3      [ ]         STREAM     CONNECTED     12209
+unix  3      [ ]         STREAM     CONNECTED     13031
+unix  3      [ ]         STREAM     CONNECTED     14763
+unix  3      [ ]         STREAM     CONNECTED     13935
+unix  3      [ ]         STREAM     CONNECTED     13195    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     13594    /var/run/dbus/system_bus_socket
+unix  3      [ ]         STREAM     CONNECTED     12222
+unix  3      [ ]         STREAM     CONNECTED     9588     /run/systemd/journal/stdout
+unix  2      [ ]         DGRAM                    12086
+unix  3      [ ]         STREAM     CONNECTED     14764    /var/run/dbus/system_bus_socket
+unix  3      [ ]         STREAM     CONNECTED     9052
+unix  2      [ ]         DGRAM                    202686
+unix  3      [ ]         DGRAM                    9062
+unix  3      [ ]         DGRAM                    9063
+unix  2      [ ]         DGRAM                    202687
+unix  2      [ ]         DGRAM                    9058
+unix  3      [ ]         STREAM     CONNECTED     10030    /run/systemd/journal/stdout
+unix  2      [ ]         DGRAM                    26724
+unix  2      [ ]         DGRAM                    202692
+unix  2      [ ]         DGRAM                    202689
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ netstat -ano
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       Timer
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      off (0.00/0/0)
+tcp        0      0 0.0.0.0:9001            0.0.0.0:*               LISTEN      off (0.00/0/0)
+tcp        0      0 0.0.0.0:9002            0.0.0.0:*               LISTEN      off (0.00/0/0)
+tcp        0      0 0.0.0.0:9003            0.0.0.0:*               LISTEN      off (0.00/0/0)
+tcp        0      0 0.0.0.0:9004            0.0.0.0:*               LISTEN      off (0.00/0/0)
+tcp        0      0 0.0.0.0:9005            0.0.0.0:*               LISTEN      off (0.00/0/0)
+tcp        0      0 0.0.0.0:9006            0.0.0.0:*               LISTEN      off (0.00/0/0)
+tcp        0      0 0.0.0.0:9007            0.0.0.0:*               LISTEN      off (0.00/0/0)
+tcp        0      0 127.0.0.1:53720         127.0.0.1:50405         ESTABLISHED keepalive (21.87/0/0)
+tcp        0    100 10.0.2.15:22            10.0.2.2:54425          ESTABLISHED on (0.20/0/0)
+tcp        0      0 127.0.0.1:42710         127.0.0.1:50404         ESTABLISHED keepalive (16.88/0/0)
+tcp        0      0 127.0.0.1:45084         127.0.0.1:21004         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:53046         127.0.0.1:50401         ESTABLISHED keepalive (18.41/0/0)
+tcp        0      0 127.0.0.1:50082         127.0.0.1:50407         ESTABLISHED keepalive (19.63/0/0)
+tcp        0      0 127.0.0.1:42834         127.0.0.1:50403         ESTABLISHED keepalive (18.54/0/0)
+tcp        0      0 127.0.0.1:53286         127.0.0.1:50401         ESTABLISHED keepalive (18.41/0/0)
+tcp        0      0 127.0.0.1:40080         127.0.0.1:21000         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:50076         127.0.0.1:50407         ESTABLISHED keepalive (18.48/0/0)
+tcp        0      0 127.0.0.1:41688         127.0.0.1:50406         ESTABLISHED keepalive (6.89/0/0)
+tcp        0      0 127.0.0.1:37314         127.0.0.1:50403         ESTABLISHED keepalive (10.22/0/0)
+tcp        0      0 127.0.0.1:36338         127.0.0.1:50404         ESTABLISHED keepalive (13.93/0/0)
+tcp        0      0 127.0.0.1:46858         127.0.0.1:50401         ESTABLISHED keepalive (13.93/0/0)
+tcp        0      0 127.0.0.1:41980         127.0.0.1:50406         ESTABLISHED keepalive (18.41/0/0)
+tcp        0      0 127.0.0.1:60030         127.0.0.1:50405         ESTABLISHED keepalive (18.54/0/0)
+tcp        0      0 172.18.0.1:37804        172.18.0.3:27017        ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:54636         127.0.0.1:50405         ESTABLISHED keepalive (14.06/0/0)
+tcp        0      0 127.0.0.1:36210         127.0.0.1:50404         ESTABLISHED keepalive (21.86/0/0)
+tcp        0      0 127.0.0.1:36614         127.0.0.1:50406         ESTABLISHED keepalive (22.12/0/0)
+tcp        0      0 127.0.0.1:33846         127.0.0.1:50402         ESTABLISHED keepalive (10.22/0/0)
+tcp        0      0 127.0.0.1:42790         127.0.0.1:50404         ESTABLISHED keepalive (19.62/0/0)
+tcp        0      0 127.0.0.1:48768         127.0.0.1:21005         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:42810         127.0.0.1:50404         ESTABLISHED keepalive (18.47/0/0)
+tcp        0      0 127.0.0.1:42088         127.0.0.1:50406         ESTABLISHED keepalive (22.12/0/0)
+tcp        0      0 127.0.0.1:33858         127.0.0.1:50402         ESTABLISHED keepalive (21.99/0/0)
+tcp        0      0 127.0.0.1:41888         127.0.0.1:50406         ESTABLISHED keepalive (18.41/0/0)
+tcp        0      0 127.0.0.1:42084         127.0.0.1:50406         ESTABLISHED keepalive (22.12/0/0)
+tcp        0      0 127.0.0.1:53228         127.0.0.1:50401         ESTABLISHED keepalive (18.41/0/0)
+tcp        0      0 127.0.0.1:46742         127.0.0.1:50401         ESTABLISHED keepalive (20.07/0/0)
+tcp        0      0 127.0.0.1:42770         127.0.0.1:50403         ESTABLISHED keepalive (19.43/0/0)
+tcp        0      0 127.0.0.1:54698         127.0.0.1:50405         ESTABLISHED keepalive (26.22/0/0)
+tcp        0      0 127.0.0.1:37294         127.0.0.1:50403         ESTABLISHED keepalive (14.18/0/0)
+tcp        0      0 127.0.0.1:37140         127.0.0.1:50404         ESTABLISHED keepalive (14.06/0/0)
+tcp        0      0 127.0.0.1:47678         127.0.0.1:50401         ESTABLISHED keepalive (14.18/0/0)
+tcp        0      0 127.0.0.1:53284         127.0.0.1:50401         ESTABLISHED keepalive (18.41/0/0)
+tcp        0      0 127.0.0.1:60022         127.0.0.1:50405         ESTABLISHED keepalive (18.54/0/0)
+tcp        0      0 127.0.0.1:35648         127.0.0.1:50406         ESTABLISHED keepalive (21.86/0/0)
+tcp        0      0 127.0.0.1:42794         127.0.0.1:50404         ESTABLISHED keepalive (16.87/0/0)
+tcp        0      0 127.0.0.1:37166         127.0.0.1:50404         ESTABLISHED keepalive (14.18/0/0)
+tcp        0      0 127.0.0.1:42942         127.0.0.1:50403         ESTABLISHED keepalive (19.62/0/0)
+tcp        0      0 127.0.0.1:33836         127.0.0.1:50402         ESTABLISHED keepalive (21.99/0/0)
+tcp        0      0 127.0.0.1:42076         127.0.0.1:50406         ESTABLISHED keepalive (22.18/0/0)
+tcp        0      0 127.0.0.1:53198         127.0.0.1:50401         ESTABLISHED keepalive (18.41/0/0)
+tcp        0      0 127.0.0.1:39932         127.0.0.1:21000         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:54566         127.0.0.1:50405         ESTABLISHED keepalive (22.31/0/0)
+tcp        0      0 127.0.0.1:37190         127.0.0.1:50404         ESTABLISHED keepalive (14.18/0/0)
+tcp        0      0 127.0.0.1:33828         127.0.0.1:50402         ESTABLISHED keepalive (10.15/0/0)
+tcp        0      0 127.0.0.1:47674         127.0.0.1:50401         ESTABLISHED keepalive (14.12/0/0)
+tcp        0      0 127.0.0.1:36342         127.0.0.1:50403         ESTABLISHED keepalive (21.86/0/0)
+tcp        0      0 127.0.0.1:44320         127.0.0.1:50407         ESTABLISHED keepalive (20.20/0/0)
+tcp        0      0 127.0.0.1:42772         127.0.0.1:50404         ESTABLISHED keepalive (16.87/0/0)
+tcp        0      0 127.0.0.1:60350         127.0.0.1:50405         ESTABLISHED keepalive (18.47/0/0)
+tcp        0      0 127.0.0.1:40172         127.0.0.1:21002         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:37306         127.0.0.1:50403         ESTABLISHED keepalive (14.18/0/0)
+tcp        0      0 127.0.0.1:58690         127.0.0.1:21003         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:33834         127.0.0.1:50402         ESTABLISHED keepalive (21.99/0/0)
+tcp        0      0 127.0.0.1:36626         127.0.0.1:50406         ESTABLISHED keepalive (14.18/0/0)
+tcp        0      0 127.0.0.1:41900         127.0.0.1:50406         ESTABLISHED keepalive (18.54/0/0)
+tcp        0      0 127.0.0.1:33902         127.0.0.1:50402         ESTABLISHED keepalive (13.99/0/0)
+tcp        0      0 127.0.0.1:42078         127.0.0.1:50406         ESTABLISHED keepalive (21.10/0/0)
+tcp        0      0 127.0.0.1:36606         127.0.0.1:50406         ESTABLISHED keepalive (14.18/0/0)
+tcp        0      0 127.0.0.1:44490         127.0.0.1:50407         ESTABLISHED keepalive (14.18/0/0)
+tcp        0      0 127.0.0.1:59966         127.0.0.1:50405         ESTABLISHED keepalive (8.55/0/0)
+tcp        0      0 127.0.0.1:60644         127.0.0.1:21000         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:33864         127.0.0.1:50402         ESTABLISHED keepalive (21.99/0/0)
+tcp        0      0 127.0.0.1:42656         127.0.0.1:50403         ESTABLISHED keepalive (19.43/0/0)
+tcp        0      0 127.0.0.1:40170         127.0.0.1:21000         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:36400         127.0.0.1:50403         ESTABLISHED keepalive (23.66/0/0)
+tcp        0      0 127.0.0.1:41984         127.0.0.1:50406         ESTABLISHED keepalive (18.54/0/0)
+tcp        0      0 127.0.0.1:39050         127.0.0.1:21004         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:47690         127.0.0.1:50401         ESTABLISHED keepalive (22.12/0/0)
+tcp        0      0 127.0.0.1:37196         127.0.0.1:50404         ESTABLISHED keepalive (14.18/0/0)
+tcp        0      0 127.0.0.1:33830         127.0.0.1:50402         ESTABLISHED keepalive (10.15/0/0)
+tcp        0      0 127.0.0.1:42408         127.0.0.1:21005         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:40004         127.0.0.1:21000         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:53328         127.0.0.1:50401         ESTABLISHED keepalive (19.62/0/0)
+tcp        0      0 127.0.0.1:33840         127.0.0.1:50402         ESTABLISHED keepalive (21.99/0/0)
+tcp        0      0 127.0.0.1:36398         127.0.0.1:50403         ESTABLISHED keepalive (23.66/0/0)
+tcp        0      0 127.0.0.1:57866         127.0.0.1:21006         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:53330         127.0.0.1:50401         ESTABLISHED keepalive (16.74/0/0)
+tcp        0      0 127.0.0.1:46740         127.0.0.1:50401         ESTABLISHED keepalive (20.07/0/0)
+tcp        0      0 127.0.0.1:49846         127.0.0.1:50407         ESTABLISHED keepalive (18.41/0/0)
+tcp        0      0 127.0.0.1:47482         127.0.0.1:50401         ESTABLISHED keepalive (10.02/0/0)
+tcp        0      0 127.0.0.1:37878         127.0.0.1:21003         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:58458         127.0.0.1:21003         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:42668         127.0.0.1:50403         ESTABLISHED keepalive (18.54/0/0)
+tcp        0      0 127.0.0.1:33850         127.0.0.1:50402         ESTABLISHED keepalive (10.22/0/0)
+tcp        0      0 127.0.0.1:33852         127.0.0.1:50402         ESTABLISHED keepalive (21.99/0/0)
+tcp        0      0 127.0.0.1:35650         127.0.0.1:50406         ESTABLISHED keepalive (21.86/0/0)
+tcp        0      0 127.0.0.1:33856         127.0.0.1:50402         ESTABLISHED keepalive (21.99/0/0)
+tcp        0      0 127.0.0.1:36344         127.0.0.1:50403         ESTABLISHED keepalive (22.31/0/0)
+tcp        0      0 127.0.0.1:54664         127.0.0.1:50405         ESTABLISHED keepalive (14.18/0/0)
+tcp        0      0 127.0.0.1:36628         127.0.0.1:50406         ESTABLISHED keepalive (14.18/0/0)
+tcp        0      0 172.18.0.1:34090        172.18.0.3:27017        ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:33866         127.0.0.1:50402         ESTABLISHED keepalive (22.50/0/0)
+tcp        0      0 127.0.0.1:54540         127.0.0.1:50405         ESTABLISHED keepalive (8.55/0/0)
+tcp        0      0 127.0.0.1:35762         127.0.0.1:50406         ESTABLISHED keepalive (13.93/0/0)
+tcp        0      0 127.0.0.1:49996         127.0.0.1:50407         ESTABLISHED keepalive (18.54/0/0)
+tcp        0      0 127.0.0.1:44286         127.0.0.1:50407         ESTABLISHED keepalive (21.86/0/0)
+tcp        0      0 127.0.0.1:44478         127.0.0.1:50407         ESTABLISHED keepalive (22.18/0/0)
+tcp        0      0 127.0.0.1:33860         127.0.0.1:50402         ESTABLISHED keepalive (21.99/0/0)
+tcp        0      0 127.0.0.1:42712         127.0.0.1:50404         ESTABLISHED keepalive (16.87/0/0)
+tcp        0      0 127.0.0.1:49988         127.0.0.1:50407         ESTABLISHED keepalive (18.54/0/0)
+tcp        0      0 127.0.0.1:53834         127.0.0.1:50405         ESTABLISHED keepalive (13.93/0/0)
+tcp        0      0 127.0.0.1:52120         127.0.0.1:21003         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:37202         127.0.0.1:50404         ESTABLISHED keepalive (22.18/0/0)
+tcp        0      0 127.0.0.1:50274         127.0.0.1:21006         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:37842         127.0.0.1:21003         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:42160         127.0.0.1:50406         ESTABLISHED keepalive (18.54/0/0)
+tcp        0      0 127.0.0.1:36396         127.0.0.1:50403         ESTABLISHED keepalive (9.96/0/0)
+tcp        0      0 127.0.0.1:59764         127.0.0.1:50405         ESTABLISHED keepalive (0.23/0/0)
+tcp        0      0 127.0.0.1:44322         127.0.0.1:50407         ESTABLISHED keepalive (18.54/0/0)
+tcp        0      0 127.0.0.1:33853         127.0.0.1:50402         ESTABLISHED keepalive (21.99/0/0)
+tcp        0      0 127.0.0.1:42692         127.0.0.1:50403         ESTABLISHED keepalive (18.54/0/0)
+tcp        0      0 127.0.0.1:42532         127.0.0.1:50404         ESTABLISHED keepalive (18.54/0/0)
+tcp        0      0 127.0.0.1:42070         127.0.0.1:50406         ESTABLISHED keepalive (18.54/0/0)
+tcp        0      0 127.0.0.1:50084         127.0.0.1:50407         ESTABLISHED keepalive (18.54/0/0)
+tcp        0      0 127.0.0.1:54686         127.0.0.1:50405         ESTABLISHED keepalive (14.18/0/0)
+tcp        0      0 127.0.0.1:60208         127.0.0.1:50405         ESTABLISHED keepalive (18.54/0/0)
+tcp        0      0 127.0.0.1:33842         127.0.0.1:50402         ESTABLISHED keepalive (10.15/0/0)
+tcp        0      0 127.0.0.1:42220         127.0.0.1:50406         ESTABLISHED keepalive (19.62/0/0)
+tcp        0      0 127.0.0.1:41924         127.0.0.1:50406         ESTABLISHED keepalive (18.54/0/0)
+tcp        0      0 127.0.0.1:43624         127.0.0.1:50407         ESTABLISHED keepalive (13.93/0/0)
+tcp        0      0 127.0.0.1:44452         127.0.0.1:50407         ESTABLISHED keepalive (26.15/0/0)
+tcp        0      0 127.0.0.1:43910         127.0.0.1:21006         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:47676         127.0.0.1:50401         ESTABLISHED keepalive (14.18/0/0)
+tcp        0      0 172.18.0.1:33466        172.18.0.3:27017        ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:37268         127.0.0.1:50403         ESTABLISHED keepalive (14.05/0/0)
+tcp        0      0 127.0.0.1:41960         127.0.0.1:50406         ESTABLISHED keepalive (18.53/0/0)
+tcp        0      0 127.0.0.1:54452         127.0.0.1:21002         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:33838         127.0.0.1:50402         ESTABLISHED keepalive (21.99/0/0)
+tcp        0      0 127.0.0.1:42760         127.0.0.1:50404         ESTABLISHED keepalive (16.87/0/0)
+tcp        0      0 127.0.0.1:43514         127.0.0.1:50407         ESTABLISHED keepalive (21.86/0/0)
+tcp        0      0 127.0.0.1:47680         127.0.0.1:50401         ESTABLISHED keepalive (14.18/0/0)
+tcp        0      0 127.0.0.1:36216         127.0.0.1:50404         ESTABLISHED keepalive (21.86/0/0)
+tcp        0      0 127.0.0.1:42722         127.0.0.1:50403         ESTABLISHED keepalive (19.43/0/0)
+tcp        0      0 127.0.0.1:42898         127.0.0.1:50403         ESTABLISHED keepalive (19.62/0/0)
+tcp        0      0 127.0.0.1:54248         127.0.0.1:21000         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:54672         127.0.0.1:50405         ESTABLISHED keepalive (14.18/0/0)
+tcp        0      0 127.0.0.1:44288         127.0.0.1:50407         ESTABLISHED keepalive (28.52/0/0)
+tcp        0      0 127.0.0.1:42534         127.0.0.1:50404         ESTABLISHED keepalive (18.53/0/0)
+tcp        0      0 127.0.0.1:42422         127.0.0.1:50403         ESTABLISHED keepalive (6.88/0/0)
+tcp        0      0 127.0.0.1:44468         127.0.0.1:50407         ESTABLISHED keepalive (14.18/0/0)
+tcp        0      0 127.0.0.1:57818         127.0.0.1:21006         ESTABLISHED off (0.00/0/0)
+tcp        0      0 127.0.0.1:53160         127.0.0.1:50401         ESTABLISHED keepalive (18.40/0/0)
+tcp        0      0 127.0.0.1:42474         127.0.0.1:50404         ESTABLISHED keepalive (18.47/0/0)
+tcp        0      0 127.0.0.1:59970         127.0.0.1:50405         ESTABLISHED keepalive (16.87/0/0)
+tcp        0      0 127.0.0.1:59964         127.0.0.1:50405         ESTABLISHED keepalive (18.53/0/0)
+tcp        0      0 127.0.0.1:44424         127.0.0.1:50407         ESTABLISHED keepalive (14.05/0/0)
+tcp        0      0 127.0.0.1:53726         127.0.0.1:50405         ESTABLISHED keepalive (21.86/0/0)
+tcp        0      0 127.0.0.1:43516         127.0.0.1:50407         ESTABLISHED keepalive (21.86/0/0)
+tcp        0      0 127.0.0.1:42776         127.0.0.1:50403         ESTABLISHED keepalive (18.53/0/0)
+tcp        0      0 127.0.0.1:53134         127.0.0.1:50401         ESTABLISHED keepalive (18.40/0/0)
+tcp        0      0 127.0.0.1:33862         127.0.0.1:50402         ESTABLISHED keepalive (21.99/0/0)
+tcp        0      0 127.0.0.1:37330         127.0.0.1:50403         ESTABLISHED keepalive (14.18/0/0)
+tcp        0      0 127.0.0.1:36566         127.0.0.1:50406         ESTABLISHED keepalive (14.05/0/0)
+tcp6       0      0 :::22006                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::22                   :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::50401                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::50402                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::50403                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::50404                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::50405                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::50406                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::50407                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::5000                 :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::21000                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::21001                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::21002                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::21003                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::21004                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::21005                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::21006                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::22000                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::22001                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::8081                 :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::28017                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::22002                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::22003                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::22004                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 :::22005                :::*                    LISTEN      off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:41980         ESTABLISHED keepalive (108.52/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:42722         ESTABLISHED keepalive (110.05/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:36216         ESTABLISHED keepalive (112.10/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:36210         ESTABLISHED keepalive (112.10/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:60208         ESTABLISHED keepalive (108.52/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33866         ESTABLISHED keepalive (113.12/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:42942         ESTABLISHED keepalive (110.56/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:36606         ESTABLISHED keepalive (128.48/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:59970         ESTABLISHED keepalive (108.52/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:41688         ESTABLISHED keepalive (126.95/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33852         ESTABLISHED keepalive (112.61/0/0)
+tcp6       0      0 127.0.0.1:21003         127.0.0.1:52120         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:36400         ESTABLISHED keepalive (113.12/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:42712         ESTABLISHED keepalive (108.52/0/0)
+tcp6       0      0 127.0.0.1:21003         127.0.0.1:37878         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:50082         ESTABLISHED keepalive (110.56/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:50084         ESTABLISHED keepalive (108.52/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:36396         ESTABLISHED keepalive (112.10/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:60022         ESTABLISHED keepalive (108.52/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:44468         ESTABLISHED keepalive (128.48/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33902         ESTABLISHED keepalive (116.20/0/0)
+tcp6       0      0 127.0.0.1:21000         127.0.0.1:60644         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:42422         ESTABLISHED keepalive (126.95/0/0)
+tcp6       0      0 127.0.0.1:50180         127.0.0.1:28017         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:53720         ESTABLISHED keepalive (112.10/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33842         ESTABLISHED keepalive (112.61/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:37306         ESTABLISHED keepalive (124.39/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:47678         ESTABLISHED keepalive (128.48/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:37330         ESTABLISHED keepalive (128.48/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:36344         ESTABLISHED keepalive (112.61/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:47690         ESTABLISHED keepalive (80.36/0/0)
+tcp6       0      0 127.0.0.1:22000         127.0.0.1:45442         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:44322         ESTABLISHED keepalive (168.93/0/0)
+tcp6       0      0 127.0.0.1:21003         127.0.0.1:58690         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:36566         ESTABLISHED keepalive (127.97/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:42070         ESTABLISHED keepalive (108.52/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:37268         ESTABLISHED keepalive (127.97/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:59764         ESTABLISHED keepalive (126.95/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:37140         ESTABLISHED keepalive (127.97/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:42770         ESTABLISHED keepalive (110.05/0/0)
+tcp6       0      0 127.0.0.1:28017         127.0.0.1:50180         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:21005         127.0.0.1:42408         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:46858         ESTABLISHED keepalive (116.20/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:59964         ESTABLISHED keepalive (58.85/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:49996         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:42220         ESTABLISHED keepalive (110.56/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:44478         ESTABLISHED keepalive (80.35/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:36338         ESTABLISHED keepalive (116.19/0/0)
+tcp6       0      0 127.0.0.1:21006         127.0.0.1:43910         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:42084         ESTABLISHED keepalive (111.07/0/0)
+tcp6       0      0 127.0.0.1:21002         127.0.0.1:40172         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:54672         ESTABLISHED keepalive (128.48/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:37294         ESTABLISHED keepalive (124.38/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:44320         ESTABLISHED keepalive (20.45/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:53834         ESTABLISHED keepalive (116.19/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:43516         ESTABLISHED keepalive (112.10/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33830         ESTABLISHED keepalive (112.61/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33838         ESTABLISHED keepalive (112.61/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:53330         ESTABLISHED keepalive (106.98/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33856         ESTABLISHED keepalive (112.10/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:36628         ESTABLISHED keepalive (124.38/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:44490         ESTABLISHED keepalive (124.38/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:43624         ESTABLISHED keepalive (116.19/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:54566         ESTABLISHED keepalive (85.47/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:42760         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:21006         127.0.0.1:50274         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:42656         ESTABLISHED keepalive (110.05/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:37314         ESTABLISHED keepalive (156.64/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:47674         ESTABLISHED keepalive (124.38/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33834         ESTABLISHED keepalive (112.61/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:53328         ESTABLISHED keepalive (110.56/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:54636         ESTABLISHED keepalive (127.97/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:53134         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33860         ESTABLISHED keepalive (112.10/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:50076         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:21004         127.0.0.1:39050         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33864         ESTABLISHED keepalive (112.10/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33840         ESTABLISHED keepalive (112.61/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:42810         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:42160         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:53228         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:43514         ESTABLISHED keepalive (112.10/0/0)
+tcp6       0      0 127.0.0.1:21006         127.0.0.1:57866         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:21000         127.0.0.1:40004         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:44452         ESTABLISHED keepalive (80.35/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:41924         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:49988         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:53046         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:44288         ESTABLISHED keepalive (178.66/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:60030         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:54698         ESTABLISHED keepalive (140.26/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:42692         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:35762         ESTABLISHED keepalive (116.19/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:53726         ESTABLISHED keepalive (112.10/0/0)
+tcp6       0      0 127.0.0.1:21003         127.0.0.1:37842         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:36626         ESTABLISHED keepalive (124.38/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:47676         ESTABLISHED keepalive (128.48/0/0)
+tcp6       0      0 10.0.2.15:22000         10.0.2.2:53901          ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:37190         ESTABLISHED keepalive (124.38/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:42474         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33858         ESTABLISHED keepalive (112.10/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:42776         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:53160         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:36614         ESTABLISHED keepalive (111.58/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:60350         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:28017         127.0.0.1:53804         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:41888         ESTABLISHED keepalive (40.42/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:54540         ESTABLISHED keepalive (38.88/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:42834         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:41900         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:42088         ESTABLISHED keepalive (111.07/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:44286         ESTABLISHED keepalive (32.22/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:36342         ESTABLISHED keepalive (112.10/0/0)
+tcp6       0      0 127.0.0.1:21000         127.0.0.1:54248         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:46740         ESTABLISHED keepalive (112.10/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:42790         ESTABLISHED keepalive (110.56/0/0)
+tcp6       0      0 127.0.0.1:49556         127.0.0.1:28017         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:49846         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:59966         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 10.0.2.15:22000         10.0.2.2:53216          ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:42772         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:42794         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33862         ESTABLISHED keepalive (112.10/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33853         ESTABLISHED keepalive (112.61/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33836         ESTABLISHED keepalive (112.61/0/0)
+tcp6       0      0 127.0.0.1:21002         127.0.0.1:54452         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:47680         ESTABLISHED keepalive (128.48/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:37196         ESTABLISHED keepalive (128.48/0/0)
+tcp6       0      0 127.0.0.1:45442         127.0.0.1:22000         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33850         ESTABLISHED keepalive (112.61/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:42710         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:42898         ESTABLISHED keepalive (110.56/0/0)
+tcp6       0      0 127.0.0.1:21004         127.0.0.1:45084         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:53286         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:42076         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:21000         127.0.0.1:40170         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:42078         ESTABLISHED keepalive (110.05/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:35648         ESTABLISHED keepalive (112.10/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:36398         ESTABLISHED keepalive (113.12/0/0)
+tcp6       0      0 127.0.0.1:21000         127.0.0.1:40080         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:21003         127.0.0.1:58458         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:42534         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:41984         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:54686         ESTABLISHED keepalive (128.48/0/0)
+tcp6       0      0 127.0.0.1:50405         127.0.0.1:54664         ESTABLISHED keepalive (124.38/0/0)
+tcp6       0      0 127.0.0.1:53804         127.0.0.1:28017         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:46742         ESTABLISHED keepalive (112.10/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:37166         ESTABLISHED keepalive (124.38/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33846         ESTABLISHED keepalive (112.61/0/0)
+tcp6       0      0 127.0.0.1:21005         127.0.0.1:48768         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50402         127.0.0.1:33828         ESTABLISHED keepalive (112.61/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:37202         ESTABLISHED keepalive (164.32/0/0)
+tcp6       0      0 10.0.2.15:22000         10.0.2.2:53208          ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:53198         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50403         127.0.0.1:42668         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:47482         ESTABLISHED keepalive (163.80/0/0)
+tcp6       0      0 127.0.0.1:50407         127.0.0.1:44424         ESTABLISHED keepalive (127.96/0/0)
+tcp6       0      0 127.0.0.1:21006         127.0.0.1:57818         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:41960         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 127.0.0.1:28017         127.0.0.1:49556         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:21000         127.0.0.1:39932         ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50406         127.0.0.1:35650         ESTABLISHED keepalive (112.09/0/0)
+tcp6       0      0 127.0.0.1:50401         127.0.0.1:53284         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 10.0.2.15:22000         10.0.2.2:57959          ESTABLISHED off (0.00/0/0)
+tcp6       0      0 127.0.0.1:50404         127.0.0.1:42532         ESTABLISHED keepalive (108.51/0/0)
+tcp6       0      0 10.0.2.15:22000         10.0.2.2:57958          ESTABLISHED off (0.00/0/0)
+udp        0      0 10.0.2.15:45417         10.0.2.3:53             ESTABLISHED off (0.00/0/0)
+udp        0      0 10.0.2.15:53902         10.0.2.3:53             ESTABLISHED off (0.00/0/0)
+udp        0      0 10.0.2.15:39933         10.0.2.3:53             ESTABLISHED off (0.00/0/0)
+udp        0      0 10.0.2.15:60417         10.0.2.3:53             ESTABLISHED off (0.00/0/0)
+udp        0      0 0.0.0.0:68              0.0.0.0:*                           off (0.00/0/0)
+udp6       0      0 :::21000                :::*                                off (0.00/0/0)
+udp6       0      0 :::21001                :::*                                off (0.00/0/0)
+udp6       0      0 :::21002                :::*                                off (0.00/0/0)
+udp6       0      0 :::21003                :::*                                off (0.00/0/0)
+udp6       0      0 :::21004                :::*                                off (0.00/0/0)
+udp6       0      0 :::21005                :::*                                off (0.00/0/0)
+udp6       0      0 :::21006                :::*                                off (0.00/0/0)
+Active UNIX domain sockets (servers and established)
+Proto RefCnt Flags       Type       State         I-Node   Path
+unix  3      [ ]         DGRAM                    8664     /run/systemd/notify
+unix  2      [ ACC ]     STREAM     LISTENING     8665     /run/systemd/private
+unix  2      [ ]         DGRAM                    26730    /run/user/1000/systemd/notify
+unix  2      [ ACC ]     STREAM     LISTENING     8671     /run/systemd/journal/stdout
+unix  2      [ ACC ]     STREAM     LISTENING     26731    /run/user/1000/systemd/private
+unix  2      [ ACC ]     SEQPACKET  LISTENING     8720     /run/udev/control
+unix  14     [ ]         DGRAM                    8672     /run/systemd/journal/socket
+unix  2      [ ACC ]     STREAM     LISTENING     8716     /run/lvm/lvmetad.socket
+unix  10     [ ]         DGRAM                    8717     /run/systemd/journal/dev-log
+unix  2      [ ACC ]     STREAM     LISTENING     8721     /run/lvm/lvmpolld.socket
+unix  2      [ ]         DGRAM                    8722     /run/systemd/journal/syslog
+unix  2      [ ACC ]     STREAM     LISTENING     204876   /home/vagrant/quorum-examples/7nodes/qdata/dd5/geth.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     12007    /run/acpid.socket
+unix  2      [ ACC ]     STREAM     LISTENING     203966   /home/vagrant/quorum-examples/7nodes/qdata/dd7/geth.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     265805   @/containerd-shim/moby/fe4cba3dbbc7ac76b223925d948326b03ea304c858037c7f084dba2da65b4afb/shim.sock
+unix  2      [ ACC ]     STREAM     LISTENING     301603   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     301617   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     302615   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     301643   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     302622   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     301655   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     12008    /var/lib/lxd/unix.socket
+unix  2      [ ACC ]     STREAM     LISTENING     301661   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     203559   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     202593   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     203582   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     203730   /home/vagrant/quorum-examples/7nodes/qdata/dd1/geth.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     202641   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     203609   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     203613   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     202663   tm.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     301893   /home/vagrant/quorum-examples/7nodes/qdata/dd2/geth.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     12010    /run/snapd-snap.socket
+unix  2      [ ACC ]     STREAM     LISTENING     12011    /var/run/dbus/system_bus_socket
+unix  2      [ ACC ]     STREAM     LISTENING     12012    /run/uuidd/request
+unix  2      [ ACC ]     STREAM     LISTENING     12009    /run/snapd.socket
+unix  2      [ ACC ]     STREAM     LISTENING     265538   @/containerd-shim/moby/64776ffee372ca12cc9a665dfc75c2d31375b23112084351533b590254b31201/shim.sock
+unix  2      [ ACC ]     STREAM     LISTENING     12082    @ISCSIADM_ABSTRACT_NAMESPACE
+unix  2      [ ACC ]     STREAM     LISTENING     265536   @/containerd-shim/moby/d8df12a01f0a26ede7727f3447911f075c1918f9828c8495a6523e0b8d5aba50/shim.sock
+unix  2      [ ACC ]     STREAM     LISTENING     255615   /var/run/docker.sock
+unix  2      [ ACC ]     STREAM     LISTENING     204819   /home/vagrant/quorum-examples/7nodes/qdata/dd6/geth.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     204831   /home/vagrant/quorum-examples/7nodes/qdata/dd4/geth.ipc
+unix  2      [ ACC ]     STREAM     LISTENING     254655   /var/run/docker/containerd/docker-containerd-debug.sock
+unix  2      [ ACC ]     STREAM     LISTENING     254656   /var/run/docker/containerd/docker-containerd.sock
+unix  2      [ ACC ]     STREAM     LISTENING     255644   /var/run/docker/metrics.sock
+unix  2      [ ACC ]     STREAM     LISTENING     254815   /run/docker/libnetwork/b8b409d3f090e20b9b6f4cde9920f049bc106b9e51560bf6914c26b3f64a5d84.sock
+unix  2      [ ACC ]     STREAM     LISTENING     204852   /home/vagrant/quorum-examples/7nodes/qdata/dd3/geth.ipc
+unix  2      [ ]         DGRAM                    289864
+unix  3      [ ]         STREAM     CONNECTED     265541
+unix  3      [ ]         STREAM     CONNECTED     254633
+unix  3      [ ]         STREAM     CONNECTED     255647
+unix  2      [ ]         DGRAM                    255628
+unix  3      [ ]         STREAM     CONNECTED     255645
+unix  3      [ ]         STREAM     CONNECTED     254634   /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     266618   @/containerd-shim/moby/fe4cba3dbbc7ac76b223925d948326b03ea304c858037c7f084dba2da65b4afb/shim.sock
+unix  3      [ ]         STREAM     CONNECTED     255642
+unix  2      [ ]         STREAM     CONNECTED     266917
+unix  3      [ ]         STREAM     CONNECTED     13384    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     254659   /var/run/docker/containerd/docker-containerd.sock
+unix  3      [ ]         STREAM     CONNECTED     14352
+unix  2      [ ]         DGRAM                    12111
+unix  3      [ ]         STREAM     CONNECTED     255649   /var/run/docker/containerd/docker-containerd.sock
+unix  2      [ ]         DGRAM                    252473
+unix  3      [ ]         STREAM     CONNECTED     254662   /var/run/docker/containerd/docker-containerd.sock
+unix  2      [ ]         DGRAM                    203639
+unix  3      [ ]         STREAM     CONNECTED     265809
+unix  2      [ ]         DGRAM                    203643
+unix  3      [ ]         STREAM     CONNECTED     25816
+unix  3      [ ]         STREAM     CONNECTED     265545
+unix  3      [ ]         STREAM     CONNECTED     13186    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     265549   @/containerd-shim/moby/d8df12a01f0a26ede7727f3447911f075c1918f9828c8495a6523e0b8d5aba50/shim.sock
+unix  3      [ ]         STREAM     CONNECTED     26708    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     12843
+unix  3      [ ]         STREAM     CONNECTED     12102
+unix  2      [ ]         DGRAM                    11102
+unix  3      [ ]         STREAM     CONNECTED     12976
+unix  3      [ ]         STREAM     CONNECTED     13176    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     12581
+unix  2      [ ]         DGRAM                    12081
+unix  3      [ ]         STREAM     CONNECTED     12224    /var/run/dbus/system_bus_socket
+unix  3      [ ]         STREAM     CONNECTED     265550   @/containerd-shim/moby/64776ffee372ca12cc9a665dfc75c2d31375b23112084351533b590254b31201/shim.sock
+unix  2      [ ]         DGRAM                    249545
+unix  3      [ ]         STREAM     CONNECTED     12965
+unix  2      [ ]         DGRAM                    301705
+unix  3      [ ]         STREAM     CONNECTED     12223    /var/run/dbus/system_bus_socket
+unix  3      [ ]         STREAM     CONNECTED     13194    /run/systemd/journal/stdout
+unix  2      [ ]         DGRAM                    25823
+unix  2      [ ]         DGRAM                    12966
+unix  3      [ ]         STREAM     CONNECTED     13593
+unix  3      [ ]         STREAM     CONNECTED     289888
+unix  2      [ ]         DGRAM                    9490
+unix  3      [ ]         STREAM     CONNECTED     12225    /var/run/dbus/system_bus_socket
+unix  3      [ ]         STREAM     CONNECTED     13936    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     289889
+unix  3      [ ]         STREAM     CONNECTED     13092
+unix  2      [ ]         DGRAM                    12218
+unix  3      [ ]         STREAM     CONNECTED     13196    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     9587
+unix  3      [ ]         STREAM     CONNECTED     12221
+unix  3      [ ]         STREAM     CONNECTED     12209
+unix  3      [ ]         STREAM     CONNECTED     13031
+unix  3      [ ]         STREAM     CONNECTED     14763
+unix  3      [ ]         STREAM     CONNECTED     13935
+unix  3      [ ]         STREAM     CONNECTED     13195    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     13594    /var/run/dbus/system_bus_socket
+unix  3      [ ]         STREAM     CONNECTED     12222
+unix  3      [ ]         STREAM     CONNECTED     9588     /run/systemd/journal/stdout
+unix  2      [ ]         DGRAM                    12086
+unix  3      [ ]         STREAM     CONNECTED     14764    /var/run/dbus/system_bus_socket
+unix  3      [ ]         STREAM     CONNECTED     9052
+unix  2      [ ]         DGRAM                    202686
+unix  3      [ ]         DGRAM                    9062
+unix  3      [ ]         DGRAM                    9063
+unix  2      [ ]         DGRAM                    202687
+unix  2      [ ]         DGRAM                    9058
+unix  3      [ ]         STREAM     CONNECTED     10030    /run/systemd/journal/stdout
+unix  2      [ ]         DGRAM                    26724
+unix  2      [ ]         DGRAM                    202692
+unix  2      [ ]         DGRAM                    202689
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ netstat -nlp | grep 5000
+(Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.)
+tcp6       0      0 :::5000                 :::*                    LISTEN      -
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo netstat -nlp | grep 5000
+tcp6       0      0 :::5000                 :::*                    LISTEN      18263/docker-proxy
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ killall -9 18263
+18263: no process found
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo killall -9 18263
+18263: no process found
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ killall -9 18263
+18263: no process found
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo netstat -nlp | grep 5000
+tcp6       0      0 :::5000                 :::*                    LISTEN      18263/docker-proxy
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo netstat -nap | grep 5000
+tcp6       0      0 :::5000                 :::*                    LISTEN      18263/docker-proxy
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ kill -9 18263
+-bash: kill: (18263) - Operation not permitted
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo kill -9 18263
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo netstat -nap | grep 5000
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f linux-docker-compose.yaml up -d
+blk-explorer-ui-free is up-to-date
+blk-mongodb-free is up-to-date
+blk-explorer-free is up-to-date
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo netstat -nap | grep 5000                       -f li
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo netstat -nap | grep 5000
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo netstat -nap | grep 5000
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo netstat -nap | grep 5000
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo netstat -nap | grep 5000
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo netstat -nap | grep 5000
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f linux-docker-compose.yaml up -d
+blk-mongodb-free is up-to-date
+blk-explorer-ui-free is up-to-date
+blk-explorer-free is up-to-date
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo netstat -nap | grep 5000       -f li
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ sudo netstat -nap | grep 5000
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ NODE_ENDPOINT=http://localhost:22000 docker-compose -f linux-docker-compose.yaml up -d
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ kill -9 18263                       -f li
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ exot
+No command 'exot' found, did you mean:
+ Command 'emot' from package 'ruby-emot' (universe)
+exot: command not found
+vagrant@ubuntu-xenial:~/quorum-examples/blk-explorer-free$ exit
+logout
+Connection to 127.0.0.1 closed.
+
+C:\Users\USER\Desktop\Quorum\quorum-examples>vagrant suspend
+==> default: Saving VM state and suspending execution...
+
+C:\Users\USER\Desktop\Quorum\quorum-examples>vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Checking if box 'ubuntu/xenial64' is up to date...
+==> default: A newer version of the box 'ubuntu/xenial64' for provider 'virtualbox' is
+==> default: available! You currently have version '20180406.0.0'. The latest is version
+==> default: '20180410.0.0'. Run `vagrant box update` to update.
+==> default: Resuming suspended VM...
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+==> default: Machine booted and ready!
+==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> default: flag to force provisioning. Provisioners marked to run always will still run.
+
+C:\Users\USER\Desktop\Quorum\quorum-examples>vagrant suspend
