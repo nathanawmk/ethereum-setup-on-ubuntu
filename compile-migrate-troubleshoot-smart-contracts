@@ -1,0 +1,106 @@
+java -jar -Dgeth.node=geth cakeshop-0.10.0-x86_64-windows.war
+
+geth  attach ipc:qdata/dd1/geth.ipc
+geth  attach ipc:qdata/dd2/geth.ipc
+geth  attach ipc:qdata/dd3/geth.ipc
+geth  attach ipc:qdata/dd4/geth.ipc
+geth  attach ipc:qdata/dd5/geth.ipc
+geth  attach ipc:qdata/dd6/geth.ipc
+geth  attach ipc:qdata/dd7/geth.ipc
+
+solcjs --bin --abi simplestorage.sol
+
+=====================================
+
+1. truffle compile 
+2. truffle migrate --reset
+3. solcjs --abi --bin <Smart Contract File>
+4. ./attachNode1.sh addUser.js
+5. ./attachNode1.sh getUser.js
+
+====================================
+
+To fix queued transactions in Quorum/Ethereum on Dashboard:
+
+rm -r -f /home/vagrant/.ethereum/geth/transactions.rlp
+rm -r -f /home/vagrant/quorum-examples/7nodes/qdata/dd2/geth/transactions.rlp
+rm -r -f /home/vagrant/quorum-examples/7nodes/qdata/dd4/geth/transactions.rlp
+rm -r -f /home/vagrant/quorum-examples/7nodes/qdata/dd7/geth/transactions.rlp
+rm -r -f /home/vagrant/quorum-examples/7nodes/qdata/dd3/geth/transactions.rlp
+rm -r -f /home/vagrant/quorum-examples/7nodes/qdata/dd6/geth/transactions.rlp
+rm -r -f /home/vagrant/quorum-examples/7nodes/qdata/dd5/geth/transactions.rlp
+rm -r -f /home/vagrant/quorum-examples/7nodes/qdata/dd1/geth/transactions.rlp
+
+./stop.sh
+./raft-start.sh
+
+=====================
+
+To fix [InternalCompilerError: Stack too deep, try using less variables. Compilation failed. See above.], change all string in struct to bytes32
+
+=====================
+
+Running migration: 7_create_user.js
+  Replacing mappedWithUnorderedIndexAndDelete...
+  ... 0xf9bdb3d89b747d7cf55421bda4c532c9c62c53a1d05c0d50a913ba7aebed0e81
+  mappedWithUnorderedIndexAndDelete: 0x2f5dfb06e97bcdca9d5d51a64a91eb3835b6065e
+Saving artifacts...
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes/myproject/migrations$
+
+[{"constant":false,"inputs":[{"name":"entityAddress","type":"address"},{"name":"entityData","type":"uint256"}],"name":"updateEntity","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"rowNumber","type":"uint256"},{"name":"entityAddress","type":"address"}],"name":"returnEntity","outputs":[{"name":"entityData","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"entityAddress","type":"address"}],"name":"isEntity","outputs":[{"name":"isIndeed","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"entityList","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"entityStructs","outputs":[{"name":"entityData","type":"uint256"},{"name":"listPointer","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"entityAddress","type":"address"}],"name":"deleteEntity","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getEntityCount","outputs":[{"name":"entityCount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"entityAddress","type":"address"},{"name":"entityData","type":"uint256"}],"name":"newEntity","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"}]
+
+================================
+
+web3.fromAscii("a1"),web3.fromAscii("a2"),web3.fromAscii("a3"),web3.fromAscii("a4"),web3.fromAscii("a5"),web3.fromAscii("a6"),web3.fromAscii("a7"),web3.fromAsci("a8"),web3.fromAscii("a9"),web3.fromAscii("a10"),web3.fromAscii("a11"),web3.fromAscii("a12")
+
+===================================
+
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ cat 10.voting.js
+a = eth.accounts[0]
+web3.eth.defaultAccount = a;
+
+var abi = [{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesReceived","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"voteForCandidate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"candidateNames","type":"bytes32[]"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}];
+
+var contractAddress = "0xedac5cbae05b5fbccfbe7fced213a55af1c40242";
+var simpleContract = web3.eth.contract(abi).at(contractAddress);
+
+console.log(simpleContract.voteForCandidate(web3.fromAscii("Nick"),{from:"0xcf7d61dbc6fdc72c2ffa6e7d5b8198a4eb705e07", data: abi, gas: 0x47b760}));
+
+===========================
+
+
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ cat 9.getTradeDetails.js
+a = eth.accounts[0]
+web3.eth.defaultAccount = a;
+
+var abi = [];
+
+var contractAddress = "0x5034c9d43ada60e030ad0575dc4cf212977787dc";
+var simpleContract = web3.eth.contract(abi).at(contractAddress);
+var tradeDetails = simpleContract.getFromTradeParties(1) + '';
+//tradeDetails.Split(",");
+console.log(a);
+console.log(web3.toAscii(tradeDetails.split(",")[0]));
+console.log(web3.toAscii(tradeDetails.split(",")[1]));
+console.log(web3.toAscii(tradeDetails.split(",")[2]));
+console.log(web3.toAscii(tradeDetails.split(",")[3]));
+
+====================================================
+
+vagrant@ubuntu-xenial:~/quorum-examples/7nodes$ cat 9.addTrade.js
+a = eth.accounts[0]
+web3.eth.defaultAccount = a;
+
+var contractAddress = "0x5034c9d43ada60e030ad0575dc4cf212977787dc";
+var simpleContract = web3.eth.contract(abi).at(contractAddress);
+
+console.log(simpleContract.addTrade(web3.fromAscii("test").....
+
+var event = simpleContract.AddTrade();
+
+event.watch(function(e,response)
+{
+console.log(web3.toAscii(response.args.success));
+});
+
+========================================================
