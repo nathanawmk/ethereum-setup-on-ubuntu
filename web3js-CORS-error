@@ -1,0 +1,7 @@
+Error:
+Unable to use web3js in web browser to access nodes in Quorum.  
+
+Solution:
+Add the following: --rpcaddr 0.0.0.0 --rpccorsdomain "*" 
+
+PRIVATE_CONFIG=qdata/c1/tm.ipc nohup geth --datadir qdata/dd1 $ARGS --permissioned --raftport 50401 --rpcport 22000 --port 21000 --unlock 0 --rpcaddr 0.0.0.0 --rpccorsdomain "*" --password passwords.txt 2>>qdata/logs/1.log &
