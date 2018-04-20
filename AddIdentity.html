@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Identity</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+
+<script type="text/javascript" src="js/web3.min.js"></script>
+<script type="text/javascript">
+	window.addEventListener('load', function() {
+
+		window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:22000"));
+
+/*
+		if (typeof web3 !== 'undefined') {
+			console.log('Web3 Detected! ' + web3.currentProvider.constructor.name);
+			window.web3 = new Web3(web3.currentProvider);
+		} else {
+			console.log('No Web3 Detected... using HTTP Provider');
+			window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:22000"))
+		}
+*/
+})
+
+function clearIdentity(){
+document.getElementById('IdentityID1').value = "";
+document.getElementById('IdentityID2').value = "";
+document.getElementById('Identitydate1').value = "";
+document.getElementById('Identitydate2').value = "";
+document.getElementById('partyname1').value = "";
+document.getElementById('partyname2').value = "";
+document.getElementById('partyid1').value = "";
+document.getElementById('partyid2').value = "";
+document.getElementById('reconStatus1').value = ""; 
+document.getElementById('reconStatus2').value = "";
+document.getElementById('IdentityReconID').value = ""; 
+document.getElementById('IdentityReconCount').value = "";
+document.getElementById('txHash1').value = "";
+document.getElementById('txHash2').value = "";
+}
+
+
+function reconIdentity(){
+//alert("reconIdentity");
+
+ var abi = [{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"IdentityReconFields","outputs":[{"name":"IdentityID1","type":"bytes32"},{"name":"IdentityID2","type":"bytes32"},{"name":"IdentityDate1","type":"bytes32"},{"name":"IdentityDate2","type":"bytes32"},{"name":"partyName1","type":"bytes32"},{"name":"partyName2","type":"bytes32"},{"name":"partyID1","type":"bytes32"},{"name":"partyID2","type":"bytes32"},{"name":"IdentityReconStatus","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getIdentityReconCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_IdentityReconIndex","type":"uint256"}],"name":"getFromIdentityReconDetails2","outputs":[{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_IdentityReconIndex","type":"uint256"}],"name":"getFromIdentityReconDetails1","outputs":[{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_IdentityID1","type":"bytes32"},{"name":"_IdentityID2","type":"bytes32"},{"name":"_IdentityDate1","type":"bytes32"},{"name":"_IdentityDate2","type":"bytes32"},{"name":"_partyName1","type":"bytes32"},{"name":"_partyName2","type":"bytes32"},{"name":"_partyID1","type":"bytes32"},{"name":"_partyID2","type":"bytes32"}],"name":"addIdentityReconFields","outputs":[{"name":"_IdentityReconIndex","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"success_IdentityReconIndex","type":"bytes32"}],"name":"AddIdentityReconFields","type":"event"}];
+  
+  var contractAddress = "0xee07528f306789b4ea39ee3461cfecc2b198ead1";
+  var contractInstance = web3.eth.contract(abi).at(contractAddress);
+
+console.log('ReconIdentity')
+console.log('IdentityID1 ' + document.getElementById("IdentityID1").value)
+console.log('IdentityID2 ' + document.getElementById("IdentityID2").value)
+
+console.log('Identitydate1 ' + document.getElementById("Identitydate1").value)
+console.log('Identitydate2 ' + document.getElementById("Identitydate2").value)
+
+console.log('partyname1 ' + document.getElementById("partyname1").value)
+console.log('partyname2 ' + document.getElementById("partyname2").value)
+
+console.log('partyid1 ' + document.getElementById("partyid1").value)
+console.log('partyid2 ' + document.getElementById("partyid2").value)
+
+contractInstance.addIdentityReconFields(web3.fromAscii(document.getElementById("IdentityID1").value), web3.fromAscii(document.getElementById("IdentityID2").value),web3.fromAscii(document.getElementById("Identitydate1").value), web3.fromAscii(document.getElementById("Identitydate2").value), web3.fromAscii(document.getElementById("partyname1").value), web3.fromAscii(document.getElementById("partyname2").value), web3.fromAscii(document.getElementById("partyid1").value),web3.fromAscii(document.getElementById("partyid2").value),{from:"0xcf7d61dbc6fdc72c2ffa6e7d5b8198a4eb705e07", data: abi, gas: 0x47b760}, function(error,result)
+{
+
+if (error!== null)
+{
+console.log(error)
+}
+else
+{
+console.log(result)
+document.getElementById('txHash1').value = result;
+document.getElementById('txHash2').value = result;
+
+var event = contractInstance.AddIdentityReconFields();
+
+event.watch(function(e,response)
+{
+console.log(response.args.success_IdentityReconIndex);
+console.log(web3.toUtf8(response.args.success_IdentityReconIndex));
+
+document.getElementById('reconStatus1').value = web3.toUtf8(response.args.success_IdentityReconIndex);
+document.getElementById('reconStatus2').value = web3.toUtf8(response.args.success_IdentityReconIndex);
+
+});
+
+
+}
+
+}
+);
+
+}
+
+function getreconIdentityCount(){
+console.log('getreconIdentityCount')
+
+document.getElementById('IdentityID1').value = "";
+document.getElementById('IdentityID2').value = "";
+document.getElementById('Identitydate1').value = "";
+document.getElementById('Identitydate2').value = "";
+document.getElementById('txHash1').value = "";
+document.getElementById('txHash2').value = "";
+document.getElementById('partyname1').value = "";
+document.getElementById('partyname2').value = "";
+document.getElementById('partyid1').value = "";
+document.getElementById('partyid2').value = "";
+document.getElementById('reconStatus1').value = "";
+document.getElementById('reconStatus2').value = "";
+document.getElementById('txHash1').value = "";
+document.getElementById('txHash2').value = "";
+document.getElementById('IdentityReconID').value = "";
+
+ var abi = [{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"IdentityReconFields","outputs":[{"name":"IdentityID1","type":"bytes32"},{"name":"IdentityID2","type":"bytes32"},{"name":"IdentityDate1","type":"bytes32"},{"name":"IdentityDate2","type":"bytes32"},{"name":"partyName1","type":"bytes32"},{"name":"partyName2","type":"bytes32"},{"name":"partyID1","type":"bytes32"},{"name":"partyID2","type":"bytes32"},{"name":"IdentityReconStatus","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getIdentityReconCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_IdentityReconIndex","type":"uint256"}],"name":"getFromIdentityReconDetails2","outputs":[{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_IdentityReconIndex","type":"uint256"}],"name":"getFromIdentityReconDetails1","outputs":[{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_IdentityID1","type":"bytes32"},{"name":"_IdentityID2","type":"bytes32"},{"name":"_IdentityDate1","type":"bytes32"},{"name":"_IdentityDate2","type":"bytes32"},{"name":"_partyName1","type":"bytes32"},{"name":"_partyName2","type":"bytes32"},{"name":"_partyID1","type":"bytes32"},{"name":"_partyID2","type":"bytes32"}],"name":"addIdentityReconFields","outputs":[{"name":"_IdentityReconIndex","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"success_IdentityReconIndex","type":"bytes32"}],"name":"AddIdentityReconFields","type":"event"}];
+  
+  var contractAddress = "0xee07528f306789b4ea39ee3461cfecc2b198ead1";
+  var contractInstance = web3.eth.contract(abi).at(contractAddress);
+
+contractInstance.getIdentityReconCount({from:"0xcf7d61dbc6fdc72c2ffa6e7d5b8198a4eb705e07", data: abi, gas: 0x47b760}, function(error,result)
+{
+
+if (error!== null)
+{
+console.log(error)
+}
+else
+{
+console.log(result)
+document.getElementById('IdentityReconCount').value = result;
+}
+
+}
+);
+
+}
+
+function getIdentityReconDetails(){
+console.log('getIdentityReconDetails')
+
+document.getElementById('IdentityID1').value = "";
+document.getElementById('IdentityID2').value = "";
+document.getElementById('Identitydate1').value = "";
+document.getElementById('Identitydate2').value = "";
+document.getElementById('txHash1').value = "";
+document.getElementById('txHash2').value = "";
+document.getElementById('partyname1').value = "";
+document.getElementById('partyname2').value = "";
+document.getElementById('partyid1').value = "";
+document.getElementById('partyid2').value = "";
+document.getElementById('reconStatus1').value = "";
+document.getElementById('reconStatus2').value = "";
+document.getElementById('txHash1').value = "";
+document.getElementById('txHash2').value = "";
+document.getElementById('IdentityReconCount').value = "";
+
+ var abi = [{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"IdentityReconFields","outputs":[{"name":"IdentityID1","type":"bytes32"},{"name":"IdentityID2","type":"bytes32"},{"name":"IdentityDate1","type":"bytes32"},{"name":"IdentityDate2","type":"bytes32"},{"name":"partyName1","type":"bytes32"},{"name":"partyName2","type":"bytes32"},{"name":"partyID1","type":"bytes32"},{"name":"partyID2","type":"bytes32"},{"name":"IdentityReconStatus","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getIdentityReconCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_IdentityReconIndex","type":"uint256"}],"name":"getFromIdentityReconDetails2","outputs":[{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_IdentityReconIndex","type":"uint256"}],"name":"getFromIdentityReconDetails1","outputs":[{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_IdentityID1","type":"bytes32"},{"name":"_IdentityID2","type":"bytes32"},{"name":"_IdentityDate1","type":"bytes32"},{"name":"_IdentityDate2","type":"bytes32"},{"name":"_partyName1","type":"bytes32"},{"name":"_partyName2","type":"bytes32"},{"name":"_partyID1","type":"bytes32"},{"name":"_partyID2","type":"bytes32"}],"name":"addIdentityReconFields","outputs":[{"name":"_IdentityReconIndex","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"success_IdentityReconIndex","type":"bytes32"}],"name":"AddIdentityReconFields","type":"event"}];
+  
+  var contractAddress = "0xee07528f306789b4ea39ee3461cfecc2b198ead1";
+  var contractInstance = web3.eth.contract(abi).at(contractAddress);
+
+var IdentityReconId_No = parseFloat(document.getElementById("IdentityReconID").value) - 1;
+console.log(IdentityReconId_No)
+
+contractInstance.getFromIdentityReconDetails1(IdentityReconId_No,{from:"0xcf7d61dbc6fdc72c2ffa6e7d5b8198a4eb705e07", data: abi, gas: 0x47b760}, function(error,result)
+{
+
+if (error!== null)
+{
+console.log(error)
+}
+else
+{
+console.log(result)
+//var 
+//web3.fromAscii(document.getElementById("IdentityID1").value)
+//document.getElementById("IdentityID1").value = window.web3.toAscii(result[0]);
+console.log(web3.toAscii(result[0]));
+var str_IdentityID1 = web3.toAscii(result[0]);
+var str_IdentityID1_r = str_IdentityID1.replace(/[\uE000-\uF8FF]/g,'');
+
+console.log(str_IdentityID1);
+document.getElementById('IdentityID1').value = web3.toUtf8(result[0]);
+document.getElementById('IdentityID2').value = web3.toUtf8(result[1]);
+document.getElementById('Identitydate1').value = web3.toUtf8(result[2]);
+document.getElementById('Identitydate2').value = web3.toUtf8(result[3]);
+document.getElementById('txHash1').value = "";
+document.getElementById('txHash2').value = "";
+}
+
+}
+);
+
+contractInstance.getFromIdentityReconDetails2(IdentityReconId_No,{from:"0xcf7d61dbc6fdc72c2ffa6e7d5b8198a4eb705e07", data: abi, gas: 0x47b760}, function(error,result)
+{
+
+if (error!== null)
+{
+console.log(error)
+}
+else
+{
+console.log(result)
+//console.log(web3.toAscii(result[4]) + web3.toAscii(result[5]));
+document.getElementById('partyname1').value = web3.toUtf8(result[0]);
+document.getElementById('partyname2').value = web3.toUtf8(result[1]);
+document.getElementById('partyid1').value = web3.toUtf8(result[2]);
+document.getElementById('partyid2').value = web3.toUtf8(result[3]);
+document.getElementById('reconStatus1').value = web3.toUtf8(result[4]);
+document.getElementById('reconStatus2').value = web3.toUtf8(result[4]);
+document.getElementById('txHash1').value = "";
+document.getElementById('txHash2').value = "";
+}
+
+}
+);
+}
+
+
+
+</script>
+</head>
+
+<body class="container">
+    <h1>Murex Source Identity Reconciliation Form</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Identity Fields to Be Reconciled</th>
+                    <th>Identity Source 1 Value (From MxML)</th>
+					<th>Identity Source 2 Value (From MxML)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Identity ID</td>
+                    <td id="candidate-1"><input type="text" id="IdentityID1" /></td>
+					<td id="candidate-2"><input type="text" id="IdentityID2" /></td>
+                </tr>
+                <tr>
+                    <td>Identity Date</td>
+                    <td id="candidate-3"><input type="text" id="Identitydate1" /></td>
+					<td id="candidate-4"><input type="text" id="Identitydate2" /></td>
+                </tr>
+                <tr>
+                    <td>Party Name</td>
+                    <td id="candidate-5"><input type="text" id="partyname1" /></td>
+					<td id="candidate-6"><input type="text" id="partyname2" /></td>
+                </tr>
+                <tr>
+                    <td>Party ID</td>
+                    <td id="candidate-7"><input type="text" id="partyid1" /></td>
+					<td id="candidate-8"><input type="text" id="partyid2" /></td>
+                </tr>
+
+                <tr>
+                    <td>Recon Status</td>
+                    <td id="candidate-9"><input type="text" id="reconStatus1" disabled/></td>
+					<td id="candidate-10"><input type="text" id="reconStatus2" disabled/></td>
+                </tr>
+<tr>
+                    <td>Transaction Hash</td>
+                    <td id="candidate-11"><input type="text" id="txHash1" disabled/></td>
+		    <td id="candidate-12"><input type="text" id="txHash2" disabled/></td>
+                </tr>
+
+				<tr> 
+				 <td></td>
+				 <td></td>
+				 <td><a href="#" onclick="reconIdentity();" class="btn btn-primary">Recon Identity</a> <a href="#" onclick="clearIdentity();" class="btn btn-primary">Clear Identity Details</a></td>
+				</tr>
+
+<tr> 
+<td></td>
+				 <td><a href="#" onclick="reconIdentity();" class="btn btn-primary">Upload Identity Source 1 XML</a> </td>
+				 <td><a href="#" onclick="reconIdentity();" class="btn btn-primary">Upload Identity Source 2 XML</a> </td>
+</tr> 
+				<tr> 
+				 <td>Enter Recon ID to Retrieve Recon Details</td>
+				 <td><input type="text" id="IdentityReconID" /></td>
+				 <td><a href="#" onclick="getIdentityReconDetails();" class="btn btn-primary">Get Identity Recon</a></td>
+				</tr>
+				<tr> 
+				 <td>Identity Recon Count</td>
+				 <td><input type="text" id="IdentityReconCount" disabled/></td>
+				 <td><a href="#" onclick="getreconIdentityCount();" class="btn btn-primary">Get Recon Count</a></td>
+				</tr>
+
+            </tbody>
+        </table>
+    </div>
+   
+</body>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+
+</html>
