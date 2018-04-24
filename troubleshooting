@@ -1,0 +1,20 @@
+======
+
+Error:
+traderecon.html#:1 Failed to load http://localhost:22001/: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:8081' is therefore not allowed access.
+
+Solution:
+PRIVATE_CONFIG=qdata/c2/tm.ipc nohup geth --datadir qdata/dd2 $ARGS --permissioned --raftport 50402 --rpcport 22001 --port 21001 --unlock 0 --rpcaddr 0.0.0.0 --rpccorsdomain "*" --password passwords.txt 2>>qdata/logs/2.log &
+
+===============
+
+Error: unknown account
+    at Object.InvalidResponse (inpage.js:445)
+    at inpage.js:445
+    at XMLHttpRequest.r.onreadystatechange (inpage.js:445)
+
+Solution:
+Ensure that the from account in the web3js from: is the same account as the geth rpc that the client is connecting through 
+
+===============
+
