@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Murex Trade Source Reconciliation Form (Maker)</title>
+    
+      <style type="text/css">
+         body
+         {
+         margin:0;
+         }
+         .centerComponents
+         {
+         margin:auto;
+         text-align:left;
+         }
+         #element1
+         {
+         width:980px;
+         }
+         #c1372497235354
+         {
+         width:944px;
+         min-height:50px;
+         height:auto !important;
+         height:50px;
+         margin:0 36px 0 0;
+         display:inline;
+         float:left;
+         }
+         #c1331787478975
+         {
+         width:980px;
+         min-height:900px;
+         height:auto !important;
+         height:900px;
+         display:inline;
+         float:left;
+         }
+         #c1366289018762
+         {
+         width:200px;
+         min-height:200px;
+         height:auto !important;
+         height:200px;
+         margin:0 470px 0 310px;
+         display:inline;
+         float:left;
+         background-color:#FFFFF1;
+         }
+         #bgnav{
+         color:#fff;
+         }
+         #group_container{
+         padding-top: 0px !important;
+         width:1049px !important;
+         }
+         #bgnav span{
+         cursor: pointer;
+         }
+         #next-img{
+         cursor:pointer;
+         }
+         #prev-img{
+         cursor:pointer;
+         }
+         #footer{
+         bottom: -14px !important;
+         }
+      </style>
+
+               <div style="border-top:2px solid #EC1D25">
+                  <div id="grp_header">
+                     <div class="logo" style="width: auto;">
+                        <a style="float:left;border:0" href="https://www..com/"><img style="display:inline;float:left" src="js/logo-strongest-bank.png" border="0" alt=" - World&#39;s Strongest Bank"></a><!--<a style="display:inline" mce_style="display:inline" href="http://.com/assets/pdf/Media/2012/May/120503_Media-20Release-20Worlds0Strongest-20Bank-202012-20online.pdf" mce_href="http://.com/assets/pdf/Media/2012/May/120503_Media-20Release-20Worlds0Strongest-20Bank-202012-20online.pdf" target="_blank"><img style="display:inline;float:left" mce_style="display:inline;float:left" src="/assets/images/uploads/wsb_logo.png" mce_src="/assets/images/uploads/wsb_logo.png" border="0" alt=" - World's Strongest Bank" /></a>-->
+                     </div>
+                     <div class="country-more-detail country">
+                        <p></p>
+                        <a class="dropdown" href="https://www..com/group/group-home.html#"><img src="js/float_tab_arrow.png" alt=""> </a>
+                        <div class="country-more-detail-box-wrapper">
+                           <span></span>
+                           <div class="country-more-detail-content">
+                              <div class="inner-more-detail-content">
+
+                              </div>
+                           </div>
+                           <br class="clear">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+	<!--
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+	-->
+
+	<link rel="stylesheet" href="js/css.css" type="text/css">
+	<link rel="stylesheet" href="js/bootstrap.min.css" type="text/css">
+
+	
+	
+<script type="text/javascript" src="js/web3.min.js"></script>
+<script type="text/javascript" src="js/jquery.min.js">
+        $(function () {
+            $("#upload").bind("click", function () {
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xml)$/;
+                if (regex.test($("#fileUpload").val().toLowerCase())) {
+                    if (typeof (FileReader) != "undefined") {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            var xmlDoc = $.parseXML(e.target.result);
+
+			    var isNew1 =  $(xmlDoc).find('operations').text();
+			    console.log(isNew1);
+
+			    var isNew2 =  $(xmlDoc).find('operation').text();
+			    console.log(isNew2);
+
+			    var isNew3 =  $(xmlDoc).find('operationId').text();
+			    console.log(isNew3);
+
+			    var isNew4 =  $(xmlDoc).find('operationType').text();
+		            console.log(isNew4);
+
+			    var isNew5 =  $(xmlDoc).find('operationCode').text();
+		            console.log(isNew5);
+
+			    //New
+			    console.log(isNew1=="" && isNew2=="" && isNew3=="" && isNew4=="" && isNew5=="")
+
+			    //Outright Cancel 
+			    var isOutrightCancel =  $(xmlDoc).find('operationType').text();
+			    console.log(isOutrightCancel=="RPL_D");
+				
+			    //Either Cancel and Reissue OR Early Termination -- Need Further Clarification
+			    var isCancelandReissueOperationCode =  $(xmlDoc).find('operationCode').text();
+			    var isCancelandReissueOperationType =  $(xmlDoc).find('operationType').text();
+			    
+			    console.log(isCancelandReissueOperationCode=="RPL_MOD" && isCancelandReissueOperationType=="XIT");
+
+			 
+
+                            var customers = $(xmlDoc).find("MxML");
+
+                            //Create a HTML Table element.
+                            var table = $("<table />");
+                            table[0].border = "1";
+
+                            //Add the header row.
+                            var row = $(table[0].insertRow(-1));
+                            customers.eq(0).children().each(function () {
+                                var headerCell = $("<th />");
+                                headerCell.html(this.nodeName);
+                                row.append(headerCell);
+                            });
+
+                            //Add the data rows.
+                            $(customers).each(function () {
+                                row = $(table[0].insertRow(-1));
+                                $(this).children().each(function () {
+                                    var cell = $("<td />");
+                                    cell.html($(this).text());
+                                    row.append(cell);
+                                });
+                            });
+
+                            var dvTable = $("#dvTable");
+                            dvTable.html("");
+                            dvTable.append(table);
+                        }
+                        reader.readAsText($("#fileUpload")[0].files[0]);
+                    } else {
+                        alert("This browser does not support HTML5.");
+                    }
+                } else {
+                    alert("Please upload a valid XML file.");
+                }
+            });
+        });
+    </script>
+<input type="file" id="fileUpload" />
+    <input type="button" id="upload" value="Upload" />
+<script type="text/javascript">
+	window.addEventListener('load', function() {
+
+		window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:22000"));
+
+/*
+		if (typeof web3 !== 'undefined') {
+			console.log('Web3 Detected! ' + web3.currentProvider.constructor.name);
+			window.web3 = new Web3(web3.currentProvider);
+		} else {
+			console.log('No Web3 Detected... using HTTP Provider');
+			window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:22000"))
+		}
+*/
+})
+
+function clearTrade(){
+document.getElementById('tradeID1').value = "";
+document.getElementById('tradeID2').value = "";
+document.getElementById('tradedate1').value = "";
+document.getElementById('tradedate2').value = "";
+document.getElementById('partyname1').value = "";
+document.getElementById('partyname2').value = "";
+document.getElementById('partyid1').value = "";
+document.getElementById('partyid2').value = "";
+document.getElementById('reconStatus1').value = ""; 
+document.getElementById('reconStatus2').value = "";
+document.getElementById('tradeReconID').value = ""; 
+document.getElementById('tradeReconCount').value = "";
+document.getElementById('txHash1').value = "";
+document.getElementById('txHash2').value = "";
+}
+
+
+function reconTrade(){
+//alert("reconTrade");
+
+ var abi = [{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"tradeReconFields","outputs":[{"name":"tradeID1","type":"bytes32"},{"name":"tradeID2","type":"bytes32"},{"name":"tradeDate1","type":"bytes32"},{"name":"tradeDate2","type":"bytes32"},{"name":"partyName1","type":"bytes32"},{"name":"partyName2","type":"bytes32"},{"name":"partyID1","type":"bytes32"},{"name":"partyID2","type":"bytes32"},{"name":"tradeReconStatus","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getTradeReconCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_tradeReconIndex","type":"uint256"}],"name":"getFromTradeReconDetails2","outputs":[{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_tradeReconIndex","type":"uint256"}],"name":"getFromTradeReconDetails1","outputs":[{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_tradeID1","type":"bytes32"},{"name":"_tradeID2","type":"bytes32"},{"name":"_tradeDate1","type":"bytes32"},{"name":"_tradeDate2","type":"bytes32"},{"name":"_partyName1","type":"bytes32"},{"name":"_partyName2","type":"bytes32"},{"name":"_partyID1","type":"bytes32"},{"name":"_partyID2","type":"bytes32"}],"name":"addTradeReconFields","outputs":[{"name":"_tradeReconIndex","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"success_tradeReconIndex","type":"bytes32"}],"name":"AddTradeReconFields","type":"event"}];
+  
+  var contractAddress = "0xbcdcc328c0ef4b22b61295255b911537e97970fd";
+  var contractInstance = web3.eth.contract(abi).at(contractAddress);
+
+console.log('ReconTrade')
+console.log('tradeID1 ' + document.getElementById("tradeID1").value)
+console.log('tradeID2 ' + document.getElementById("tradeID2").value)
+
+console.log('tradedate1 ' + document.getElementById("tradedate1").value)
+console.log('tradedate2 ' + document.getElementById("tradedate2").value)
+
+console.log('partyname1 ' + document.getElementById("partyname1").value)
+console.log('partyname2 ' + document.getElementById("partyname2").value)
+
+console.log('partyid1 ' + document.getElementById("partyid1").value)
+console.log('partyid2 ' + document.getElementById("partyid2").value)
+
+contractInstance.addTradeReconFields(web3.fromAscii(document.getElementById("tradeID1").value), web3.fromAscii(document.getElementById("tradeID2").value),web3.fromAscii(document.getElementById("tradedate1").value), web3.fromAscii(document.getElementById("tradedate2").value), web3.fromAscii(document.getElementById("partyname1").value), web3.fromAscii(document.getElementById("partyname2").value), web3.fromAscii(document.getElementById("partyid1").value),web3.fromAscii(document.getElementById("partyid2").value),{from:"0xcf7d61dbc6fdc72c2ffa6e7d5b8198a4eb705e07", data: abi, gas: 0x47b760}, function(error,result)
+{
+
+if (error!== null)
+{
+console.log(error)
+}
+else
+{
+console.log(result)
+document.getElementById('txHash1').value = result;
+document.getElementById('txHash2').value = result;
+
+var event = contractInstance.AddTradeReconFields();
+
+event.watch(function(e,response)
+{
+console.log(response.args.success_tradeReconIndex);
+console.log(web3.toUtf8(response.args.success_tradeReconIndex));
+
+document.getElementById('reconStatus1').value = web3.toUtf8(response.args.success_tradeReconIndex);
+document.getElementById('reconStatus2').value = web3.toUtf8(response.args.success_tradeReconIndex);
+
+});
+
+
+}
+
+}
+);
+
+}
+
+function getreconTradeCount(){
+console.log('getreconTradeCount')
+
+document.getElementById('tradeID1').value = "";
+document.getElementById('tradeID2').value = "";
+document.getElementById('tradedate1').value = "";
+document.getElementById('tradedate2').value = "";
+document.getElementById('txHash1').value = "";
+document.getElementById('txHash2').value = "";
+document.getElementById('partyname1').value = "";
+document.getElementById('partyname2').value = "";
+document.getElementById('partyid1').value = "";
+document.getElementById('partyid2').value = "";
+document.getElementById('reconStatus1').value = "";
+document.getElementById('reconStatus2').value = "";
+document.getElementById('txHash1').value = "";
+document.getElementById('txHash2').value = "";
+document.getElementById('tradeReconID').value = "";
+
+ var abi = [{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"tradeReconFields","outputs":[{"name":"tradeID1","type":"bytes32"},{"name":"tradeID2","type":"bytes32"},{"name":"tradeDate1","type":"bytes32"},{"name":"tradeDate2","type":"bytes32"},{"name":"partyName1","type":"bytes32"},{"name":"partyName2","type":"bytes32"},{"name":"partyID1","type":"bytes32"},{"name":"partyID2","type":"bytes32"},{"name":"tradeReconStatus","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getTradeReconCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_tradeReconIndex","type":"uint256"}],"name":"getFromTradeReconDetails2","outputs":[{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_tradeReconIndex","type":"uint256"}],"name":"getFromTradeReconDetails1","outputs":[{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_tradeID1","type":"bytes32"},{"name":"_tradeID2","type":"bytes32"},{"name":"_tradeDate1","type":"bytes32"},{"name":"_tradeDate2","type":"bytes32"},{"name":"_partyName1","type":"bytes32"},{"name":"_partyName2","type":"bytes32"},{"name":"_partyID1","type":"bytes32"},{"name":"_partyID2","type":"bytes32"}],"name":"addTradeReconFields","outputs":[{"name":"_tradeReconIndex","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"success_tradeReconIndex","type":"bytes32"}],"name":"AddTradeReconFields","type":"event"}];
+  
+  var contractAddress = "0xbcdcc328c0ef4b22b61295255b911537e97970fd";
+  var contractInstance = web3.eth.contract(abi).at(contractAddress);
+
+contractInstance.getTradeReconCount({from:"0xcf7d61dbc6fdc72c2ffa6e7d5b8198a4eb705e07", data: abi, gas: 0x47b760}, function(error,result)
+{
+
+if (error!== null)
+{
+console.log(error)
+}
+else
+{
+console.log(result)
+document.getElementById('tradeReconCount').value = result;
+}
+
+}
+);
+
+}
+
+function getTradeReconDetails(){
+console.log('getTradeReconDetails')
+
+document.getElementById('tradeID1').value = "";
+document.getElementById('tradeID2').value = "";
+document.getElementById('tradedate1').value = "";
+document.getElementById('tradedate2').value = "";
+document.getElementById('txHash1').value = "";
+document.getElementById('txHash2').value = "";
+document.getElementById('partyname1').value = "";
+document.getElementById('partyname2').value = "";
+document.getElementById('partyid1').value = "";
+document.getElementById('partyid2').value = "";
+document.getElementById('reconStatus1').value = "";
+document.getElementById('reconStatus2').value = "";
+document.getElementById('txHash1').value = "";
+document.getElementById('txHash2').value = "";
+document.getElementById('tradeReconCount').value = "";
+
+ var abi = [{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"tradeReconFields","outputs":[{"name":"tradeID1","type":"bytes32"},{"name":"tradeID2","type":"bytes32"},{"name":"tradeDate1","type":"bytes32"},{"name":"tradeDate2","type":"bytes32"},{"name":"partyName1","type":"bytes32"},{"name":"partyName2","type":"bytes32"},{"name":"partyID1","type":"bytes32"},{"name":"partyID2","type":"bytes32"},{"name":"tradeReconStatus","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getTradeReconCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_tradeReconIndex","type":"uint256"}],"name":"getFromTradeReconDetails2","outputs":[{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_tradeReconIndex","type":"uint256"}],"name":"getFromTradeReconDetails1","outputs":[{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"},{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_tradeID1","type":"bytes32"},{"name":"_tradeID2","type":"bytes32"},{"name":"_tradeDate1","type":"bytes32"},{"name":"_tradeDate2","type":"bytes32"},{"name":"_partyName1","type":"bytes32"},{"name":"_partyName2","type":"bytes32"},{"name":"_partyID1","type":"bytes32"},{"name":"_partyID2","type":"bytes32"}],"name":"addTradeReconFields","outputs":[{"name":"_tradeReconIndex","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"success_tradeReconIndex","type":"bytes32"}],"name":"AddTradeReconFields","type":"event"}];
+  
+  var contractAddress = "0xbcdcc328c0ef4b22b61295255b911537e97970fd";
+  var contractInstance = web3.eth.contract(abi).at(contractAddress);
+
+var tradeReconId_No = parseFloat(document.getElementById("tradeReconID").value) - 1;
+console.log(tradeReconId_No)
+
+contractInstance.getFromTradeReconDetails1(tradeReconId_No,{from:"0xcf7d61dbc6fdc72c2ffa6e7d5b8198a4eb705e07", data: abi, gas: 0x47b760}, function(error,result)
+{
+
+if (error!== null)
+{
+console.log(error)
+}
+else
+{
+console.log(result)
+//var 
+//web3.fromAscii(document.getElementById("tradeID1").value)
+//document.getElementById("tradeID1").value = window.web3.toAscii(result[0]);
+console.log(web3.toAscii(result[0]));
+var str_tradeID1 = web3.toAscii(result[0]);
+var str_tradeID1_r = str_tradeID1.replace(/[\uE000-\uF8FF]/g,'');
+
+console.log(str_tradeID1);
+document.getElementById('tradeID1').value = web3.toUtf8(result[0]);
+document.getElementById('tradeID2').value = web3.toUtf8(result[1]);
+document.getElementById('tradedate1').value = web3.toUtf8(result[2]);
+document.getElementById('tradedate2').value = web3.toUtf8(result[3]);
+document.getElementById('txHash1').value = "";
+document.getElementById('txHash2').value = "";
+}
+
+}
+);
+
+contractInstance.getFromTradeReconDetails2(tradeReconId_No,{from:"0xcf7d61dbc6fdc72c2ffa6e7d5b8198a4eb705e07", data: abi, gas: 0x47b760}, function(error,result)
+{
+
+if (error!== null)
+{
+console.log(error)
+}
+else
+{
+console.log(result)
+//console.log(web3.toAscii(result[4]) + web3.toAscii(result[5]));
+document.getElementById('partyname1').value = web3.toUtf8(result[0]);
+document.getElementById('partyname2').value = web3.toUtf8(result[1]);
+document.getElementById('partyid1').value = web3.toUtf8(result[2]);
+document.getElementById('partyid2').value = web3.toUtf8(result[3]);
+document.getElementById('reconStatus1').value = web3.toUtf8(result[4]);
+document.getElementById('reconStatus2').value = web3.toUtf8(result[4]);
+document.getElementById('txHash1').value = "";
+document.getElementById('txHash2').value = "";
+}
+
+}
+);
+}
+
+function gettradeReconTXDetails(){
+
+//var str_tradeReconTXDetails = web3.toAscii(document.getElementById('tradeReconTXDetails').value);
+//var str_tradeReconTXDetails1 = web3.toUtf8(document.getElementById('tradeReconTXDetails').value);
+//var str_tradeReconTXDetails2 = web3.fromAscii(document.getElementById('tradeReconTXDetails').value);
+
+//console.log(str_tradeReconTXDetails);
+//console.log(str_tradeReconTXDetails1);
+//console.log(str_tradeReconTXDetails2);
+
+var transaction = web3.eth.getTransaction(document.getElementById('tradeReconTXDetails').value);
+
+console.log(transaction);
+console.log(transaction.blockNumber);
+console.log(transaction.from);
+console.log(transaction.to);
+console.log(transaction.input);
+console.log(web3.toAscii(transaction.input));
+
+document.getElementById('blockno').value = transaction.blockNumber;
+document.getElementById('from').value = transaction.from;
+document.getElementById('to').value = transaction.to;
+document.getElementById('inputdata').value = transaction.input;
+
+}
+
+
+
+</script>
+
+</head>
+
+
+
+<body class="container">
+    <h1>Murex Trade Source Reconciliation Form (Maker)</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Trade Fields to Be Reconciled</th>
+                    <th>Trade Source 1 Value (From MxML)</th>
+					<th>Trade Source 2 Value (From MxML)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Trade ID</td>
+                    <td id="candidate-1"><input type="text" id="tradeID1" /></td>
+					<td id="candidate-2"><input type="text" id="tradeID2" /></td>
+                </tr>
+                <tr>
+                    <td>Trade Date</td>
+                    <td id="candidate-3"><input type="text" id="tradedate1" /></td>
+					<td id="candidate-4"><input type="text" id="tradedate2" /></td>
+                </tr>
+                <tr>
+                    <td>Party Name</td>
+                    <td id="candidate-5"><input type="text" id="partyname1" /></td>
+					<td id="candidate-6"><input type="text" id="partyname2" /></td>
+                </tr>
+                <tr>
+                    <td>Party ID</td>
+                    <td id="candidate-7"><input type="text" id="partyid1" /></td>
+					<td id="candidate-8"><input type="text" id="partyid2" /></td>
+                </tr>
+
+                <tr>
+                    <td>Recon Status</td>
+                    <td id="candidate-9"><input type="text" id="reconStatus1" disabled/></td>
+					<td id="candidate-10"><input type="text" id="reconStatus2" disabled/></td>
+                </tr>
+<tr>
+                    <td>Transaction Hash</td>
+                    <td id="candidate-11"><input type="text" id="txHash1" disabled/></td>
+		    <td id="candidate-12"><input type="text" id="txHash2" disabled/></td>
+                </tr>
+
+				<tr> 
+				 <td></td>
+				 <td></td>
+				 <td><a href="#" onclick="reconTrade();" class="btn btn-primary">Recon Trade</a> <a href="#" onclick="clearTrade();" class="btn btn-primary">Clear Trade Details</a></td>
+				</tr>
+
+<tr> 
+<td></td>
+				 <td><a href="#" onclick="reconTrade();" class="btn btn-primary">Upload Trade Source 1 XML</a><input type="file" id="fileUpload" />
+    <input type="button" id="upload1" value="Upload1" />
+
+    </td>
+				 <td><a href="#" onclick="reconTrade();" class="btn btn-primary">Upload Trade Source 2 XML</a> </td>
+</tr> 
+				<tr> 
+				 <td>Enter Recon ID to Retrieve Recon Details</td>
+				 <td><input type="text" id="tradeReconID" /></td>
+				 <td><a href="#" onclick="getTradeReconDetails();" class="btn btn-primary">Get Trade Recon</a></td>
+				</tr>
+
+				<tr> 
+				 <td>Trade Recon Count</td>
+				 <td><input type="text" id="tradeReconCount" disabled/></td>
+				 <td><a href="#" onclick="getreconTradeCount();" class="btn btn-primary">Get Recon Count</a></td>
+				</tr>
+
+				<tr> 
+				 <td>Get Trade Reconciliation Transaction Details Based on Transaction Hash</td>
+				 <td><input type="text" id="tradeReconTXDetails"/></td>
+				 <td><a href="#" onclick="gettradeReconTXDetails();" class="btn btn-primary">Get Trade Reconciliation Transaction Details</a></td>
+				</tr>
+
+
+				<tr> 
+				 <td>Block Number</td>
+				 <td><textarea id="blockno"></textarea></td>
+				 <td></td>
+				</tr>
+
+				<tr> 
+				 <td>From</td>
+				 <td><textarea id="from"></textarea></td>
+				 <td></td>
+				</tr>
+
+				<tr> 
+				 <td>To</td>
+				 <td><textarea id="to"></textarea></td>
+				 <td></td>
+				</tr>
+
+				<tr> 
+				 <td>Input</td>
+				 <td><textarea id="inputdata"></textarea></td>
+				 <td></td>
+				</tr>
+
+
+            </tbody>
+        </table>
+    </div>
+   
+</body>
+    </form>
+
+<script src="js/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+
+<!--
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+-->
+
+</html>
