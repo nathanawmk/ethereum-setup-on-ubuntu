@@ -1,0 +1,62 @@
+1. Enable Network Adapter/Disable RHEL 7 Firewall 
+- service firewalld stop
+- systemctl disable firewalld
+
+2. Copy the binaries + scripts + dependencies over to home/pri-sys/quorum
+- chmod 777 -R * binaries
+- chmod 777 -R * dependencies
+
+3. Install the following dependencies (for constellation node) 
+su
+rpm -Uvh --force --nodeps
+
+a. libdb-devel
+b. leveldb-devel
+c. libsodium-devel
+d. zlib-devel 
+e. ncurses-devel
+
+===
+To fix libsodium.so.18, need to build and make install from the tar.gz
+
+su
+rpm -Uvh --force --nodeps cpp
+rpm -Uvh --force --nodeps glibc-devel
+rpm -Uvh --force --nodeps glibc-headers 
+rpm -Uvh --force --nodeps kernel-headers
+rpm -Uvh --force --nodeps libmpc
+rpm -Uvh --force --nodeps mpfr
+
+rpm -Uvh --force --nodeps glibc-2.17-222.el7.i686
+rpm -Uvh --force --nodeps glibc-2.17-222.el7.x86_64
+rpm -Uvh --force --nodeps glibc-common
+rpm -Uvh --force --nodeps libgcc-4.8.5-28.el7.i686.rpm
+rpm -Uvh --force --nodeps libgcc-4.8.5-28.el7.x86_64
+rpm -Uvh --force --nodeps libgomp
+
+rpm -Uvh --force --nodeps gcc
+	
+tar -xvf libsodium-1.0.8.tar.gz
+cd libsodium-1.0.8
+chmod 777 -R *
+
+./configure
+make && make check
+sudo make install
+
+cp /usr/local/lib/libsodium.so /usr/lib64
+cp /usr/local/lib/libsodium.so.18 /usr/lib64
+===
+
+4. Add the environment into bashrc 
+
+===
+as pri-sys
+
+5a. chmod 777 -R * 
+
+5. ./raft-init.sh
+
+6. ./raft-start.sh
+
+7. ./geth-start.sh 
